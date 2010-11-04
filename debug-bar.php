@@ -4,7 +4,7 @@ Plugin Name: Debug Bar
 Plugin URI: http://wordpress.org/extend/plugins/debug-bar/
 Description: Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
 Author: wordpressdotorg
-Version: 0.1
+Version: 0.2
 Author URI: http://wordpress.org/
 */
 
@@ -88,10 +88,10 @@ function debug_bar_list() {
 	</script>
 	<div align='left' id='querylist'>
 
-	<h1>Debugging blog #<?php echo $GLOBALS['blog_id']; ?> on <?php echo php_uname( 'n' ); ?></h1>
+	<h1><?php printf( __('Debugging blog #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ); ?></h1>
 	<div id="debug-status">
 		<p class="left"></p>
-		<p class="right">PHP Version: <?php echo phpversion(); ?></p>
+		<p class="right"><?php printf( __('PHP Version: %s'), phpversion() ); ?></p>
 	</div>
 	<ul class="debug-menu-links">
 
@@ -134,7 +134,7 @@ function debug_bar_queries() {
 		$show_many = isset($_GET['debug_queries']);
 
 		if ( $wpdb->num_queries > 500 && !$show_many )
-			$out .= "<p>There are too many queries to show easily! <a href='" . add_query_arg( 'debug_queries', 'true' ) . "'>Show them anyway</a>.</p>";
+			$out .= "<p>" . sprintf( __('There are too many queries to show easily! <a href="%s">Show them anyway</a>'), add_query_arg( 'debug_queries', 'true' ) ) . "</p>";
 
 		$out .= '<ol id="wpd-queries">';
 		$first_query = 0;
@@ -150,12 +150,11 @@ function debug_bar_queries() {
 
 			$query = nl2br(esc_html($query));
 
-			// $dbhname, $host, $port, $name, $tcp, $elapsed
 			$out .= "<li>$query<br/><div class='qdebug'>$debug <span>#{$counter} (" . number_format(sprintf('%0.1f', $elapsed * 1000), 1, '.', ',') . "ms)</span></div></li>\n";
 		}
 		$out .= '</ol>';
 	} else {
-		$out .= "<p><strong>There are no queries on this page, you won the prize!!! :)</strong></p>";
+		$out .= "<p><strong>" . __('There are no queries on this page.') . "</strong></p>";
 	}
 
 	$query_count = '<h2><span>Total Queries:</span>' . number_format( $wpdb->num_queries ) . "</h2>\n";
