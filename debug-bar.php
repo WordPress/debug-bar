@@ -34,6 +34,11 @@ function debug_bar_menu_init() {
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101109' );
 	wp_enqueue_script( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.js", array(), '20101109' );
+
+	// Silence E_NOTICE for deprecated usage.
+	foreach ( array( 'function', 'file', 'argument' ) as $item )
+		add_filter( "deprecated_{$item}_trigger_error", '__return_false' );
+	
 }
 add_action('admin_bar_init', 'debug_bar_menu_init');
 
@@ -53,8 +58,9 @@ function debug_bar_list() {
 
 	if ( WP_DEBUG ) {
 		$debugs['php'] = array( __('Notices / Warnings'), 'debug_bar_php' );
-		$debugs['deprecated'] = array( __('Deprecated'), 'debug_bar_deprecated' );
 	}
+			
+	$debugs['deprecated'] = array( __('Deprecated'), 'debug_bar_deprecated' );
 
 	$debugs = apply_filters( 'debug_bar_list', $debugs );
 
@@ -169,7 +175,23 @@ function debug_bar_php() {
 }
 
 function debug_bar_deprecated() {
+	global $_debug_bar_deprecated_functions, $_debug_bar_deprecated_files, $_debug_bar_deprecated_arguments;
 	echo "<div id='debug-bar-deprecated'>";
+	echo '<h2><span>Total Functions:</span>' . number_format( count( $_debug_bar_deprecated_functions ) ) . "</h2>\n";
+	echo '<h2><span>Total Arguments:</span>' . number_format( count( $_debug_bar_deprecated_arguments ) ) . "</h2>\n";
+	echo '<h2><span>Total Files:</span>' . number_format( count( $_debug_bar_deprecated_files ) ) . "</h2>\n";
+	echo '<ol class="debug-bar-deprecated-list">';
+	foreach ( $_debug_bar_deprecated_functions as $location => $message)
+		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+	echo '</ol';
+	echo '<ol class="debug-bar-deprecated-list">';
+	foreach ( $_debug_bar_deprecated_files as $location => $message)
+		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+	echo '</ol';
+	echo '<ol class="debug-bar-deprecated-list">';
+	foreach ( $_debug_bar_deprecated_arguments as $location => $message)
+		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+	echo '</ol';
 	echo "</div>";
 }
 
@@ -207,4 +229,57 @@ function debug_bar_error_handler( $type, $message, $file, $line ) {
 	else
 		return false;
 }
+
+// Alot of this code is massaged from nacin's log-deprecated-notices plugin
+$_debug_bar_deprecated_functions = $_debug_bar_deprecated_files = $_debug_bar_deprecated_arguments = array();
+function debug_bar_deprecated_function_run($function, $replacement, $version) {
+	global $_debug_bar_deprecated_functions;
+	$backtrace = debug_backtrace();
+	$bt = 4;
+	// Check if we're a hook callback.
+	if ( ! isset( $backtrace[4]['file'] ) && 'call_user_func_array' == $backtrace[5]['function'] ) {
+		$bt = 6;
+	}
+	$file = $backtrace[ $bt ]['file'];
+	$line = $backtrace[ $bt ]['line'];
+	if ( ! is_null($replacement) )
+		$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'), $function, $version, $replacement );
+	else
+		$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'), $function, $version );
+	
+	$_debug_bar_deprecated_functions[$file.':'.$line] = $message;
+}
+add_action( 'deprecated_function_run',  'debug_bar_deprecated_function_run',  10, 3 );
+
+function debug_bar_deprecated_file_included( $old_file, $replacement, $version, $message ) {
+	global $_debug_bar_deprecated_files;
+	$backtrace = debug_backtrace();
+	$file = $backtrace[4]['file'];
+	$file_abs = str_replace(ABSPATH, '', $file);
+	$line = $backtrace[4]['line'];
+	$message = empty( $message ) ? '' : ' ' . $message;
+	if ( ! is_null( $replacement ) )
+		$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'), $file_abs, $version, $replacement ) . $message;
+	else
+		$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'), $file_abs, $version ) . $message;
+	
+	$_debug_bar_deprecated_files[$file.':'.$line] = $message;
+}
+add_action( 'deprecated_file_included', 'debug_bar_deprecated_file_included', 10, 4 );
+
+function debug_bar_deprecated_argument_run( $function, $message, $version) {
+	global $_debug_bar_deprecated_arguments;
+	$backtrace = debug_backtrace();
+	$bt = 4;
+	if ( ! isset( $backtrace[4]['file'] ) && 'call_user_func_array' == $backtrace[5]['function'] ) {
+		$bt = 6;
+	}
+	$file = $backtrace[ $bt ]['file'];
+	$line = $backtrace[ $bt ]['line'];
+	
+	$_debug_bar_deprecated_arguments[$file.':'.$line] = $message;
+}
+add_action( 'deprecated_argument_run',  'debug_bar_deprecated_argument_run',  10, 3 );
+
+
 ?>
