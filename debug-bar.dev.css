@@ -217,6 +217,25 @@
 	background: #fff;
 }
 
+#debug-bar-php ol.debug-bar-php-list {
+	padding: 0 !important;
+	margin: 0 !important;
+	list-style: none;
+	clear: left;
+}
+
+	#debug-bar-php ol.debug-bar-php-list li {
+		padding: 10px;
+		margin: 0 0 10px 0;
+	}
+
+	#debug-bar-php ol.debug-bar-php-list li.debug-bar-php-warning {
+			background: red;
+	}
+	#debug-bar-php ol.debug-bar-php-list li.debug-bar-php-notice {
+			background: orange;
+	}
+
 /**
 * End super admin styling
 */
