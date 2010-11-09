@@ -30,7 +30,10 @@ add_action( 'wp_before_admin_bar_render', 'debug_bar_menu', 1000 );
 function debug_bar_menu_init() {
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
 		return;
-	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . '/debug-bar/debug-bar.css', array(), '20101103' );
+	
+	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
+	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101103' );
+	wp_enqueue_script( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.js", array(), '20101109' );
 }
 add_action('admin_bar_init', 'debug_bar_menu_init');
 
@@ -54,38 +57,6 @@ function debug_bar_list() {
 		return;
 
 ?>
-	<script type="text/javascript">
-	/* <![CDATA[ */
-	var toggle_query_list = function() { 
-		var querylist = document.getElementById( 'querylist' );
-		if( querylist && querylist.style.display == 'block' ) {
-			querylist.style.display='none';
-		} else {
-			querylist.style.display='block';
-		}
-	}
-
-	var clickDebugLink = function( targetsGroupId, obj) {
-		var sectionDivs = document.getElementById( targetsGroupId ).childNodes;
-		for ( var i = 0; i < sectionDivs.length; i++ ) {
-			if ( 1 != sectionDivs[i].nodeType ) {
-				continue;
-			}
-			sectionDivs[i].style.display = 'none';
-		}
-		document.getElementById( obj.href.substr( obj.href.indexOf( '#' ) + 1 ) ).style.display = 'block';
-
-		for ( var i = 0; i < obj.parentNode.parentNode.childNodes.length; i++ ) {
-			if ( 1 != obj.parentNode.parentNode.childNodes[i].nodeType ) {
-				continue;
-			}
-			obj.parentNode.parentNode.childNodes[i].removeAttribute( 'class' );
-		}
-		obj.parentNode.setAttribute( 'class', 'current' );
-		return false;
-	};
-	/* ]]> */
-	</script>
 	<div align='left' id='querylist'>
 
 	<h1><?php printf( __('Debugging blog #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ); ?></h1>

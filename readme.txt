@@ -1,5 +1,5 @@
 === Debug Bar ===
-Contributors: wordpressdotorg, ryan
+Contributors: wordpressdotorg, ryan, westi
 Tags: debug
 Tested up to: 3.1
 Stable tag: 0.1
