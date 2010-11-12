@@ -195,11 +195,6 @@ function debug_bar_deprecated() {
 	echo "</div>";
 }
 
-if ( WP_DEBUG ) {
-	$_debug_bar_real_error_handler = set_error_handler('debug_bar_error_handler');
-	$_debug_bar_warnings = $_debug_bar_notices = array();
-}
-
 function debug_bar_error_handler( $type, $message, $file, $line ) {
 	global $_debug_bar_real_error_handler, $_debug_bar_notices, $_debug_bar_warnings;
 
@@ -228,6 +223,10 @@ function debug_bar_error_handler( $type, $message, $file, $line ) {
 		return call_user_func( $_debug_bar_real_error_handler, $type, $message, $file, $line );
 	else
 		return false;
+}
+if ( WP_DEBUG ) {
+	$GLOBALS['_debug_bar_real_error_handler'] = set_error_handler('debug_bar_error_handler');
+	$GLOBALS['_debug_bar_warnings'] = $GLOBALS['_debug_bar_notices'] = array(); 
 }
 
 // Alot of this code is massaged from nacin's log-deprecated-notices plugin
