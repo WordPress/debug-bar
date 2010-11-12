@@ -25,7 +25,7 @@ function debug_bar_menu() {
 
 	$wp_admin_bar->add_menu( array( 'id' => 'queries', 'title' => __('Debug'), 'href' => 'javascript:toggle_query_list()', 'meta' => array( 'class' => 'ab-sadmin' ) ) );
 }
-add_action( 'wp_before_admin_bar_render', 'debug_bar_menu', 1000 );
+add_action( 'admin_bar_menu', 'debug_bar_menu', 1000 );
 
 function debug_bar_menu_init() {
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
