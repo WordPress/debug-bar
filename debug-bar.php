@@ -23,7 +23,14 @@ function debug_bar_menu() {
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
 	return;
 
-	$wp_admin_bar->add_menu( array( 'id' => 'queries', 'title' => __('Debug'), 'href' => 'javascript:toggle_query_list()', 'meta' => array( 'class' => 'ab-sadmin' ) ) );
+	$class = 'ab-sadmin';
+	if ( count( $GLOBALS['_debug_bar_warnings'] ) )
+		$class .= ' ab-php-warning';       
+	elseif ( count( $GLOBALS['_debug_bar_notices'] ) )
+		$class .= ' ab-php-notice';
+
+	/* Add the main siteadmin menu item */
+	$wp_admin_bar->add_menu( array( 'id' => 'queries', 'title' => __('Debug'), 'href' => 'javascript:toggle_query_list()', 'meta' => array( 'class' => $class ) ) );
 }
 add_action( 'admin_bar_menu', 'debug_bar_menu', 1000 );
 
@@ -32,7 +39,7 @@ function debug_bar_menu_init() {
 	return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
-	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101109' );
+	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101112' );
 	wp_enqueue_script( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.js", array(), '20101109' );
 
 	// Silence E_NOTICE for deprecated usage.
@@ -279,6 +286,4 @@ function debug_bar_deprecated_argument_run( $function, $message, $version) {
 	$_debug_bar_deprecated_arguments[$file.':'.$line] = $message;
 }
 add_action( 'deprecated_argument_run',  'debug_bar_deprecated_argument_run',  10, 3 );
-
-
 ?>

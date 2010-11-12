@@ -248,6 +248,16 @@
 		margin: 0 0 10px 0;
 		background: #f0f0f0;
 	}
+
+#wpadminbar li.ab-php-warning {
+	background: #dd0000;
+}
+
+#wpadminbar li.ab-php-notice {
+	background: #dd5500;
+}
+
+
 /**
 * End super admin styling
 */
