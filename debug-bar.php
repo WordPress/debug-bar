@@ -166,11 +166,11 @@ function debug_bar_php() {
 	echo '<ol class="debug-bar-php-list">';
 	foreach ( $_debug_bar_warnings as $location => $message)
 		echo "<li class='debug-bar-php-warning'>WARNING: ".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol';
+	echo '</ol>';
 	echo '<ol class="debug-bar-php-list">';
 	foreach ( $_debug_bar_notices as $location => $message)
 		echo "<li  class='debug-bar-php-notice'>NOTICE: ".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol';
+	echo '</ol>';
 	echo "</div>";
 }
 
@@ -183,15 +183,15 @@ function debug_bar_deprecated() {
 	echo '<ol class="debug-bar-deprecated-list">';
 	foreach ( $_debug_bar_deprecated_functions as $location => $message)
 		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol';
+	echo '</ol>';
 	echo '<ol class="debug-bar-deprecated-list">';
 	foreach ( $_debug_bar_deprecated_files as $location => $message)
 		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol';
+	echo '</ol>';
 	echo '<ol class="debug-bar-deprecated-list">';
 	foreach ( $_debug_bar_deprecated_arguments as $location => $message)
 		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol';
+	echo '</ol>';
 	echo "</div>";
 }
 
