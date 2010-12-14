@@ -4,7 +4,7 @@
  Plugin URI: http://wordpress.org/extend/plugins/debug-bar/
  Description: Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
  Author: wordpressdotorg
- Version: 0.2
+ Version: 0.3-alpha
  Author URI: http://wordpress.org/
  */
 
@@ -39,7 +39,7 @@ function debug_bar_menu_init() {
 	return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
-	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101112' );
+	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101214' );
 	wp_enqueue_script( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.js", array(), '20101109' );
 
 	// Silence E_NOTICE for deprecated usage.
@@ -68,6 +68,7 @@ function debug_bar_list() {
 	}
 			
 	$debugs['deprecated'] = array( __('Deprecated'), 'debug_bar_deprecated' );
+	$debugs['wp_query'] = array( __( 'WP Query' ), 'debug_bar_wp_query' );
 
 	$debugs = apply_filters( 'debug_bar_list', $debugs );
 
@@ -202,6 +203,20 @@ function debug_bar_deprecated() {
 	echo "</div>";
 }
 
+function debug_bar_wp_query() {
+	echo "<div id='debug-bar-wp-query'>";
+	echo '<h2><span>Queried Object ID:</span>' . get_queried_object_id() . "</h2>\n";
+	echo '<div class="clear"></div>';
+	echo '<ol class="debug-bar-wp-query-list">';
+	$object = get_queried_object();
+	if (! is_null( $object ) ) {
+		foreach ($object as $key => $value) {
+			echo '<li>' . $key . ' => ' . $value . '</li>';
+		}
+	}
+	echo '</ol>';
+}
+
 function debug_bar_error_handler( $type, $message, $file, $line ) {
 	global $_debug_bar_real_error_handler, $_debug_bar_notices, $_debug_bar_warnings;
 
@@ -286,4 +301,5 @@ function debug_bar_deprecated_argument_run( $function, $message, $version) {
 	$_debug_bar_deprecated_arguments[$file.':'.$line] = $message;
 }
 add_action( 'deprecated_argument_run',  'debug_bar_deprecated_argument_run',  10, 3 );
+
 ?>

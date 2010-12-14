@@ -257,7 +257,18 @@
 	background: #dd5500;
 }
 
+#debug-bar-wp-query ol.debug-bar-wp-query-list {
+	padding: 0 !important;
+	margin: 0 !important;
+	list-style: none;
+	clear: left;
+}
 
+	#debug-bar-wp-query ol.debug-bar-wp-query-list li {
+		padding: 10px;
+		margin: 0 0 10px 0;
+		background: #f0f0f0;
+	}
 /**
 * End super admin styling
 */
