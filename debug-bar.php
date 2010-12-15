@@ -171,14 +171,18 @@ function debug_bar_php() {
 	echo "<div id='debug-bar-php'>";
 	echo '<h2><span>Total Warnings:</span>' . number_format( count( $_debug_bar_warnings ) ) . "</h2>\n";
 	echo '<h2><span>Total Notices:</span>' . number_format( count( $_debug_bar_notices ) ) . "</h2>\n";
-	echo '<ol class="debug-bar-php-list">';
-	foreach ( $_debug_bar_warnings as $location => $message)
-		echo "<li class='debug-bar-php-warning'>WARNING: ".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol>';
-	echo '<ol class="debug-bar-php-list">';
-	foreach ( $_debug_bar_notices as $location => $message)
-		echo "<li  class='debug-bar-php-notice'>NOTICE: ".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol>';
+	if ( count( $_debug_bar_warnings ) ) {
+		echo '<ol class="debug-bar-php-list">';
+		foreach ( $_debug_bar_warnings as $location => $message)
+			echo "<li class='debug-bar-php-warning'>WARNING: ".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+		echo '</ol>';
+	}
+	if ( count( $_debug_bar_notices ) ) {
+		echo '<ol class="debug-bar-php-list">';
+		foreach ( $_debug_bar_notices as $location => $message)
+			echo "<li  class='debug-bar-php-notice'>NOTICE: ".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+		echo '</ol>';
+	}
 	echo "</div>";
 }
 
@@ -188,18 +192,24 @@ function debug_bar_deprecated() {
 	echo '<h2><span>Total Functions:</span>' . number_format( count( $_debug_bar_deprecated_functions ) ) . "</h2>\n";
 	echo '<h2><span>Total Arguments:</span>' . number_format( count( $_debug_bar_deprecated_arguments ) ) . "</h2>\n";
 	echo '<h2><span>Total Files:</span>' . number_format( count( $_debug_bar_deprecated_files ) ) . "</h2>\n";
-	echo '<ol class="debug-bar-deprecated-list">';
-	foreach ( $_debug_bar_deprecated_functions as $location => $message)
-		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol>';
-	echo '<ol class="debug-bar-deprecated-list">';
-	foreach ( $_debug_bar_deprecated_files as $location => $message)
-		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol>';
-	echo '<ol class="debug-bar-deprecated-list">';
-	foreach ( $_debug_bar_deprecated_arguments as $location => $message)
-		echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
-	echo '</ol>';
+	if ( count( $_debug_bar_deprecated_functions ) ) {
+		echo '<ol class="debug-bar-deprecated-list">';
+		foreach ( $_debug_bar_deprecated_functions as $location => $message)
+			echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+		echo '</ol>';
+	}
+	if ( count( $_debug_bar_deprecated_files ) ) {
+		echo '<ol class="debug-bar-deprecated-list">';
+		foreach ( $_debug_bar_deprecated_files as $location => $message)
+			echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+		echo '</ol>';
+	}
+	if ( count( $_debug_bar_deprecated_arguments ) ) {
+		echo '<ol class="debug-bar-deprecated-list">';
+		foreach ( $_debug_bar_deprecated_arguments as $location => $message)
+			echo "<li class='debug-bar-deprecated-function'>".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+		echo '</ol>';
+	}
 	echo "</div>";
 }
 
@@ -207,14 +217,15 @@ function debug_bar_wp_query() {
 	echo "<div id='debug-bar-wp-query'>";
 	echo '<h2><span>Queried Object ID:</span>' . get_queried_object_id() . "</h2>\n";
 	echo '<div class="clear"></div>';
-	echo '<ol class="debug-bar-wp-query-list">';
 	$object = get_queried_object();
 	if (! is_null( $object ) ) {
+		echo '<ol class="debug-bar-wp-query-list">';
 		foreach ($object as $key => $value) {
 			echo '<li>' . $key . ' => ' . $value . '</li>';
 		}
+		echo '</ol>';
 	}
-	echo '</ol>';
+	echo '</div>';
 }
 
 function debug_bar_error_handler( $type, $message, $file, $line ) {
