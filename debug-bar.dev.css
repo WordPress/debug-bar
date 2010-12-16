@@ -2,7 +2,7 @@
  * Super admin styling
  */
  
-div#wpadminbar li.ab-sadmin {
+div#wpadminbar li.ab-debug-bar {
     float: right;
 }
 

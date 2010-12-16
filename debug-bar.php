@@ -23,7 +23,7 @@ function debug_bar_menu() {
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
 	return;
 
-	$class = 'ab-sadmin';
+	$class = 'ab-debug-bar';
 	if ( count( $GLOBALS['_debug_bar_warnings'] ) )
 		$class .= ' ab-php-warning';       
 	elseif ( count( $GLOBALS['_debug_bar_notices'] ) )
@@ -39,7 +39,7 @@ function debug_bar_menu_init() {
 	return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
-	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101216' );
+	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101216a' );
 	wp_enqueue_script( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.js", array(), '20101109' );
 
 	// Silence E_NOTICE for deprecated usage.
