@@ -1,6 +1,11 @@
 /**
  * Super admin styling
  */
+ 
+div#wpadminbar li.ab-sadmin {
+    float: right;
+}
+
 #querylist {
 	font-family: Arial, Tahoma, sans-serif;
 	display: none;
@@ -189,32 +194,6 @@
 #querylist ol {
 	font: 12px Monaco, "Courier New", Courier, Fixed !important;
 	line-height: 180% !important;
-}
-
-#wpadminbar #admin-bar-micro ul li {
-	list-style-type: none;
-	position: relative;
-	margin: 0;
-	padding: 0;
-}
-#wpadminbar #admin-bar-micro ul ul, #wpadminbar #admin-bar-micro #awaiting-mod, #wpadminbar .ab-sadmin .count-0 {
-	display: none !important;
-}
-#wpadminbar #admin-bar-micro ul li:hover > ul {
-	display: block;
-	position: absolute;
-	top: -1px;
-	left: 100%;
-}
-#wpadminbar #admin-bar-micro li a {
-	display: block;
-	text-decoration: none;
-}
-#wpadminbar #admin-bar-micro li li a {
-	background: #ddd;
-}
-#wpadminbar #admin-bar-micro li li li a {
-	background: #fff;
 }
 
 #debug-bar-php ol.debug-bar-php-list {
