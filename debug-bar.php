@@ -214,8 +214,48 @@ function debug_bar_deprecated() {
 }
 
 function debug_bar_wp_query() {
+	global $template;
+
 	echo "<div id='debug-bar-wp-query'>";
 	echo '<h2><span>Queried Object ID:</span>' . get_queried_object_id() . "</h2>\n";
+
+	// Determine the query type. Follows the template loader order.
+	$type = '';
+	if ( is_404() )
+		$type = '404';
+	elseif ( is_search() )
+		$type = 'Search';
+	elseif ( is_tax() )
+		$type = 'Taxonomy';
+	elseif ( is_front_page() )
+		$type = 'Front Page';
+	elseif ( is_home() )
+		$type = 'Home';
+	elseif ( is_attachment() )
+		$type = 'Attachment';
+	elseif ( is_single() )
+		$type = 'Single';
+	elseif ( is_page() )
+		$type = 'Page';
+	elseif ( is_category() )
+		$type = 'Category';
+	elseif ( is_tag() )
+		$type = 'Tag';
+	elseif ( is_author() )
+		$type = 'Author';
+	elseif ( is_date() )
+		$type = 'Date';
+	elseif ( is_archive() )
+		$type = 'Archive';
+	elseif ( is_paged() )
+		$type = 'Paged';
+
+	if ( !empty($type) )
+		echo '<h2><span>Query Type:</span>' . $type . "</h2>\n";
+
+	if ( !empty($template) )
+		echo '<h2><span>Query Template:</span>' . basename($template) . "</h2>\n";
+
 	echo '<div class="clear"></div>';
 	$object = get_queried_object();
 	if (! is_null( $object ) ) {
