@@ -256,6 +256,17 @@ function debug_bar_wp_query() {
 	if ( !empty($template) )
 		echo '<h2><span>Query Template:</span>' . basename($template) . "</h2>\n";
 
+	$show_on_front = get_option( 'show_on_front' );
+	$page_on_front = get_option( 'page_on_front' );
+	$page_for_posts = get_option( 'page_for_posts' );
+
+	echo '<h2><span>Show on Front:</span>' . $show_on_front . "</h2>\n";
+	if ( 'page' == $show_on_front ) {
+		echo '<h2><span>Page for Posts:</span>' . $page_for_posts . "</h2>\n";
+		echo '<h2><span>Page on Front:</span>' . $page_on_front . "</h2>\n";
+	}
+	
+
 	echo '<div class="clear"></div>';
 	$object = get_queried_object();
 	if (! is_null( $object ) ) {
