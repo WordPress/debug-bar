@@ -39,8 +39,8 @@ function debug_bar_menu_init() {
 	return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
-	wp_enqueue_style( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.css", array(), '20101216a' );
-	wp_enqueue_script( 'admin-bar-debug', WP_PLUGIN_URL . "/debug-bar/debug-bar$suffix.js", array(), '20101109' );
+	wp_enqueue_style( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.css"), array(), '20101216a' );
+	wp_enqueue_script( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.js"), array(), '20101109' );
 
 	// Silence E_NOTICE for deprecated usage.
 	foreach ( array( 'function', 'file', 'argument' ) as $item )
