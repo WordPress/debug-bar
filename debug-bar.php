@@ -25,7 +25,7 @@ function debug_bar_menu() {
 
 	$class = 'ab-debug-bar';
 	if ( count( $GLOBALS['_debug_bar_warnings'] ) )
-		$class .= ' ab-php-warning';       
+		$class .= ' ab-php-warning';
 	elseif ( count( $GLOBALS['_debug_bar_notices'] ) )
 		$class .= ' ab-php-notice';
 
@@ -45,7 +45,7 @@ function debug_bar_menu_init() {
 	// Silence E_NOTICE for deprecated usage.
 	foreach ( array( 'function', 'file', 'argument' ) as $item )
 		add_filter( "deprecated_{$item}_trigger_error", '__return_false' );
-	
+
 }
 add_action('admin_bar_init', 'debug_bar_menu_init');
 
@@ -53,7 +53,7 @@ function debug_bar_list() {
 	global $wpdb, $wp_object_cache;
 
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
-	return;
+		return;
 
 	$debugs = array();
 
@@ -66,14 +66,17 @@ function debug_bar_list() {
 	if ( WP_DEBUG ) {
 		$debugs['php'] = array( __('Notices / Warnings'), 'debug_bar_php' );
 	}
-			
+
 	$debugs['deprecated'] = array( __('Deprecated'), 'debug_bar_deprecated' );
 	$debugs['wp_query'] = array( __( 'WP Query' ), 'debug_bar_wp_query' );
+
+	if ( ! is_admin() )
+		$debugs['request'] = array( __( 'Request' ), 'debug_bar_request' );
 
 	$debugs = apply_filters( 'debug_bar_list', $debugs );
 
 	if ( empty($debugs) )
-	return;
+		return;
 
 	?>
 <div align='left' id='querylist'>
@@ -214,7 +217,7 @@ function debug_bar_deprecated() {
 }
 
 function debug_bar_wp_query() {
-	global $template;
+	global $template, $wp_query;
 
 	echo "<div id='debug-bar-wp-query'>";
 	echo '<h2><span>Queried Object ID:</span>' . get_queried_object_id() . "</h2>\n";
@@ -265,11 +268,25 @@ function debug_bar_wp_query() {
 		echo '<h2><span>Page for Posts:</span>' . $page_for_posts . "</h2>\n";
 		echo '<h2><span>Page on Front:</span>' . $page_on_front . "</h2>\n";
 	}
-	
 
 	echo '<div class="clear"></div>';
+
+	if ( empty($wp_query->query) )
+		$query = 'None';
+	else
+		$query = http_build_query( $wp_query->query );
+
+	echo '<h3>Query Arguments:</h3>';
+	echo '<p>' . esc_html( $query ) . '</p>';
+
+	if ( ! empty($wp_query->request) ) {
+		echo '<h3>Query SQL:</h3>';
+		echo '<p>' . esc_html( $wp_query->request ) . '</p>';
+	}
+
 	$object = get_queried_object();
-	if (! is_null( $object ) ) {
+	if ( ! is_null( $object ) ) {
+		echo '<h3>Queried Object:</h3>';
 		echo '<ol class="debug-bar-wp-query-list">';
 		foreach ($object as $key => $value) {
 			echo '<li>' . $key . ' => ' . $value . '</li>';
@@ -279,17 +296,57 @@ function debug_bar_wp_query() {
 	echo '</div>';
 }
 
+function debug_bar_request() {
+	global $wp;
+
+	echo "<div id='debug-bar-request'>";
+
+	if ( empty($wp->request) )
+		$request = 'None';
+	else
+		$request = $wp->request;
+
+	echo '<h3>Request:</h3>';
+	echo '<p>' . esc_html( $request ) . '</p>';
+
+	if ( empty($wp->query_string) )
+		$query_string = 'None';
+	else
+		$query_string = $wp->query_string;
+
+	echo '<h3>Query String:</h3>';
+	echo '<p>' . esc_html( $query_string ) . '</p>';
+
+	if ( empty($wp->matched_rule) )
+		$matched_rule = 'None';
+	else
+		$matched_rule = $wp->matched_rule;
+
+	echo '<h3>Matched Rewrite Rule:</h3>';
+	echo '<p>' . esc_html( $matched_rule ) . '</p>';
+
+	if ( empty($wp->matched_query) )
+		$matched_query = 'None';
+	else
+		$matched_query = $wp->matched_query;
+
+	echo '<h3>Matched Rewrite Query:</h3>';
+	echo '<p>' . esc_html( $matched_query ) . '</p>';
+
+	echo '</div>';
+}
+
 function debug_bar_error_handler( $type, $message, $file, $line ) {
 	global $_debug_bar_real_error_handler, $_debug_bar_notices, $_debug_bar_warnings;
 
 	switch ( $type ) {
 		case E_WARNING :
 		case E_USER_WARNING :
-			$_debug_bar_warnings[$file.':'.$line] = $message; 
+			$_debug_bar_warnings[$file.':'.$line] = $message;
 			break;
 		case E_NOTICE :
 		case E_USER_NOTICE :
-			$_debug_bar_notices[$file.':'.$line] = $message; 
+			$_debug_bar_notices[$file.':'.$line] = $message;
 			break;
 		case E_STRICT :
 			// TODO
@@ -310,7 +367,7 @@ function debug_bar_error_handler( $type, $message, $file, $line ) {
 }
 if ( WP_DEBUG ) {
 	$GLOBALS['_debug_bar_real_error_handler'] = set_error_handler('debug_bar_error_handler');
-	$GLOBALS['_debug_bar_warnings'] = $GLOBALS['_debug_bar_notices'] = array(); 
+	$GLOBALS['_debug_bar_warnings'] = $GLOBALS['_debug_bar_notices'] = array();
 }
 
 // Alot of this code is massaged from nacin's log-deprecated-notices plugin
@@ -329,7 +386,7 @@ function debug_bar_deprecated_function_run($function, $replacement, $version) {
 		$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'), $function, $version, $replacement );
 	else
 		$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'), $function, $version );
-	
+
 	$_debug_bar_deprecated_functions[$file.':'.$line] = $message;
 }
 add_action( 'deprecated_function_run',  'debug_bar_deprecated_function_run',  10, 3 );
@@ -345,7 +402,7 @@ function debug_bar_deprecated_file_included( $old_file, $replacement, $version, 
 		$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'), $file_abs, $version, $replacement ) . $message;
 	else
 		$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'), $file_abs, $version ) . $message;
-	
+
 	$_debug_bar_deprecated_files[$file.':'.$line] = $message;
 }
 add_action( 'deprecated_file_included', 'debug_bar_deprecated_file_included', 10, 4 );
@@ -359,7 +416,7 @@ function debug_bar_deprecated_argument_run( $function, $message, $version) {
 	}
 	$file = $backtrace[ $bt ]['file'];
 	$line = $backtrace[ $bt ]['line'];
-	
+
 	$_debug_bar_deprecated_arguments[$file.':'.$line] = $message;
 }
 add_action( 'deprecated_argument_run',  'debug_bar_deprecated_argument_run',  10, 3 );
