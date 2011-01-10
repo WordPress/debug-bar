@@ -84,7 +84,7 @@ function debug_bar_list() {
 <h1><?php printf( __('Debugging blog #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ); ?></h1>
 <div id="debug-status">
 <p class="left"></p>
-<p class="right"><?php printf( __('PHP Version: %s'), phpversion() ); ?></p>
+<p class="right"><?php printf( __('PHP Version: %1$s, DB Version: %2$s'), phpversion(), $wpdb->db_version() ); ?></p>
 </div>
 <ul class="debug-menu-links">
 
@@ -176,14 +176,18 @@ function debug_bar_php() {
 	echo '<h2><span>Total Notices:</span>' . number_format( count( $_debug_bar_notices ) ) . "</h2>\n";
 	if ( count( $_debug_bar_warnings ) ) {
 		echo '<ol class="debug-bar-php-list">';
-		foreach ( $_debug_bar_warnings as $location => $message)
+		foreach ( $_debug_bar_warnings as $location_message) {
+			list( $location, $message) = $location_message;
 			echo "<li class='debug-bar-php-warning'>WARNING: ".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+		}
 		echo '</ol>';
 	}
 	if ( count( $_debug_bar_notices ) ) {
 		echo '<ol class="debug-bar-php-list">';
-		foreach ( $_debug_bar_notices as $location => $message)
+		foreach ( $_debug_bar_notices as $location_message) {
+			list( $location, $message) = $location_message;
 			echo "<li  class='debug-bar-php-notice'>NOTICE: ".str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message). "</li>";
+		}
 		echo '</ol>';
 	}
 	echo "</div>";
@@ -339,14 +343,16 @@ function debug_bar_request() {
 function debug_bar_error_handler( $type, $message, $file, $line ) {
 	global $_debug_bar_real_error_handler, $_debug_bar_notices, $_debug_bar_warnings;
 
+	$_key = md5( $file . ':' . $line . ':' . $message );
+
 	switch ( $type ) {
 		case E_WARNING :
 		case E_USER_WARNING :
-			$_debug_bar_warnings[$file.':'.$line] = $message;
+			$_debug_bar_warnings[$_key] = array( $file.':'.$line, $message );
 			break;
 		case E_NOTICE :
 		case E_USER_NOTICE :
-			$_debug_bar_notices[$file.':'.$line] = $message;
+			$_debug_bar_notices[$_key] = array( $file.':'.$line, $message );
 			break;
 		case E_STRICT :
 			// TODO

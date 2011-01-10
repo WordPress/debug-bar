@@ -1,9 +1,9 @@
 /**
- * Super admin styling
+ * Debug Bar styling
  */
 
 div#wpadminbar li.ab-debug-bar {
-    float: right;
+	float: right;
 }
 
 #querylist {
