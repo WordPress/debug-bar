@@ -85,6 +85,10 @@ function debug_bar_list() {
 <div id='debug-bar-handle'></div>
 <div id='debug-bar-menu'>
 	<div id="debug-status">
+		<?php //@todo: Add a link to information about WP_DEBUG. ?>
+		<?php if ( ! WP_DEBUG ): ?>
+			<span id="debug-status-warning"><?php _e('WP_DEBUG OFF'); ?></span> | 
+		<?php endif; ?>
 		<span id="debug-status-title"><?php printf( __('Blog #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ); ?></span>
 		| <span id="debug-status-version"><?php printf( __('PHP: %1$s | DB: %2$s'), phpversion(), $wpdb->db_version() ); ?></span>
 	</div>

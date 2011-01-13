@@ -88,6 +88,10 @@
 	padding-right: 15px;
 	color: #999;
 }
+#debug-status-warning {
+	font-weight: bold;
+	color: red;
+}
 #debug-status-title {
 	font-weight: bold;
 	color: #555;
