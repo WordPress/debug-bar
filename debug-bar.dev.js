@@ -57,7 +57,7 @@ clickDebugLink = function( e ) {
 };
 
 addEvent(window, 'load', function() {
-	var adminBarLink = document.getElementById('wp-admin-bar-queries'),
+	var adminBarLink = document.getElementById('wp-admin-bar-debug-bar'),
 		adminBarTabs = document.getElementById('debug-menu-links');
 	addEvent( adminBarLink, 'click', toggleQueryList );
 	addEvent( adminBarTabs, 'click', clickDebugLink );

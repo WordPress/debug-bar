@@ -23,14 +23,14 @@ function debug_bar_menu() {
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
 	return;
 
-	$class = 'ab-debug-bar';
+	$class = '';
 	if ( count( $GLOBALS['_debug_bar_warnings'] ) )
-		$class .= ' ab-php-warning';
+		$class = 'warning';
 	elseif ( count( $GLOBALS['_debug_bar_notices'] ) )
-		$class .= ' ab-php-notice';
+		$class = 'notice';
 
 	/* Add the main siteadmin menu item */
-	$wp_admin_bar->add_menu( array( 'id' => 'queries', 'title' => __('Debug'), 'meta' => array( 'class' => $class ) ) );
+	$wp_admin_bar->add_menu( array( 'id' => 'debug-bar', 'title' => __('Debug'), 'meta' => array( 'class' => $class ) ) );
 }
 add_action( 'admin_bar_menu', 'debug_bar_menu', 1000 );
 
