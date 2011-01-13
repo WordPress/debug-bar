@@ -128,7 +128,7 @@
 	-moz-border-radius-topleft: 4px;
 }
 
-#debug-menu-links li.current a {
+#debug-menu-links li a.current {
 	background: #fff;
 	color: #555 !important;
 }

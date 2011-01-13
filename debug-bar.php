@@ -39,8 +39,8 @@ function debug_bar_menu_init() {
 	return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
-	wp_enqueue_style( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.css"), array(), '20110112' );
-	wp_enqueue_script( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.js"), array(), '20110112' );
+	wp_enqueue_style( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.css"), array(), '20110112a' );
+	wp_enqueue_script( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.js"), array('jquery'), '20110112a' );
 
 	// Silence E_NOTICE for deprecated usage.
 	foreach ( array( 'function', 'file', 'argument' ) as $item )
@@ -88,15 +88,18 @@ function debug_bar_list() {
 </div>
 <ul id="debug-menu-links">
 
-	<?php	$current = ' class="current"'; foreach ( $debugs as $debug => $debug_output ) : ?>
-
-	<li <?php echo $current; ?>><a
-		id="debug-menu-link-<?php echo $debug; ?>"
-		class="debug-menu-link"
-		href="#debug-menu-target-<?php echo $debug; ?>">
-		<?php echo $debug_output[0] ?></a></li>
-
-	<?php	$current = ''; endforeach; ?>
+<?php
+	$current = ' current';
+	foreach ( $debugs as $debug => $debug_output ) : ?>
+		<li><a
+			id="debug-menu-link-<?php echo esc_attr( $debug ); ?>"
+			class="debug-menu-link<?php echo $current; ?>"
+			href="#debug-menu-target-<?php echo esc_attr( $debug ); ?>">
+			<?php echo $debug_output[0] ?>
+		</a></li>
+		<?php
+		$current = '';
+	endforeach; ?>
 
 </ul>
 
