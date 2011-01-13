@@ -6,12 +6,19 @@
 	float: right;
 }
 
+#wpadminbar #wp-admin-bar-debug-bar.active {
+	background: #555;
+	background: -moz-linear-gradient(bottom,  #555,  #3e3e3e);
+	background: -webkit-gradient(linear, left bottom, left top, from(#555), to(#3e3e3e));
+}
+
 #wpadminbar #wp-admin-bar-debug-bar.warning {
 	background-color: #f44;
 	background-image: -moz-linear-gradient(bottom, #d00, #f44);
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#d00), to(#f44));
 }
-#wpadminbar #wp-admin-bar-debug-bar.warning:hover {
+#wpadminbar #wp-admin-bar-debug-bar.warning:hover,
+#wpadminbar #wp-admin-bar-debug-bar.warning.active {
 	background-color: #d00;
 	background-image: -moz-linear-gradient(bottom, #f44, #d00 );
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#f44), to(#d00));
@@ -26,7 +33,8 @@
 	background-image: -moz-linear-gradient(bottom, #ee6f00, #ff8922);
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#ee6f00), to(#ff8922));
 }
-#wpadminbar #wp-admin-bar-debug-bar.notice:hover {
+#wpadminbar #wp-admin-bar-debug-bar.notice:hover,
+#wpadminbar #wp-admin-bar-debug-bar.notice.active {
 	background-color: #ee6f00;
 	background-image: -moz-linear-gradient(bottom, #ff8922, #ee6f00 );
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#ff8922), to(#ee6f00));

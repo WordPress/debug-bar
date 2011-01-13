@@ -59,14 +59,14 @@ wpDebugBar = {
 	
 	toggle: function(){
 		$('#wp-admin-bar-debug-bar').click( function(e){
+			var show = debugBar.is(':hidden');
 			e.preventDefault();
 
-			if ( debugBar.is(':hidden') ) {
-				debugBar.show();
+			debugBar.toggle( show );
+			$(this).toggleClass( 'active', show );
+
+			if ( show )
 				bounds.fix();
-			} else {
-				debugBar.hide();
-			}
 		});
 	},
 	
