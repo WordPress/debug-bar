@@ -2,7 +2,7 @@
 Contributors: wordpressdotorg, ryan, westi, koopersmith
 Tags: debug
 Tested up to: 3.1
-Stable tag: 0.4
+Stable tag: 0.4.1
 Requires at least: 3.1
 
 Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
