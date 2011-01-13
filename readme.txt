@@ -1,5 +1,5 @@
 === Debug Bar ===
-Contributors: wordpressdotorg, ryan, westi
+Contributors: wordpressdotorg, ryan, westi, koopersmith
 Tags: debug
 Tested up to: 3.1
 Stable tag: 0.3
@@ -15,7 +15,14 @@ A must for developers!
 
 When WP_DEBUG is enabled it also tracks PHP Warnings and Notices to make them easier to find.
 
+When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
+
 == Upgrade Notice ==
+
+= 0.4 =
+Added DB Version information
+Updated PHP Warning and Notice tracking so that multiple different errors on the same line are tracked
+Compatibility updates for trunk
 
 = 0.3 =
 Added WordPress Query infomation
@@ -29,6 +36,11 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 0.4 =
+Added DB Version information
+Updated PHP Warning and Notice tracking so that multiple different errors on the same line are tracked
+Compatibility updates for trunk
 
 = 0.3 =
 Added WordPress Query infomation
