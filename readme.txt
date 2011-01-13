@@ -30,6 +30,10 @@ Initial Release
 
 == Changelog ==
 
+= 0.3 =
+Added WordPress Query infomation
+Added Request parsing information
+
 = 0.2 =
 Added PHP Notice / Warning tracking when WP_DEBUG enabled
 Added deprecated function usage tracking
