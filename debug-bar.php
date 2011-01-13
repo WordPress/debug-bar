@@ -39,8 +39,9 @@ function debug_bar_menu_init() {
 	return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
-	wp_enqueue_style( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.css"), array(), '20110112a' );
-	wp_enqueue_script( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.js"), array('jquery'), '20110112a' );
+	wp_enqueue_style( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.css"), array(), '20110113' );
+	wp_enqueue_script( 'admin-bar-ui-dockable', plugins_url("debug-bar/ui-dockable$suffix.js"), array('jquery-ui-mouse'), '20110113' );
+	wp_enqueue_script( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.js"), array('jquery', 'admin-bar-ui-dockable'), '20110113' );
 
 	// Silence E_NOTICE for deprecated usage.
 	foreach ( array( 'function', 'file', 'argument' ) as $item )
@@ -79,14 +80,15 @@ function debug_bar_list() {
 		return;
 
 	?>
-<div align='left' id='querylist'>
+<div id='querylist'>
 
-<h1><?php printf( __('Debugging blog #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ); ?></h1>
-<div id="debug-status">
-<p class="left"></p>
-<p class="right"><?php printf( __('PHP Version: %1$s, DB Version: %2$s'), phpversion(), $wpdb->db_version() ); ?></p>
-</div>
-<ul id="debug-menu-links">
+<div id='debug-bar-handle'></div>
+<div id='debug-bar-menu'>
+	<div id="debug-status">
+		<span id="debug-status-title"><?php printf( __('Blog #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ); ?></span>
+		| <span id="debug-status-version"><?php printf( __('PHP: %1$s | DB: %2$s'), phpversion(), $wpdb->db_version() ); ?></span>
+	</div>
+	<ul id="debug-menu-links">
 
 <?php
 	$current = ' current';
@@ -101,7 +103,8 @@ function debug_bar_list() {
 		$current = '';
 	endforeach; ?>
 
-</ul>
+	</ul>
+</div>
 
 <div id="debug-menu-targets"><?php	$current = ' style="display: block"'; foreach ( $debugs as $debug => $debug_output ) : ?>
 

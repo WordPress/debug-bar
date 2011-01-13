@@ -43,44 +43,51 @@
 #querylist {
 	font-family: Arial, Tahoma, sans-serif;
 	display: none;
-	position: absolute;
-	top: 50px;
-	left: 50px;
-	right: 50px;
+	position: fixed;
+	height: 250px;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	background: #fff;
-	padding: 20px;
-	-moz-box-shadow: 0 0 15px #888;
-	-webkit-box-shadow: 0 0 15px #888;
-	box-shadow: 0 0 15px #888;
 	z-index: 99999;
-	border: 10px solid #f0f0f0;
 	color: #000;
 	line-height: 150% !important;
+	text-align: left;
+}
+
+#debug-bar-handle {
+	border-color: #c6c6c6;
+	border-style: solid;
+	border-width: 1px 0;
+	height: 2px;
+	background: #fff;
+	cursor: n-resize;
+}
+
+#debug-bar-menu {
+	background: #d9d9d9; /* fallback color */
+	background:-moz-linear-gradient(bottom,  #d7d7d7,  #e4e4e4);
+	background:-webkit-gradient(linear, left bottom, left top, from(#d7d7d7), to(#e4e4e4));
+	overflow: hidden;
+	height: 24px;
+	text-shadow: 0 1px 0 #f4f4f4;
+}
+
+#debug-status {
+	float: right;
+	text-align: right;
+	padding-top: 4px;
+	padding-right: 15px;
+	color: #999;
+}
+#debug-status-title {
+	font-weight: bold;
+	color: #555;
 }
 
 #querylist pre {
 	font-size: 12px;
 	padding: 10px;
-}
-
-#querylist h1 {
-	font-family: georgia, times, serif;
-	text-align: center;
-	font-size: 24px;
-	padding: 20px 5px;
-	background: #eee;
-	color: #555;
-	margin: 0;
-}
-
-#querylist div#debug-status {
-	background: #ccc;
-	color: #fff;
-	overflow: hidden;
-	height: 21px;
-	font-size: 14px;
-	font-family: georgia, times, serif;
-	padding: 7px 15px;
 }
 
 #querylist .left {
@@ -97,12 +104,10 @@
 
 #debug-menu-links {
 	clear: left;
-	background: #ccc;
-	padding: 10px 15px 0;
+	padding: 3px 15px 0;
 	overflow: hidden;
 	list-style: none;
 	margin: 0;
-	padding: 0 0 0 15px;
 }
 
 #debug-menu-links li {
@@ -114,23 +119,28 @@
 #debug-menu-links li a {
 	outline: none;
 	display: block;
-	padding: 5px 9px;
+	line-height: 16px;
+	padding: 2px 9px 3px;
 	margin-right: 0;
-	background: #bbb;
-	color: #fff !important;
+	color: #777 !important;
 	text-decoration: none !important;
-	font-weight: normal;
+	font-weight: bold !important;
 	font-size: 12px;
-	color: #555;
 	-webkit-border-top-right-radius: 4px;
 	-webkit-border-top-left-radius: 4px;
 	-moz-border-radius-topright: 4px;
 	-moz-border-radius-topleft: 4px;
 }
 
+#debug-menu-links li a:hover {
+	color: #555 !important;
+	background-color: #eee;
+	background-image: -moz-linear-gradient(bottom, #ddd, #eee);
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#ddd), to(#eee));
+}
 #debug-menu-links li a.current {
 	background: #fff;
-	color: #555 !important;
+	color: #222 !important;
 }
 
 #querylist h2 {
@@ -139,7 +149,6 @@
 	border: 1px solid #eee;
 	padding: 5px 10px 15px;
 	clear: none;
-	important;
 	text-align: center;
 	font-family: georgia, times, serif;
 	font-size: 28px;
@@ -205,7 +214,13 @@
 	text-decoration: none !important;
 }
 
+#debug-menu-targets {
+	overflow: auto;
+	height: 100%; /* @todo: fix me. this extends the window slighly below the bottom. */
+}
+
 #querylist .debug-menu-target {
+	margin: 10px;
 	display: none;
 }
 
