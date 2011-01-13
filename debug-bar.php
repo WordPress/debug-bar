@@ -51,28 +51,28 @@ function debug_bar_menu_init() {
 add_action('admin_bar_init', 'debug_bar_menu_init');
 
 function debug_bar_list() {
-	global $wpdb, $wp_object_cache;
+	global $wpdb, $wp_object_cache, $_debug_bar_notices, $_debug_bar_warnings;
 
 	if ( ! is_super_admin() || ! is_admin_bar_showing() )
 		return;
 
 	$debugs = array();
 
-	if ( defined('SAVEQUERIES') && SAVEQUERIES )
-	$debugs['wpdb'] = array( __('Queries'), 'debug_bar_queries' );
-
-	if ( is_object($wp_object_cache) && method_exists($wp_object_cache, 'stats') )
-	$debugs['object-cache'] = array( __('Object Cache'), 'debug_bar_object_cache' );
-
-	if ( WP_DEBUG ) {
+	if ( WP_DEBUG && ( count( $_debug_bar_notices ) || count( $_debug_bar_warnings ) ) )
 		$debugs['php'] = array( __('Notices / Warnings'), 'debug_bar_php' );
-	}
+
+	$debugs['wp_query'] = array( __( 'WP Query' ), 'debug_bar_wp_query' );
+	
+	if ( defined('SAVEQUERIES') && SAVEQUERIES )
+		$debugs['wpdb'] = array( __('Queries'), 'debug_bar_queries' );
 
 	$debugs['deprecated'] = array( __('Deprecated'), 'debug_bar_deprecated' );
-	$debugs['wp_query'] = array( __( 'WP Query' ), 'debug_bar_wp_query' );
 
 	if ( ! is_admin() )
 		$debugs['request'] = array( __( 'Request' ), 'debug_bar_request' );
+
+	if ( is_object($wp_object_cache) && method_exists($wp_object_cache, 'stats') )
+		$debugs['object-cache'] = array( __('Object Cache'), 'debug_bar_object_cache' );
 
 	$debugs = apply_filters( 'debug_bar_list', $debugs );
 
