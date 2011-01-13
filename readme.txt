@@ -19,6 +19,9 @@ When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
 
 == Upgrade Notice ==
 
+= 0.4.1 =
+Compatibility updates for trunk
+
 = 0.4 =
 Added DB Version information
 Updated PHP Warning and Notice tracking so that multiple different errors on the same line are tracked
@@ -36,6 +39,9 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 0.4.1 =
+Compatibility updates for trunk
 
 = 0.4 =
 Added DB Version information
