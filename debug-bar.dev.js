@@ -1,6 +1,6 @@
 (function(){
 
-var addEvent, toggleQueryList, clickDebugLink;
+var addEvent, preventDefault, toggleQueryList, clickDebugLink;
 
 addEvent = function( obj, type, fn ) {
 	if (obj.addEventListener)
@@ -8,6 +8,13 @@ addEvent = function( obj, type, fn ) {
 	else if (obj.attachEvent)
 		obj.attachEvent('on' + type, function() { return fn.call(obj, window.event);});
 };
+
+preventDefault = function( e ) {
+	// IE doesn't support preventDefault, and does support returnValue
+	if ( e.preventDefault )
+		e.preventDefault();
+	e.returnValue = false;
+}
 
 toggleQueryList = function( e ) {
 	var querylist = document.getElementById( 'querylist' );
@@ -18,15 +25,18 @@ toggleQueryList = function( e ) {
 		querylist.style.display='block';
 	}
 
-	// IE doesn't support preventDefault, and does support returnValue
-	if ( e.preventDefault )
-		e.preventDefault();
-	e.returnValue = false;
+	preventDefault( e );
 };
 
-clickDebugLink = function( targetsGroupId, obj) {
-	var sectionDivs, i, j;
-	sectionDivs = document.getElementById( targetsGroupId ).childNodes;
+clickDebugLink = function( e ) {
+	var sectionDivs, i, j,
+		obj = e.target || e.srcElement;
+
+	if ( ! obj.className || -1 == obj.className.indexOf('debug-menu-link') )
+		return;
+
+	sectionDivs = document.getElementById( 'debug-menu-targets' ).childNodes;
+
 	for ( i = 0; i < sectionDivs.length; i++ ) {
 		if ( 1 != sectionDivs[i].nodeType ) {
 			continue;
@@ -42,12 +52,15 @@ clickDebugLink = function( targetsGroupId, obj) {
 		obj.parentNode.parentNode.childNodes[j].removeAttribute( 'class' );
 	}
 	obj.parentNode.setAttribute( 'class', 'current' );
-	return false;
+
+	preventDefault( e );
 };
 
 addEvent(window, 'load', function() {
-	var li = document.getElementById('wp-admin-bar-queries');
-	addEvent( li, 'click', toggleQueryList );
+	var adminBarLink = document.getElementById('wp-admin-bar-queries'),
+		adminBarTabs = document.getElementById('debug-menu-links');
+	addEvent( adminBarLink, 'click', toggleQueryList );
+	addEvent( adminBarTabs, 'click', clickDebugLink );
 });
 
 })();

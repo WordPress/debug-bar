@@ -39,8 +39,8 @@ function debug_bar_menu_init() {
 	return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
-	wp_enqueue_style( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.css"), array(), '20101216a' );
-	wp_enqueue_script( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.js"), array(), '20101109' );
+	wp_enqueue_style( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.css"), array(), '20110112' );
+	wp_enqueue_script( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.js"), array(), '20110112' );
 
 	// Silence E_NOTICE for deprecated usage.
 	foreach ( array( 'function', 'file', 'argument' ) as $item )
@@ -86,14 +86,15 @@ function debug_bar_list() {
 <p class="left"></p>
 <p class="right"><?php printf( __('PHP Version: %1$s, DB Version: %2$s'), phpversion(), $wpdb->db_version() ); ?></p>
 </div>
-<ul class="debug-menu-links">
+<ul id="debug-menu-links">
 
 	<?php	$current = ' class="current"'; foreach ( $debugs as $debug => $debug_output ) : ?>
 
 	<li <?php echo $current; ?>><a
 		id="debug-menu-link-<?php echo $debug; ?>"
-		href="#debug-menu-target-<?php echo $debug; ?>"
-		onclick="try { return clickDebugLink( 'debug-menu-targets', this ); } catch (e) { return true; }"><?php echo $debug_output[0] ?></a></li>
+		class="debug-menu-link"
+		href="#debug-menu-target-<?php echo $debug; ?>">
+		<?php echo $debug_output[0] ?></a></li>
 
 	<?php	$current = ''; endforeach; ?>
 

@@ -61,7 +61,7 @@ div#wpadminbar li.ab-debug-bar {
 	font-weight: normal;
 }
 
-#querylist ul.debug-menu-links {
+#debug-menu-links {
 	clear: left;
 	background: #ccc;
 	padding: 10px 15px 0;
@@ -71,13 +71,13 @@ div#wpadminbar li.ab-debug-bar {
 	padding: 0 0 0 15px;
 }
 
-#querylist ul.debug-menu-links li {
+#debug-menu-links li {
 	float: left;
 	margin-right: 10px;
 	margin-bottom: 0 !important;
 }
 
-#querylist ul.debug-menu-links li a {
+#debug-menu-links li a {
 	outline: none;
 	display: block;
 	padding: 5px 9px;
@@ -94,7 +94,7 @@ div#wpadminbar li.ab-debug-bar {
 	-moz-border-radius-topleft: 4px;
 }
 
-#querylist ul.debug-menu-links li.current a {
+#debug-menu-links li.current a {
 	background: #fff;
 	color: #555 !important;
 }
@@ -127,35 +127,6 @@ div#wpadminbar li.ab-debug-bar {
 	text-align: left;
 	font-size: 22px;
 	margin-bottom: 0;
-}
-
-#object-cache-stats ul.debug-menu-links {
-	padding: 0;
-	margin: 0;
-	background: none;
-}
-
-#object-cache-stats ul.debug-menu-links li {
-	float: left;
-	margin-bottom: 10px !important;
-	background: none !important;
-	border: 1px solid #eee !important;
-	color: #555 !important;
-}
-
-#object-cache-stats ul.debug-menu-links li.current a {
-	background: #ccc !important;
-	color: #fff !important;
-	-webkit-border-top-right-radius: 0;
-	-webkit-border-top-left-radius: 0;
-	-moz-border-radius-topright: 0;
-	-moz-border-radius-topleft: 0;
-}
-
-#object-cache-stats ul.debug-menu-links li a {
-	background: none;
-	color: #555 !important;
-	overflow: hidden;
 }
 
 #querylist h3 {
