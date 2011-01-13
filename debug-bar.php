@@ -30,7 +30,7 @@ function debug_bar_menu() {
 		$class .= ' ab-php-notice';
 
 	/* Add the main siteadmin menu item */
-	$wp_admin_bar->add_menu( array( 'id' => 'queries', 'title' => __('Debug'), 'href' => 'javascript:toggle_query_list()', 'meta' => array( 'class' => $class ) ) );
+	$wp_admin_bar->add_menu( array( 'id' => 'queries', 'title' => __('Debug'), 'meta' => array( 'class' => $class ) ) );
 }
 add_action( 'admin_bar_menu', 'debug_bar_menu', 1000 );
 

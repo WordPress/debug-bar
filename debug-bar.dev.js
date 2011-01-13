@@ -1,13 +1,28 @@
-var toggle_query_list, clickDebugLink;
+(function(){
 
-toggle_query_list = function() { 
+var addEvent, toggleQueryList, clickDebugLink;
+
+addEvent = function( obj, type, fn ) {
+	if (obj.addEventListener)
+		obj.addEventListener(type, fn, false);
+	else if (obj.attachEvent)
+		obj.attachEvent('on' + type, function() { return fn.call(obj, window.event);});
+};
+
+toggleQueryList = function( e ) {
 	var querylist = document.getElementById( 'querylist' );
+
 	if( querylist && querylist.style.display == 'block' ) {
 		querylist.style.display='none';
 	} else {
 		querylist.style.display='block';
 	}
-}
+
+	// IE doesn't support preventDefault, and does support returnValue
+	if ( e.preventDefault )
+		e.preventDefault();
+	e.returnValue = false;
+};
 
 clickDebugLink = function( targetsGroupId, obj) {
 	var sectionDivs, i, j;
@@ -29,3 +44,10 @@ clickDebugLink = function( targetsGroupId, obj) {
 	obj.parentNode.setAttribute( 'class', 'current' );
 	return false;
 };
+
+addEvent(window, 'load', function() {
+	var li = document.getElementById('wp-admin-bar-queries');
+	addEvent( li, 'click', toggleQueryList );
+});
+
+})();
