@@ -19,19 +19,29 @@
 
 class Debug_Bar {
 	var $panels = array();
-	
+
 	function Debug_Bar() {
-		add_action( 'admin_bar_menu',               array( &$this, 'admin_bar_menu' ), 1000 );
-		add_action( 'admin_bar_init',               array( &$this, 'admin_bar_init' ) );
-		add_action( 'wp_after_admin_bar_render',    array( &$this, 'render' ) );
+		add_action( 'admin_bar_init', array( &$this, 'init' ) );
 	}
-	
+
+	function init() {
+		if ( ! is_super_admin() || ! is_admin_bar_showing() )
+			return;
+
+		add_action( 'admin_bar_menu',               array( &$this, 'admin_bar_menu' ), 1000 );
+		add_action( 'wp_after_admin_bar_render',    array( &$this, 'render' ) );
+
+		$this->requirements();
+		$this->enqueue();
+		$this->init_panels();
+	}
+
 	function requirements() {
 		$recs = array( 'panel', 'php', 'queries', 'request', 'wp-query', 'object-cache', 'deprecated' );
 		foreach ( $recs as $rec )
 			require_once "panels/class-debug-bar-$rec.php";
 	}
-	
+
 	function enqueue() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 
@@ -41,7 +51,7 @@ class Debug_Bar {
 		wp_enqueue_script( 'admin-bar-ui-dockable', "{$url}js/ui-dockable$suffix.js", array('jquery-ui-mouse'), '20110113' );
 		wp_enqueue_script( 'admin-bar-debug', "{$url}js/debug-bar$suffix.js", array('jquery', 'admin-bar-ui-dockable'), '20110113' );
 	}
-	
+
 	function init_panels() {
 		$classes = array(
 			'Debug_Bar_PHP',
@@ -63,14 +73,9 @@ class Debug_Bar {
 				unset( $this->panels[ $panel_key ] );
 		}
 	}
-	
+
 	function admin_bar_menu() {
 		global $wp_admin_bar;
-		
-		if ( ! is_super_admin() || ! is_admin_bar_showing() )
-			return;
-
-		$this->init_panels();
 
 		$class = '';
 		if ( count( $GLOBALS['_debug_bar_warnings'] ) )
@@ -81,24 +86,11 @@ class Debug_Bar {
 		/* Add the main siteadmin menu item */
 		$wp_admin_bar->add_menu( array( 'id' => 'debug-bar', 'title' => __('Debug'), 'meta' => array( 'class' => $class ) ) );
 	}
-	
-	function admin_bar_init() {
-		if ( ! is_super_admin() || ! is_admin_bar_showing() )
-			return;
 
-		$this->requirements();
-		$this->enqueue();
-
-		// Silence E_NOTICE for deprecated usage.
-		foreach ( array( 'function', 'file', 'argument' ) as $item )
-			add_filter( "deprecated_{$item}_trigger_error", '__return_false' );
-
-	}
-	
 	function render() {
 		global $wpdb, $wp_object_cache, $_debug_bar_notices, $_debug_bar_warnings;
 
-		if ( ! is_super_admin() || ! is_admin_bar_showing() || empty( $this->panels ) )
+		if ( empty( $this->panels ) )
 			return;
 
 		foreach ( $this->panels as $panel_key => $panel ) {
