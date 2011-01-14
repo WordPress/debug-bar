@@ -67,9 +67,10 @@ class Debug_Bar {
 	function admin_bar_menu() {
 		global $wp_admin_bar;
 		
-		$this->init_panels();
 		if ( ! is_super_admin() || ! is_admin_bar_showing() )
 			return;
+
+		$this->init_panels();
 
 		$class = '';
 		if ( count( $GLOBALS['_debug_bar_warnings'] ) )
