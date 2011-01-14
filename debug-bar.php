@@ -118,6 +118,7 @@ class Debug_Bar {
 			<?php endif; ?>
 			<span id="debug-status-title"><?php printf( __('Blog #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ); ?></span>
 			| <span id="debug-status-version"><?php printf( __('PHP: %1$s | DB: %2$s'), phpversion(), $wpdb->db_version() ); ?></span>
+			| <span id="debug-status-peak-memory"><?php printf( __( 'Peak Memory: %s' ), number_format( memory_get_peak_usage( ) ) ); ?> bytes</span>
 		</div>
 		<ul id="debug-menu-links">
 
