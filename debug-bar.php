@@ -106,13 +106,32 @@ class Debug_Bar {
 	<div id='debug-bar-handle'></div>
 	<div id='debug-bar-menu'>
 		<div id="debug-status">
-			<?php //@todo: Add a link to information about WP_DEBUG. ?>
-			<?php if ( ! WP_DEBUG ): ?>
-				<span id="debug-status-warning"><?php _e('WP_DEBUG OFF'); ?></span> | 
-			<?php endif; ?>
-			<span id="debug-status-title"><?php printf( __('Blog #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ); ?></span>
-			| <span id="debug-status-version"><?php printf( __('PHP: %1$s | DB: %2$s'), phpversion(), $wpdb->db_version() ); ?></span>
-			| <span id="debug-status-peak-memory"><?php printf( __( 'Peak Memory: %s' ), number_format( memory_get_peak_usage( ) ) ); ?> bytes</span>
+			<?php //@todo: Add a links to information about WP_DEBUG, PHP version, MySQL version, and Peak Memory.
+			$statuses = array();
+			if ( ! WP_DEBUG )
+				$statuses[] = array( 'warning', __('WP_DEBUG OFF'), '' );
+			$statuses[] = array( 'site', sprintf( __('Site #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ), '' );
+			$statuses[] = array( 'php', __('PHP'), phpversion() );
+			$statuses[] = array( 'db', __('DB'), $wpdb->db_version() );
+			$statuses[] = array( 'memory', __('Mem.'), sprintf( __('%s bytes'), number_format( memory_get_peak_usage() ) ) );
+			
+			$statuses = apply_filters( 'debug_bar_statuses', $statuses );
+			
+			$status_html = array();
+			foreach ( $statuses as $status ) {
+				list( $slug, $title, $data ) = $status;
+
+				$html = "<span id='debug-status-$slug' class='debug-status'>";
+				$html .= "<span class='debug-status-title'>$title</span>";
+				if ( ! empty( $data ) )
+					$html .= " <span class='debug-status-data'>$data</span>";
+				$html .= '</span>';
+				$status_html[] = $html;
+			}
+
+			echo implode( ' | ', $status_html );
+			
+			?>
 		</div>
 		<ul id="debug-menu-links">
 

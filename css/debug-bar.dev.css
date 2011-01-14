@@ -86,13 +86,20 @@
 	text-align: right;
 	padding-top: 4px;
 	padding-right: 15px;
+	color: #bbb;
+}
+#debug-status .debug-status-title {
 	color: #999;
+}
+#debug-status .debug-status-data {
+	color: #999;
+	font-weight: bold;
 }
 #debug-status-warning {
 	font-weight: bold;
 	color: red;
 }
-#debug-status-title {
+#debug-status-site {
 	font-weight: bold;
 	color: #555;
 }
