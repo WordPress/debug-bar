@@ -39,9 +39,12 @@ function debug_bar_menu_init() {
 	return;
 
 	$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
-	wp_enqueue_style( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.css"), array(), '20110113' );
-	wp_enqueue_script( 'admin-bar-ui-dockable', plugins_url("debug-bar/ui-dockable$suffix.js"), array('jquery-ui-mouse'), '20110113' );
-	wp_enqueue_script( 'admin-bar-debug', plugins_url("debug-bar/debug-bar$suffix.js"), array('jquery', 'admin-bar-ui-dockable'), '20110113' );
+
+	$url = plugin_dir_url( __FILE__ );
+
+	wp_enqueue_style( 'admin-bar-debug', "{$url}css/debug-bar$suffix.css", array(), '20110113' );
+	wp_enqueue_script( 'admin-bar-ui-dockable', "{$url}js/ui-dockable$suffix.js", array('jquery-ui-mouse'), '20110113' );
+	wp_enqueue_script( 'admin-bar-debug', "{$url}js/debug-bar$suffix.js", array('jquery', 'admin-bar-ui-dockable'), '20110113' );
 
 	// Silence E_NOTICE for deprecated usage.
 	foreach ( array( 'function', 'file', 'argument' ) as $item )
