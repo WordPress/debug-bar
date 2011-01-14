@@ -89,7 +89,7 @@ class Debug_Bar {
 	}
 
 	function render() {
-		global $wpdb, $wp_object_cache, $_debug_bar_notices, $_debug_bar_warnings;
+		global $wpdb;
 
 		if ( empty( $this->panels ) )
 			return;
