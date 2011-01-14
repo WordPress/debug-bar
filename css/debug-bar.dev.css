@@ -99,6 +99,9 @@
 	font-weight: bold;
 	color: red;
 }
+#debug-status #debug-status-site {
+	font-weight: bold;
+}
 
 #querylist pre {
 	font-size: 12px;
