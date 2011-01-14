@@ -77,14 +77,15 @@ class Debug_Bar {
 	function admin_bar_menu() {
 		global $wp_admin_bar;
 
-		$class = '';
-		if ( count( $GLOBALS['_debug_bar_warnings'] ) )
-			$class = 'warning';
-		elseif ( count( $GLOBALS['_debug_bar_notices'] ) )
-			$class = 'notice';
+		$classes = apply_filters( 'debug_bar_classes', array() );
+		$classes = implode( " ", $classes );
 
 		/* Add the main siteadmin menu item */
-		$wp_admin_bar->add_menu( array( 'id' => 'debug-bar', 'title' => __('Debug'), 'meta' => array( 'class' => $class ) ) );
+		$wp_admin_bar->add_menu( array(
+			'id'    => 'debug-bar',
+			'title' => __('Debug'),
+			'meta'  => array( 'class' => $classes )
+		) );
 	}
 
 	function render() {

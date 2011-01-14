@@ -7,8 +7,12 @@ class Debug_Bar_Panel {
 	function Debug_Bar_Panel( $title='' ) {
 		$this->title( $title );
 
-		if ( $this->init() === false )
+		if ( $this->init() === false ) {
 			$this->set_visible( false );
+			return;
+		}
+
+		add_filter( 'debug_bar_classes', array( &$this, 'debug_bar_classes' ) );
 	}
 
 	/**
@@ -37,6 +41,9 @@ class Debug_Bar_Panel {
 		$this->_title = $title;
 	}
 
+	function debug_bar_classes( $classes ) {
+		return $classes;
+	}
 }
 
 ?>

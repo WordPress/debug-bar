@@ -16,6 +16,14 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 		$this->set_visible( count( $_debug_bar_notices ) || count( $_debug_bar_warnings ) );
 	}
 
+	function debug_bar_classes( $classes ) {
+		if ( count( $GLOBALS['_debug_bar_warnings'] ) )
+			$classes[] = 'warning';
+		elseif ( count( $GLOBALS['_debug_bar_notices'] ) )
+			$classes[] = 'notice';
+		return $classes;
+	}
+
 	function error_handler( $type, $message, $file, $line ) {
 		global $_debug_bar_real_error_handler, $_debug_bar_notices, $_debug_bar_warnings;
 
