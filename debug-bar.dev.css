@@ -228,7 +228,11 @@
 
 #debug-menu-targets {
 	overflow: auto;
-	height: 100%; /* @todo: fix me. this extends the window slighly below the bottom. */
+	position: absolute;
+	top: 28px;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 #querylist .debug-menu-target {
