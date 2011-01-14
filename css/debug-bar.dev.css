@@ -95,13 +95,9 @@
 	color: #999;
 	font-weight: bold;
 }
-#debug-status-warning {
+#debug-status #debug-status-warning {
 	font-weight: bold;
 	color: red;
-}
-#debug-status-site {
-	font-weight: bold;
-	color: #555;
 }
 
 #querylist pre {
