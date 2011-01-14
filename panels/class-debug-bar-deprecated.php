@@ -5,7 +5,7 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 	var $deprecated_functions = array();
 	var $deprecated_files = array();
 	var $deprecated_arguments = array();
-	
+
 	function init() {
 		$this->title( __('Deprecated') );
 
@@ -17,7 +17,7 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 		foreach ( array( 'function', 'file', 'argument' ) as $item )
 			add_filter( "deprecated_{$item}_trigger_error", '__return_false' );
 	}
-	
+
 	function prerender() {
 		$this->set_visible(
 			count( $this->deprecated_functions )
@@ -25,7 +25,7 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 			|| count( $this->deprecated_arguments )
 		);
 	}
-	
+
 	function render() {
 		echo "<div id='debug-bar-deprecated'>";
 		echo '<h2><span>Total Functions:</span>' . number_format( count( $this->deprecated_functions ) ) . "</h2>\n";
@@ -51,7 +51,7 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 		}
 		echo "</div>";
 	}
-	
+
 	function deprecated_function_run($function, $replacement, $version) {
 		$backtrace = debug_backtrace();
 		$bt = 4;
@@ -68,7 +68,7 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 
 		$this->deprecated_functions[$file.':'.$line] = $message;
 	}
-	
+
 	function deprecated_file_included( $old_file, $replacement, $version, $message ) {
 		$backtrace = debug_backtrace();
 		$file = $backtrace[4]['file'];
@@ -82,7 +82,7 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 
 		$this->deprecated_files[$file.':'.$line] = $message;
 	}
-	
+
 	function deprecated_argument_run( $function, $message, $version) {
 		$backtrace = debug_backtrace();
 		$bt = 4;

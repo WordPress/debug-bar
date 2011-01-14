@@ -55,7 +55,7 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 		else
 			return false;
 	}
-	
+
 	function render() {
 		echo "<div id='debug-bar-php'>";
 		echo '<h2><span>Total Warnings:</span>' . number_format( count( $this->warnings ) ) . "</h2>\n";
@@ -77,7 +77,7 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 			echo '</ol>';
 		}
 		echo "</div>";
-		
+
 	}
 }
 

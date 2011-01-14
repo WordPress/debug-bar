@@ -114,9 +114,9 @@ class Debug_Bar {
 			$statuses[] = array( 'php', __('PHP'), phpversion() );
 			$statuses[] = array( 'db', __('DB'), $wpdb->db_version() );
 			$statuses[] = array( 'memory', __('Mem.'), sprintf( __('%s bytes'), number_format( memory_get_peak_usage() ) ) );
-			
+
 			$statuses = apply_filters( 'debug_bar_statuses', $statuses );
-			
+
 			$status_html = array();
 			foreach ( $statuses as $status ) {
 				list( $slug, $title, $data ) = $status;
@@ -130,7 +130,7 @@ class Debug_Bar {
 			}
 
 			echo implode( ' | ', $status_html );
-			
+
 			?>
 		</div>
 		<ul id="debug-menu-links">

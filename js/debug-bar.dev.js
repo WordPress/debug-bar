@@ -6,7 +6,7 @@ bounds = {
 	adminBarHeight: 0,
 	minHeight: 0,
 	marginBottom: 0,
-	
+
 	inUpper: function(){
 		return debugBar.offset().top - $win.scrollTop() >= bounds.adminBarHeight;
 	},
@@ -32,16 +32,16 @@ wpDebugBar = {
 		debugBar = $('#querylist');
 		$win = $(window);
 		$body = $(document.body);
-		
+
 		bounds.minHeight = $('#debug-bar-handle').outerHeight() + $('#debug-bar-menu').outerHeight();
 		bounds.adminBarHeight = $('#wpadminbar').outerHeight();
 		bounds.marginBottom = parseInt( $body.css('margin-bottom'), 10 );
-		
+
 		wpDebugBar.dock();
 		wpDebugBar.toggle();
 		wpDebugBar.tabs();
 	},
-	
+
 	dock: function(){
 		debugBar.dockable({
 			handle: '#debug-bar-handle',
@@ -59,7 +59,7 @@ wpDebugBar = {
 				bounds.fix();
 		});
 	},
-	
+
 	toggle: function(){
 		$('#wp-admin-bar-debug-bar').click( function(e){
 			var show = debugBar.is(':hidden');
@@ -74,11 +74,11 @@ wpDebugBar = {
 				bounds.restore();
 		});
 	},
-	
+
 	tabs: function(){
 		var debugMenuLinks = $('.debug-menu-link'),
 			debugMenuTargets = $('.debug-menu-target');
-			
+
 		debugMenuLinks.click( function(e){
 			var t = $(this);
 
