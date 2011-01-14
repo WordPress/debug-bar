@@ -14,12 +14,15 @@ bounds = {
 		return debugBar.outerHeight() >= bounds.minHeight
 			&& $win.height() >= bounds.minHeight;
 	},
-	fix: function() {
+	fix: function(){
 		if ( ! bounds.inUpper() )
 			debugBar.height( $win.height() - bounds.adminBarHeight );
 		if ( ! bounds.inLower() )
 			debugBar.height( bounds.minHeight );
 		$body.css( 'margin-bottom', debugBar.height() + bounds.marginBottom );
+	},
+	restore: function(){
+		$body.css( 'margin-bottom', bounds.marginBottom );
 	}
 };
 
@@ -67,6 +70,8 @@ wpDebugBar = {
 
 			if ( show )
 				bounds.fix();
+			else
+				bounds.restore();
 		});
 	},
 	
