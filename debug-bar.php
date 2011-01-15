@@ -190,7 +190,6 @@ class Debug_Bar {
 
 		<div id="debug-menu-target-<?php echo $class; ?>" class="debug-menu-target" <?php echo $current; ?>>
 			<?php $panel->render(); ?>
-			<?php // echo str_replace( '&nbsp;', '', $panel->run() ); ?>
 		</div>
 
 		<?php
