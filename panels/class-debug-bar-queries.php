@@ -22,7 +22,7 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 			if ( $wpdb->num_queries > 500 && !$show_many )
 			$out .= "<p>" . sprintf( __('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'debug-bar'), add_query_arg( 'debug_queries', 'true' ) ) . "</p>";
 
-			$out .= '<ol id="wpd-queries">';
+			$out .= '<ol class="wpd-queries">';
 			$first_query = 0;
 			$counter = 0;
 

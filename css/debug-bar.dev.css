@@ -194,20 +194,20 @@
 	margin-bottom: 15px;
 }
 
-#querylist ol#wpd-queries {
+#querylist ol.wpd-queries {
 	padding: 0 !important;
 	margin: 0 !important;
 	list-style: none;
 	clear: left;
 }
 
-#querylist ol#wpd-queries li {
+#querylist ol.wpd-queries li {
 	padding: 10px;
 	background: #f0f0f0;
 	margin: 0 0 10px 0;
 }
 
-#querylist ol#wpd-queries li div.qdebug {
+#querylist ol.wpd-queries li div.qdebug {
 	background: #e8e8e8;
 	margin: 10px -10px -10px -10px;
 	padding: 5px 150px 5px 5px;
@@ -216,7 +216,7 @@
 	min-height: 20px;
 }
 
-#querylist ol#wpd-queries li div.qdebug span {
+#querylist ol.wpd-queries li div.qdebug span {
 	position: absolute;
 	right: 10px;
 	top: 5px;
