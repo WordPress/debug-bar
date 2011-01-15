@@ -334,6 +334,10 @@
 	text-align: center;
 	cursor: pointer;
 }
+#debug-bar-actions span.minus {
+	line-height: 10px;
+	font-size: 14px;
+}
 #debug-bar-actions span:hover {
 	background: #888;
 	background: -moz-linear-gradient(bottom,  #999,  #777);
