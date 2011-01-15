@@ -19,6 +19,11 @@ When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
 
 == Upgrade Notice ==
 
+= 0.5 =
+New UI
+Backend rewritten with a class for each panel
+Many miscellaneous improvements
+
 = 0.4.1 =
 Compatibility updates for trunk
 
@@ -39,6 +44,11 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 0.5 =
+New UI
+Backend rewritten with a class for each panel
+Many miscellaneous improvements
 
 = 0.4.1 =
 Compatibility updates for trunk
