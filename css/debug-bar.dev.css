@@ -80,9 +80,12 @@
 	height: 24px;
 	text-shadow: 0 1px 0 #f4f4f4;
 }
+#debug-bar-menu-right {
+	float: right;
+}
 
 #debug-status {
-	float: right;
+	float: left;
 	text-align: right;
 	padding-top: 4px;
 	padding-right: 15px;
@@ -305,4 +308,34 @@
 	font-family: georgia, times, serif;
 	font-size: 22px;
 	margin: 15px 10px 15px 0 !important;
+}
+
+#debug-bar-actions {
+	float: left;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+#debug-bar-actions span {
+	-moz-border-radius: 20px;
+	display: block;
+	float: left;
+	font-size: 16px;
+	height: 12px;
+	line-height: 13px;
+	width: 12px;
+	color: #eee;
+	background: #aaa;
+	background: -moz-linear-gradient(bottom,  #999,  #bbb);
+	background: -webkit-gradient(linear, left bottom, left top, from(#999), to(#bbb));
+	text-shadow: 0 1px 0 #999;
+	border: 1px solid #999;
+	text-align: center;
+	cursor: pointer;
+}
+#debug-bar-actions span:hover {
+	background: #888;
+	background: -moz-linear-gradient(bottom,  #999,  #777);
+	background: -webkit-gradient(linear, left bottom, left top, from(#999), to(#777));
+	border: 1px solid #777;
+	text-shadow: 0 1px 0 #777;
 }

@@ -128,6 +128,7 @@ class Debug_Bar {
 
 	<div id='debug-bar-handle'></div>
 	<div id='debug-bar-menu'>
+		<div id='debug-bar-menu-right'>
 		<div id="debug-status">
 			<?php //@todo: Add a links to information about WP_DEBUG, PHP version, MySQL version, and Peak Memory.
 			$statuses = array();
@@ -153,8 +154,11 @@ class Debug_Bar {
 			}
 
 			echo implode( ' | ', $status_html );
-
 			?>
+		</div>
+		<div id="debug-bar-actions">
+			<span class="plus">+</span>
+		</div>
 		</div>
 		<ul id="debug-menu-links">
 

@@ -14,11 +14,13 @@ bounds = {
 		return debugBar.outerHeight() >= bounds.minHeight
 			&& $win.height() >= bounds.minHeight;
 	},
-	fix: function(){
-		if ( ! bounds.inUpper() )
+	update: function( to ){
+		if ( ! bounds.inUpper() || to == 'upper' )
 			debugBar.height( $win.height() - bounds.adminBarHeight );
-		if ( ! bounds.inLower() )
+		if ( ! bounds.inLower() || to == 'lower' )
 			debugBar.height( bounds.minHeight );
+		if ( typeof to == "number" )
+			debugBar.height( to );
 		$body.css( 'margin-bottom', debugBar.height() + bounds.marginBottom );
 	},
 	restore: function(){
@@ -40,6 +42,7 @@ wpDebugBar = {
 		wpDebugBar.dock();
 		wpDebugBar.toggle();
 		wpDebugBar.tabs();
+		wpDebugBar.actions();
 	},
 
 	dock: function(){
@@ -49,14 +52,14 @@ wpDebugBar = {
 				return bounds.inUpper() && bounds.inLower();
 			},
 			resized: function( e, ui ) {
-				bounds.fix();
+				bounds.update();
 			}
 		});
 
 		// If the window is resized, make sure the debug bar isn't too large.
 		$win.resize( function(){
 			if ( debugBar.is(':visible') )
-				bounds.fix();
+				bounds.update();
 		});
 	},
 
@@ -69,7 +72,7 @@ wpDebugBar = {
 			$(this).toggleClass( 'active', show );
 
 			if ( show )
-				bounds.fix();
+				bounds.update();
 			else
 				bounds.restore();
 		});
@@ -95,6 +98,16 @@ wpDebugBar = {
 			t.addClass('current');
 			// The hashed component of the href is the id that we want to display.
 			$('#' + this.href.substr( this.href.indexOf( '#' ) + 1 ) ).show();
+		});
+	},
+
+	actions: function(){
+		var actions = $('#debug-bar-actions');
+			maximize = $('.plus', actions);
+
+		// @todo: Make this toggle maximize, remove scrollbars, etc.
+		maximize.click( function(){
+			bounds.update( 'upper' );
 		});
 	}
 };
