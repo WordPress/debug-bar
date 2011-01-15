@@ -158,7 +158,7 @@ class Debug_Bar {
 		</div>
 		<div id="debug-bar-actions">
 			<span class="plus">+</span>
-			<span class="minus" style="display: none">&ndash;</span
+			<span class="minus" style="display: none">&ndash;</span>
 		</div>
 		</div>
 		<ul id="debug-menu-links">
