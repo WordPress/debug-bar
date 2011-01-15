@@ -102,19 +102,21 @@ wpDebugBar = {
 	},
 
 	actions: function(){
-		var actions = $('#debug-bar-actions');
-			maximize = $('.plus', actions);
-			minimize = $('.minus', actions);
+		var actions = $('#debug-bar-actions'),
+			maximize = $('.plus', actions),
+			restore = $('.minus', actions),
+			lastHeight = debugBar.height();
 
 		// @todo: Make this toggle maximize, remove scrollbars, etc.
 		maximize.click( function(){
+			lastHeight = debugBar.height();
 			bounds.update( 'upper' );
 			maximize.hide();
-			minimize.show();
+			restore.show();
 		});
-		minimize.click( function(){
-			bounds.update( 'lower' );
-			minimize.hide();
+		restore.click( function(){
+			bounds.update( lastHeight );
+			restore.hide();
 			maximize.show();
 		})
 	}
