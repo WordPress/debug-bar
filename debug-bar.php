@@ -21,6 +21,8 @@ class Debug_Bar {
 	var $panels = array();
 
 	function Debug_Bar() {
+		if ( defined('DOING_AJAX') && DOING_AJAX )
+			add_action( 'admin_init', array( &$this, 'init_ajax' ) );
 		add_action( 'admin_bar_init', array( &$this, 'init' ) );
 	}
 
@@ -30,9 +32,18 @@ class Debug_Bar {
 
 		add_action( 'admin_bar_menu',               array( &$this, 'admin_bar_menu' ), 1000 );
 		add_action( 'wp_after_admin_bar_render',    array( &$this, 'render' ) );
+		add_action( 'wp_head',                      array( &$this, 'ensure_ajaxurl' ), 1 );
 
 		$this->requirements();
 		$this->enqueue();
+		$this->init_panels();
+	}
+
+	function init_ajax() {
+		if ( ! is_super_admin() )
+			return;
+
+		$this->requirements();
 		$this->init_panels();
 	}
 
@@ -47,9 +58,11 @@ class Debug_Bar {
 
 		$url = plugin_dir_url( __FILE__ );
 
-		wp_enqueue_style( 'admin-bar-debug', "{$url}css/debug-bar$suffix.css", array(), '20110113' );
-		wp_enqueue_script( 'admin-bar-ui-dockable', "{$url}js/ui-dockable$suffix.js", array('jquery-ui-mouse'), '20110113' );
-		wp_enqueue_script( 'admin-bar-debug', "{$url}js/debug-bar$suffix.js", array('jquery', 'admin-bar-ui-dockable'), '20110113' );
+		wp_enqueue_style( 'debug-bar', "{$url}css/debug-bar$suffix.css", array(), '20110114' );
+		wp_enqueue_script( 'debug-bar-ui-dockable', "{$url}js/ui-dockable$suffix.js", array('jquery-ui-mouse'), '20110113' );
+		wp_enqueue_script( 'debug-bar', "{$url}js/debug-bar$suffix.js", array('jquery', 'debug-bar-ui-dockable'), '20110114' );
+
+		do_action('debug_bar_enqueue_scripts');
 	}
 
 	function init_panels() {
@@ -59,7 +72,7 @@ class Debug_Bar {
 			'Debug_Bar_Queries',
 			'Debug_Bar_Deprecated',
 			'Debug_Bar_Request',
-			'Debug_Bar_Object_Cache'
+			'Debug_Bar_Object_Cache',
 		);
 
 		foreach ( $classes as $class ) {
@@ -72,6 +85,18 @@ class Debug_Bar {
 			if ( ! $panel->is_visible() )
 				unset( $this->panels[ $panel_key ] );
 		}
+	}
+
+	function ensure_ajaxurl() {
+		if ( is_admin() )
+			return;
+		?>
+		<script type="text/javascript">
+		//<![CDATA[
+		var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+		//]]>
+		</script>
+		<?php
 	}
 
 	function admin_bar_menu() {
