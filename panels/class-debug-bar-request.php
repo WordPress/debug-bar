@@ -2,7 +2,7 @@
 
 class Debug_Bar_Request extends Debug_Bar_Panel {
 	function init() {
-		$this->title( __('Request') );
+		$this->title( __('Request', 'debug-bar') );
 	}
 
 	function prerender() {

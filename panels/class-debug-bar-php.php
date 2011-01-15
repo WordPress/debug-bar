@@ -9,7 +9,7 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 		if ( ! WP_DEBUG )
 			return false;
 
-		$this->title( __('Notices / Warnings') );
+		$this->title( __('Notices / Warnings', 'debug-bar') );
 
 		$this->real_error_handler = set_error_handler( array( &$this, 'error_handler' ) );
 	}

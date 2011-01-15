@@ -2,7 +2,7 @@
 
 class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 	function init() {
-		$this->title( __('WP Query') );
+		$this->title( __('WP Query', 'debug-bar') );
 	}
 
 	function prerender() {

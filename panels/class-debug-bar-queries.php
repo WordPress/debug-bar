@@ -2,7 +2,7 @@
 
 class Debug_Bar_Queries extends Debug_Bar_Panel {
 	function init() {
-		$this->title( __('Queries') );
+		$this->title( __('Queries', 'debug-bar') );
 	}
 
 	function prerender() {
@@ -20,7 +20,7 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 			$show_many = isset($_GET['debug_queries']);
 
 			if ( $wpdb->num_queries > 500 && !$show_many )
-			$out .= "<p>" . sprintf( __('There are too many queries to show easily! <a href="%s">Show them anyway</a>'), add_query_arg( 'debug_queries', 'true' ) ) . "</p>";
+			$out .= "<p>" . sprintf( __('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'debug-bar'), add_query_arg( 'debug_queries', 'true' ) ) . "</p>";
 
 			$out .= '<ol id="wpd-queries">';
 			$first_query = 0;
@@ -44,7 +44,7 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 			}
 			$out .= '</ol>';
 		} else {
-			$out .= "<p><strong>" . __('There are no queries on this page.') . "</strong></p>";
+			$out .= "<p><strong>" . __('There are no queries on this page.', 'debug-bar') . "</strong></p>";
 		}
 
 		$query_count = '<h2><span>Total Queries:</span>' . number_format( $wpdb->num_queries ) . "</h2>\n";

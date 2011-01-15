@@ -106,7 +106,7 @@ class Debug_Bar {
 		/* Add the main siteadmin menu item */
 		$wp_admin_bar->add_menu( array(
 			'id'    => 'debug-bar',
-			'title' => __('Debug'),
+			'title' => __('Debug', 'debug-bar'),
 			'meta'  => array( 'class' => $classes )
 		) );
 	}
@@ -132,11 +132,11 @@ class Debug_Bar {
 			<?php //@todo: Add a links to information about WP_DEBUG, PHP version, MySQL version, and Peak Memory.
 			$statuses = array();
 			if ( ! WP_DEBUG )
-				$statuses[] = array( 'warning', __('WP_DEBUG OFF'), '' );
-			$statuses[] = array( 'site', sprintf( __('Site #%d on %s'), $GLOBALS['blog_id'], php_uname( 'n' ) ), '' );
-			$statuses[] = array( 'php', __('PHP'), phpversion() );
-			$statuses[] = array( 'db', __('DB'), $wpdb->db_version() );
-			$statuses[] = array( 'memory', __('Mem.'), sprintf( __('%s bytes'), number_format( memory_get_peak_usage() ) ) );
+				$statuses[] = array( 'warning', __('WP_DEBUG OFF', 'debug-bar'), '' );
+			$statuses[] = array( 'site', sprintf( __('Site #%d on %s', 'debug-bar'), $GLOBALS['blog_id'], php_uname( 'n' ) ), '' );
+			$statuses[] = array( 'php', __('PHP', 'debug-bar'), phpversion() );
+			$statuses[] = array( 'db', __('DB', 'debug-bar'), $wpdb->db_version() );
+			$statuses[] = array( 'memory', __('Mem.', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format( memory_get_peak_usage() ) ) );
 
 			$statuses = apply_filters( 'debug_bar_statuses', $statuses );
 

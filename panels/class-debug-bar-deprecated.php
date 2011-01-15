@@ -7,7 +7,7 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 	var $deprecated_arguments = array();
 
 	function init() {
-		$this->title( __('Deprecated') );
+		$this->title( __('Deprecated', 'debug-bar') );
 
 		add_action( 'deprecated_function_run', array( &$this, 'deprecated_function_run' ), 10, 3 );
 		add_action( 'deprecated_file_included', array( &$this, 'deprecated_file_included' ), 10, 4 );
@@ -62,9 +62,9 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 		$file = $backtrace[ $bt ]['file'];
 		$line = $backtrace[ $bt ]['line'];
 		if ( ! is_null($replacement) )
-			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'), $function, $version, $replacement );
+			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.', 'debug-bar'), $function, $version, $replacement );
 		else
-			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'), $function, $version );
+			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.', 'debug-bar'), $function, $version );
 
 		$this->deprecated_functions[$file.':'.$line] = $message;
 	}
@@ -76,9 +76,9 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 		$line = $backtrace[4]['line'];
 		$message = empty( $message ) ? '' : ' ' . $message;
 		if ( ! is_null( $replacement ) )
-			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.'), $file_abs, $version, $replacement ) . $message;
+			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.', 'debug-bar'), $file_abs, $version, $replacement ) . $message;
 		else
-			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.'), $file_abs, $version ) . $message;
+			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.', 'debug-bar'), $file_abs, $version ) . $message;
 
 		$this->deprecated_files[$file.':'.$line] = $message;
 	}
