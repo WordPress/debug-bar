@@ -317,6 +317,8 @@
 }
 #debug-bar-actions span {
 	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
 	display: block;
 	float: left;
 	font-size: 16px;
