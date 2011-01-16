@@ -15,12 +15,12 @@ bounds = {
 			&& $win.height() >= bounds.minHeight;
 	},
 	update: function( to ){
+		if ( typeof to == "number" )
+			debugBar.height( to );
 		if ( ! bounds.inUpper() || to == 'upper' )
 			debugBar.height( $win.height() - bounds.adminBarHeight );
 		if ( ! bounds.inLower() || to == 'lower' )
 			debugBar.height( bounds.minHeight );
-		if ( typeof to == "number" )
-			debugBar.height( to );
 		$body.css( 'margin-bottom', debugBar.height() + bounds.marginBottom );
 	},
 	restore: function(){
