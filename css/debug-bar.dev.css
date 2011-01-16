@@ -62,6 +62,10 @@
 	line-height: 150% !important;
 	text-align: left;
 }
+#querylist.db-dockable-disabled {
+	height: auto;
+	top: 28px;
+}
 
 #debug-bar-handle {
 	border-color: #c6c6c6;
@@ -70,6 +74,12 @@
 	height: 2px;
 	background: #fff;
 	cursor: n-resize;
+}
+
+.db-dockable-disabled #debug-bar-handle {
+	cursor: inherit;
+	height: 1px;
+	border-top: 0;
 }
 
 #debug-bar-menu {

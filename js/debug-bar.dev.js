@@ -1,6 +1,8 @@
+var wpDebugBar;
+
 (function($) {
 
-var debugBar, bounds, wpDebugBar, $win, $body;
+var debugBar, bounds, api, $win, $body;
 
 bounds = {
 	adminBarHeight: 0,
@@ -15,7 +17,7 @@ bounds = {
 			&& $win.height() >= bounds.minHeight;
 	},
 	update: function( to ){
-		if ( typeof to == "number" )
+		if ( typeof to == "number" || to == 'auto' )
 			debugBar.height( to );
 		if ( ! bounds.inUpper() || to == 'upper' )
 			debugBar.height( $win.height() - bounds.adminBarHeight );
@@ -28,7 +30,7 @@ bounds = {
 	}
 };
 
-wpDebugBar = {
+wpDebugBar = api = {
 	init: function(){
 		// Initialize variables.
 		debugBar = $('#querylist');
@@ -39,10 +41,10 @@ wpDebugBar = {
 		bounds.adminBarHeight = $('#wpadminbar').outerHeight();
 		bounds.marginBottom = parseInt( $body.css('margin-bottom'), 10 );
 
-		wpDebugBar.dock();
-		wpDebugBar.toggle();
-		wpDebugBar.tabs();
-		wpDebugBar.actions();
+		api.dock();
+		api.toggle();
+		api.tabs();
+		api.actions.init();
 	},
 
 	dock: function(){
@@ -58,7 +60,7 @@ wpDebugBar = {
 
 		// If the window is resized, make sure the debug bar isn't too large.
 		$win.resize( function(){
-			if ( debugBar.is(':visible') )
+			if ( debugBar.is(':visible') && ! debugBar.dockable('option', 'disabled') )
 				bounds.update();
 		});
 	},
@@ -101,24 +103,35 @@ wpDebugBar = {
 		});
 	},
 
-	actions: function(){
-		var actions = $('#debug-bar-actions'),
-			maximize = $('.plus', actions),
-			restore = $('.minus', actions),
-			lastHeight = debugBar.height();
+	actions: {
+		height: 0,
+		overflow: 'auto',
+		buttons: {},
 
-		// @todo: Make this toggle maximize, remove scrollbars, etc.
-		maximize.click( function(){
-			lastHeight = debugBar.height();
-			bounds.update( 'upper' );
-			maximize.hide();
-			restore.show();
-		});
-		restore.click( function(){
-			bounds.update( lastHeight );
-			restore.hide();
-			maximize.show();
-		})
+		init: function() {
+			var actions = $('#debug-bar-actions');
+
+			api.actions.height = debugBar.height();
+			api.actions.overflow = $body.css( 'overflow' );
+
+			api.actions.buttons.max = $('.plus', actions).click( api.actions.maximize );
+			api.actions.buttons.res = $('.minus', actions).click( api.actions.restore );
+		},
+		maximize: function() {
+			api.actions.height = debugBar.height();
+			$body.css( 'overflow', 'hidden' );
+			bounds.update( 'auto' );
+			api.actions.buttons.max.hide();
+			api.actions.buttons.res.show();
+			debugBar.dockable('disable');
+		},
+		restore: function() {
+			$body.css( 'overflow', api.actions.overflow );
+			bounds.update( api.actions.height );
+			api.actions.buttons.res.hide();
+			api.actions.buttons.max.show();
+			debugBar.dockable('enable');
+		}
 	}
 };
 
