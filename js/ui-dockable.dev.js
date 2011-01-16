@@ -33,6 +33,7 @@
 			};
 		},
 		_mouseStart: function(event) {
+			this._trigger( "start", event, this.widget() );
 			this.d0 = this.element[this.dimension]() + event[this.page];
 		},
 		_mouseDrag: function(event) {
@@ -47,6 +48,9 @@
 		},
 		_mouseCapture: function(event) {
 			return !this.options.disabled && event.target == this.handle[0];
+		},
+		_mouseStop: function(event) {
+			this._trigger( "stop", event, this.widget() );
 		}
 	});
 })(jQuery);
