@@ -11,6 +11,9 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 
 	function render() {
 		global $template, $wp_query;
+		$queried_object = get_queried_object();
+		if ( $queried_object && isset( $queried_object->post_type ) )
+			$post_type_object = get_post_type_object( $queried_object->post_type );
 
 		echo "<div id='debug-bar-wp-query'>";
 		echo '<h2><span>Queried Object ID:</span>' . get_queried_object_id() . "</h2>\n";
@@ -62,6 +65,9 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 			echo '<h2><span>Page on Front:</span>' . $page_on_front . "</h2>\n";
 		}
 
+		if ( isset( $post_type_object ) )
+			echo '<h2><span>Post Type:</span>' . $post_type_object->labels->singular_name . "</h2>\n";
+
 		echo '<div class="clear"></div>';
 
 		if ( empty($wp_query->query) )
@@ -77,11 +83,10 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 			echo '<p>' . esc_html( $wp_query->request ) . '</p>';
 		}
 
-		$object = get_queried_object();
-		if ( ! is_null( $object ) ) {
+		if ( ! is_null( $queried_object ) ) {
 			echo '<h3>Queried Object:</h3>';
 			echo '<ol class="debug-bar-wp-query-list">';
-			foreach ($object as $key => $value) {
+			foreach ($queried_object as $key => $value) {
 				echo '<li>' . $key . ' => ' . $value . '</li>';
 			}
 			echo '</ol>';
