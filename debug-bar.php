@@ -58,7 +58,7 @@ class Debug_Bar {
 
 		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20110114' );
 		wp_enqueue_script( 'debug-bar-ui-dockable', plugins_url( "js/ui-dockable$suffix.js", __FILE__ ), array('jquery-ui-mouse'), '20110113' );
-		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'debug-bar-ui-dockable'), '20110114' );
+		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'debug-bar-ui-dockable', 'utils'), '20110114' );
 
 		do_action('debug_bar_enqueue_scripts');
 	}
@@ -88,10 +88,16 @@ class Debug_Bar {
 	function ensure_ajaxurl() {
 		if ( is_admin() )
 			return;
+		$current_user = wp_get_current_user();
 		?>
 		<script type="text/javascript">
 		//<![CDATA[
-		var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+		var userSettings = {
+				'url': '<?php echo SITECOOKIEPATH; ?>',
+				'uid': '<?php echo $current_user->ID; ?>',
+				'time':'<?php echo time() ?>'
+			},
+			ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
 		//]]>
 		</script>
 		<?php

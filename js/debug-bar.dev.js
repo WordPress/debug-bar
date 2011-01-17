@@ -42,9 +42,42 @@ wpDebugBar = api = {
 		bounds.marginBottom = parseInt( $body.css('margin-bottom'), 10 );
 
 		api.dock();
-		api.toggle();
+		api.toggle.init();
 		api.tabs();
 		api.actions.init();
+		api.cookie.restore();
+	},
+
+	cookie: {
+		get: function() {
+			var cookie = wpCookies.getHash('wp-debug-bar-' + userSettings.uid);
+
+			cookie.visible = cookie.visible == 'true';
+			cookie.height = parseInt( cookie.height, 10 );
+			return cookie;
+		},
+		update: function() {
+			var name = 'wp-debug-bar-' + userSettings.uid,
+				expires = new Date(),
+				path = userSettings.url,
+				value = {
+					visible: debugBar.is(':visible'),
+					height: debugBar.height()
+				};
+
+			expires.setTime( expires.getTime() + 31536000000 );
+
+			wpCookies.setHash( name, value, expires, path );
+		},
+		restore: function() {
+			var cookie = api.cookie.get();
+
+			if ( ! cookie )
+				return;
+
+			api.toggle.pending = cookie.height;
+			api.toggle.visibility( cookie.visible );
+		}
 	},
 
 	dock: function(){
@@ -55,6 +88,9 @@ wpDebugBar = api = {
 			},
 			resized: function( e, ui ) {
 				bounds.update();
+			},
+			stop: function( e, ui ) {
+				api.cookie.update();
 			}
 		});
 
@@ -65,19 +101,28 @@ wpDebugBar = api = {
 		});
 	},
 
-	toggle: function(){
-		$('#wp-admin-bar-debug-bar').click( function(e){
-			var show = debugBar.is(':hidden');
-			e.preventDefault();
+	toggle: {
+		pending: '',
+		init: function() {
+			$('#wp-admin-bar-debug-bar').click( function(e) {
+				e.preventDefault();
+				api.toggle.visibility();
+			});
+		},
+		visibility: function( show ){
+			show = typeof show == 'undefined' ? debugBar.is(':hidden') : show;
 
 			debugBar.toggle( show );
 			$(this).toggleClass( 'active', show );
 
-			if ( show )
-				bounds.update();
-			else
+			if ( show ) {
+				bounds.update( api.toggle.pending );
+				api.toggle.pending = '';
+			} else {
 				bounds.restore();
-		});
+			}
+			api.cookie.update();
+		}
 	},
 
 	tabs: function(){
