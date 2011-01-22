@@ -52,6 +52,10 @@ wpDebugBar = api = {
 		get: function() {
 			var cookie = wpCookies.getHash('wp-debug-bar-' + userSettings.uid);
 
+			if ( ! cookie )
+				return;
+
+			// Convert the properties to the correct types.
 			cookie.visible = cookie.visible == 'true';
 			cookie.height = parseInt( cookie.height, 10 );
 			return cookie;
