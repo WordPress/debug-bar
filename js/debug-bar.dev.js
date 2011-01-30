@@ -2,7 +2,7 @@ var wpDebugBar;
 
 (function($) {
 
-var debugBar, bounds, api, $win, $body;
+var debugBar, bounds, api, $win;
 
 bounds = {
 	adminBarHeight: 0,
@@ -23,23 +23,32 @@ bounds = {
 			debugBar.height( $win.height() - bounds.adminBarHeight );
 		if ( ! bounds.inLower() || to == 'lower' )
 			debugBar.height( bounds.minHeight );
-		$body.css( 'margin-bottom', debugBar.height() + bounds.marginBottom );
+		api.spacer.css( 'margin-bottom', debugBar.height() + bounds.marginBottom );
 	},
 	restore: function(){
-		$body.css( 'margin-bottom', bounds.marginBottom );
+		api.spacer.css( 'margin-bottom', bounds.marginBottom );
 	}
 };
 
 wpDebugBar = api = {
+	// The element that we will pad to prevent the debug bar
+	// from overlapping the bottom of the page.
+	spacer: undefined,
+
 	init: function(){
 		// Initialize variables.
 		debugBar = $('#querylist');
 		$win = $(window);
-		$body = $(document.body);
+
+		// In the admin, we need to pad the footer.
+		api.spacer = $('.wp-admin #footer');
+		// If we're not in the admin, pad the body.
+		if ( ! api.spacer.length )
+			api.spacer = $(document.body);
 
 		bounds.minHeight = $('#debug-bar-handle').outerHeight() + $('#debug-bar-menu').outerHeight();
 		bounds.adminBarHeight = $('#wpadminbar').outerHeight();
-		bounds.marginBottom = parseInt( $body.css('margin-bottom'), 10 );
+		bounds.marginBottom = parseInt( api.spacer.css('margin-bottom'), 10 );
 
 		api.dock();
 		api.toggle.init();
@@ -161,21 +170,21 @@ wpDebugBar = api = {
 			var actions = $('#debug-bar-actions');
 
 			api.actions.height = debugBar.height();
-			api.actions.overflow = $body.css( 'overflow' );
+			api.actions.overflow = api.spacer.css( 'overflow' );
 
 			api.actions.buttons.max = $('.plus', actions).click( api.actions.maximize );
 			api.actions.buttons.res = $('.minus', actions).click( api.actions.restore );
 		},
 		maximize: function() {
 			api.actions.height = debugBar.height();
-			$body.css( 'overflow', 'hidden' );
+			api.spacer.css( 'overflow', 'hidden' );
 			bounds.update( 'auto' );
 			api.actions.buttons.max.hide();
 			api.actions.buttons.res.show();
 			debugBar.dockable('disable');
 		},
 		restore: function() {
-			$body.css( 'overflow', api.actions.overflow );
+			api.spacer.css( 'overflow', api.actions.overflow );
 			bounds.update( api.actions.height );
 			api.actions.buttons.res.hide();
 			api.actions.buttons.max.show();
