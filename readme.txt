@@ -2,7 +2,7 @@
 Contributors: wordpressdotorg, ryan, westi, koopersmith
 Tags: debug
 Tested up to: 3.1
-Stable tag: 0.5
+Stable tag: 0.5.1
 Requires at least: 3.1
 
 Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
@@ -16,6 +16,8 @@ A must for developers!
 When WP_DEBUG is enabled it also tracks PHP Warnings and Notices to make them easier to find.
 
 When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
+
+Add a PHP/MySQL console with the [Debug Bar Console plugin](http://wordpress.org/extend/plugins/debug-bar-console/).
 
 == Upgrade Notice ==
 
