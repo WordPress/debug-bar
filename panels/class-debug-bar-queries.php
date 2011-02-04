@@ -25,10 +25,9 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 			$show_many = isset($_GET['debug_queries']);
 
 			if ( $wpdb->num_queries > 500 && !$show_many )
-			$out .= "<p>" . sprintf( __('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'debug-bar'), add_query_arg( 'debug_queries', 'true' ) ) . "</p>";
+				$out .= "<p>" . sprintf( __('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'debug-bar'), add_query_arg( 'debug_queries', 'true' ) ) . "</p>";
 
 			$out .= '<ol class="wpd-queries">';
-			$first_query = 0;
 			$counter = 0;
 
 			foreach ( $wpdb->queries as $q ) {
@@ -36,8 +35,8 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 
 				$total_time += $elapsed;
 
-				if ( !$show_many && ++$counter > 500 )
-				continue;
+				if ( ++$counter > 500 && ! $show_many )
+					break;
 
 				$debug = explode( ', ', $debug );
 				$debug = array_diff( $debug, array( 'require_once', 'require', 'include_once', 'include' ) );
@@ -54,7 +53,7 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 			else
 				$out .= "<p><strong>" . __('SAVEQUERIES must be defined to show the query log.', 'debug-bar') . "</strong></p>";
 		}
-		
+
 		if ( ! empty($EZSQL_ERROR) ) {
 			$out .= '<h3>' . __( 'Database Errors', 'debug-bar' ) . '</h3>';
 			$out .= '<ol class="wpd-queries">';
