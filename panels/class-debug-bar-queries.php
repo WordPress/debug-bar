@@ -6,14 +6,19 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 	}
 
 	function prerender() {
-		$this->set_visible( defined('SAVEQUERIES') && SAVEQUERIES );
+		$this->set_visible( defined('SAVEQUERIES') && SAVEQUERIES || ! empty($GLOBALS['EZSQL_ERROR']) );
+	}
+
+	function debug_bar_classes( $classes ) {
+		if ( ! empty($GLOBALS['EZSQL_ERROR']) )
+			$classes[] = 'warning';
+		return $classes;
 	}
 
 	function render() {
-		global $wpdb;
+		global $wpdb, $EZSQL_ERROR;
 
-		$queries = array();
-		$out = '';
+		$out = '<h3>' . __( 'Queries', 'debug-bar' ) . '</h3>';
 		$total_time = 0;
 
 		if ( !empty($wpdb->queries) ) {
@@ -44,13 +49,32 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 			}
 			$out .= '</ol>';
 		} else {
-			$out .= "<p><strong>" . __('There are no queries on this page.', 'debug-bar') . "</strong></p>";
+			if ( $wpdb->num_queries == 0 )
+				$out .= "<p><strong>" . __('There are no queries on this page.', 'debug-bar') . "</strong></p>";
+			else
+				$out .= "<p><strong>" . __('SAVEQUERIES must be defined to show the query log.', 'debug-bar') . "</strong></p>";
+		}
+		
+		if ( ! empty($EZSQL_ERROR) ) {
+			$out .= '<h3>' . __( 'Database Errors', 'debug-bar' ) . '</h3>';
+			$out .= '<ol class="wpd-queries">';
+
+			foreach ( $EZSQL_ERROR as $e ) {
+				$query = nl2br(esc_html($e['query']));
+				$out .= "<li>$query<br/><div class='qdebug'>{$e['error_str']}</div></li>\n";
+			}
+			$out .= '</ol>';
 		}
 
-		$query_count = '<h2><span>Total Queries:</span>' . number_format( $wpdb->num_queries ) . "</h2>\n";
-		$query_time = '<h2><span>Total query time:</span>' . number_format(sprintf('%0.1f', $total_time * 1000), 1) . " ms</h2>\n";
+		$heading = '';
+		if ( $wpdb->num_queries )
+			$heading .= '<h2><span>Total Queries:</span>' . number_format( $wpdb->num_queries ) . "</h2>\n";
+		if ( $total_time )
+			$heading .= '<h2><span>Total query time:</span>' . number_format(sprintf('%0.1f', $total_time * 1000), 1) . " ms</h2>\n";
+		if ( ! empty($EZSQL_ERROR) )
+			$heading .= '<h2><span>Total DB Errors:</span>' . number_format( count($EZSQL_ERROR) ) . "</h2>\n";
 
-		$out = $query_count . $query_time . $out;
+		$out = $heading . $out;
 
 		echo $out;
 	}
