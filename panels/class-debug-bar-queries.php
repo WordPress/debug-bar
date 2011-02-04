@@ -36,7 +36,7 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 				$total_time += $elapsed;
 
 				if ( ++$counter > 500 && ! $show_many )
-					break;
+					continue;
 
 				$debug = explode( ', ', $debug );
 				$debug = array_diff( $debug, array( 'require_once', 'require', 'include_once', 'include' ) );
