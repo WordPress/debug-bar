@@ -27,7 +27,7 @@ class Debug_Bar {
 	}
 
 	function init() {
-		if ( ! is_super_admin() || ! is_admin_bar_showing() )
+		if ( ! is_super_admin() || ! is_admin_bar_showing() || $this->is_wp_login() )
 			return;
 
 		add_action( 'admin_bar_menu',               array( &$this, 'admin_bar_menu' ), 1000 );
@@ -37,6 +37,13 @@ class Debug_Bar {
 		$this->requirements();
 		$this->enqueue();
 		$this->init_panels();
+	}
+	
+	/* Are we on the wp-login.php page?
+	 * We can get here while logged in and break the page as the admin bar isn't shown and otherthings the js relies on aren't available.
+	 */
+	function is_wp_login() {
+		return 'wp-login.php' == basename( $_SERVER['SCRIPT_NAME']);
 	}
 
 	function init_ajax() {
