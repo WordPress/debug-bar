@@ -21,6 +21,12 @@ Add a PHP/MySQL console with the [Debug Bar Console plugin](http://wordpress.org
 
 == Upgrade Notice ==
 
+= 0.7 =
+Made compatible with PHP < 5.2.0
+CSS Tweaks
+Load JavaScript in Footer
+Fixed display issues for WP_Query debug on CPT archives pages
+
 = 0.6 =
 Added maximize/restore button
 Added cookie to keep track of debug bar state
@@ -52,6 +58,12 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 0.7 =
+Made compatible with PHP < 5.2.0
+CSS Tweaks
+Load JavaScript in Footer
+Fixed display issues for WP_Query debug on CPT archives pages
 
 = 0.6 =
 Added maximize/restore button
