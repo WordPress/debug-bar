@@ -20,9 +20,9 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 
 	function debug_bar_classes( $classes ) {
 		if ( count( $this->warnings ) )
-			$classes[] = 'warning';
+			$classes[] = 'debug-bar-php-warning-summary';
 		elseif ( count( $this->notices ) )
-			$classes[] = 'notice';
+			$classes[] = 'debug-bar-php-notice-summary';
 		return $classes;
 	}
 

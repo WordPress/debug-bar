@@ -63,7 +63,7 @@ class Debug_Bar {
 	function enqueue() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 
-		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20110114' );
+		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20110316' );
 		wp_enqueue_script( 'debug-bar-ui-dockable', plugins_url( "js/ui-dockable$suffix.js", __FILE__ ), array('jquery-ui-mouse'), '20110113' );
 		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'debug-bar-ui-dockable', 'utils'), '20110114' );
 
