@@ -87,7 +87,16 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 			echo '<h3>Queried Object:</h3>';
 			echo '<ol class="debug-bar-wp-query-list">';
 			foreach ($queried_object as $key => $value) {
-				echo '<li>' . $key . ' => ' . $value . '</li>';
+				// See: http://wordpress.org/support/topic/plugin-debug-bar-custom-post-type-archive-catchable-fatal-error
+				// TODO: Fix better
+				if ( is_object( $value ) ) {
+					echo '<li>' . $key . ' => <ol>';
+					foreach ( $value as $_key => $_value )
+						echo '<li>' . $_key . ' => ' . $_value . '</li>';
+					echo '</ol></li>';
+				} else {
+					echo '<li>' . $key . ' => ' . $value . '</li>';
+				}
 			}
 			echo '</ol>';
 		}
