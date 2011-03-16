@@ -26,6 +26,7 @@ Made compatible with PHP < 5.2.0
 CSS Tweaks
 Load JavaScript in Footer
 Fixed display issues for WP_Query debug on CPT archives pages
+SQL/DB error tracking
 
 = 0.6 =
 Added maximize/restore button
@@ -64,6 +65,7 @@ Made compatible with PHP < 5.2.0
 CSS Tweaks
 Load JavaScript in Footer
 Fixed display issues for WP_Query debug on CPT archives pages
+SQL/DB error tracking
 
 = 0.6 =
 Added maximize/restore button
