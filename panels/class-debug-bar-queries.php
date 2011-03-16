@@ -18,7 +18,7 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 	function render() {
 		global $wpdb, $EZSQL_ERROR;
 
-		$out = '<h3>' . __( 'Queries', 'debug-bar' ) . '</h3>';
+		$out = '';
 		$total_time = 0;
 
 		if ( !empty($wpdb->queries) ) {
