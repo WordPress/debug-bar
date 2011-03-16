@@ -110,6 +110,16 @@ class Debug_Bar {
 		<?php
 	}
 
+	// memory_get_peak_usage is PHP >= 5.2.0 only
+	function safe_memory_get_peak_usage() {
+		if ( function_exists( 'memory_get_peak_usage' ) ) {
+			$usage = memory_get_peak_usage();
+		} else {
+			$usage = memory_get_usage();
+		}
+		return $usage;
+	}
+
 	function admin_bar_menu() {
 		global $wp_admin_bar;
 
@@ -150,7 +160,7 @@ class Debug_Bar {
 			$statuses[] = array( 'site', sprintf( __('Site #%d on %s', 'debug-bar'), $GLOBALS['blog_id'], php_uname( 'n' ) ), '' );
 			$statuses[] = array( 'php', __('PHP', 'debug-bar'), phpversion() );
 			$statuses[] = array( 'db', __('DB', 'debug-bar'), $wpdb->db_version() );
-			$statuses[] = array( 'memory', __('Mem.', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format( memory_get_peak_usage() ) ) );
+			$statuses[] = array( 'memory', __('Mem.', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format( $this->safe_memory_get_peak_usage() ) ) );
 
 			$statuses = apply_filters( 'debug_bar_statuses', $statuses );
 
