@@ -151,13 +151,13 @@ wpDebugBar = api = {
 				return;
 
 			// Deselect other tabs and hide other panels.
-			debugMenuTargets.hide();
+			debugMenuTargets.hide().trigger('debug-bar-hide');
 			debugMenuLinks.removeClass('current');
 
 			// Select the current tab and show the current panel.
 			t.addClass('current');
 			// The hashed component of the href is the id that we want to display.
-			$('#' + this.href.substr( this.href.indexOf( '#' ) + 1 ) ).show();
+			$('#' + this.href.substr( this.href.indexOf( '#' ) + 1 ) ).show().trigger('debug-bar-show');
 		});
 	},
 

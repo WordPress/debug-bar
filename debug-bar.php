@@ -38,7 +38,7 @@ class Debug_Bar {
 		$this->enqueue();
 		$this->init_panels();
 	}
-	
+
 	/* Are we on the wp-login.php page?
 	 * We can get here while logged in and break the page as the admin bar isn't shown and otherthings the js relies on aren't available.
 	 */
@@ -65,7 +65,7 @@ class Debug_Bar {
 
 		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20110316a' );
 		wp_enqueue_script( 'debug-bar-ui-dockable', plugins_url( "js/ui-dockable$suffix.js", __FILE__ ), array('jquery-ui-mouse'), '20110113', true );
-		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'debug-bar-ui-dockable', 'utils'), '20110114', true );
+		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'debug-bar-ui-dockable', 'utils'), '20110606', true );
 
 		do_action('debug_bar_enqueue_scripts');
 	}
