@@ -129,7 +129,7 @@ class Debug_Bar {
 		/* Add the main siteadmin menu item */
 		$wp_admin_bar->add_menu( array(
 			'id'    => 'debug-bar',
-			'title' => __('Debug', 'debug-bar'),
+			'title' => apply_filters( 'debug_bar_title', __('Debug', 'debug-bar') ),
 			'meta'  => array( 'class' => $classes )
 		) );
 	}
