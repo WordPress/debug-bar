@@ -1,5 +1,5 @@
 === Debug Bar ===
-Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_
+Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka
 Tags: debug
 Tested up to: 3.1
 Stable tag: 0.7
@@ -20,6 +20,9 @@ When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
 Add a PHP/MySQL console with the [Debug Bar Console plugin](http://wordpress.org/extend/plugins/debug-bar-console/).
 
 == Upgrade Notice ==
+
+= 0.8 =
+JavaScript error tracking
 
 = 0.7 =
 Made compatible with PHP < 5.2.0

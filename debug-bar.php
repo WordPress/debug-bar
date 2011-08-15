@@ -55,7 +55,7 @@ class Debug_Bar {
 	}
 
 	function requirements() {
-		$recs = array( 'panel', 'php', 'queries', 'request', 'wp-query', 'object-cache', 'deprecated' );
+		$recs = array( 'panel', 'php', 'queries', 'request', 'wp-query', 'object-cache', 'deprecated', 'js' );
 		foreach ( $recs as $rec )
 			require_once "panels/class-debug-bar-$rec.php";
 	}
@@ -78,6 +78,7 @@ class Debug_Bar {
 			'Debug_Bar_Deprecated',
 			'Debug_Bar_Request',
 			'Debug_Bar_Object_Cache',
+			'Debug_Bar_JS',
 		);
 
 		foreach ( $classes as $class ) {

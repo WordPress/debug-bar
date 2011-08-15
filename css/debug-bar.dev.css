@@ -364,3 +364,38 @@
 	border: 1px solid #777;
 	text-shadow: 0 1px 0 #777;
 }
+
+/**
+ * Debug Bar JS error item styling
+ */
+
+#debug-menu-links li a#debug-menu-link-Debug_Bar_JS {
+	display: none;
+}
+
+#debug-bar-js ol.debug-bar-js-list {
+	padding: 0 !important;
+	margin: 0 !important;
+	list-style: none;
+	clear: left;
+}
+
+#debug-bar-js ol.debug-bar-js-list li {
+	padding: 10px;
+	margin: 0 0 10px 0;
+}
+
+#debug-bar-js .debug-bar-js-error {
+	background-color: #ffebe8;
+	border: 1px solid #c00;
+}
+
+#debug-bar-js .debug-bar-js-error span {
+	color: #666;
+	font-size: 0.8em;
+	display: block;
+}
+
+#debug-bar-js .debug-bar-js-error:hover span {
+	color: #000;
+}
