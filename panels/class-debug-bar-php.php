@@ -14,8 +14,8 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 		$this->real_error_handler = set_error_handler( array( &$this, 'error_handler' ) );
 	}
 
-	function prerender() {
-		$this->set_visible( count( $this->notices ) || count( $this->warnings ) );
+	function is_visible() {
+		return count( $this->notices ) || count( $this->warnings );
 	}
 
 	function debug_bar_classes( $classes ) {

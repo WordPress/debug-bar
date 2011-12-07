@@ -1,6 +1,6 @@
-/**
- * Admin bar styling
- */
+/* =========================================================================
+ *   Admin bar styling
+ * ========================================================================= */
 
 #wpadminbar #wp-admin-bar-debug-bar {
 	float: right;
@@ -44,64 +44,121 @@
 	text-shadow: 0 -1px 0 #700;
 }
 
+#wpadminbar #wp-admin-bar-debug-bar ul {
+	right: 0;
+}
+
 /**
  * Debug bar styling
  */
 
 #querylist {
-	font-family: Arial, Tahoma, sans-serif;
 	display: none;
 	position: fixed;
-	height: 250px;
+	height: 33%;
+	min-height: 350px;
+	font-family: Arial, Tahoma, sans-serif;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	background: #fff;
-	z-index: 99999;
+	z-index: 99000;
 	color: #000;
 	line-height: 150% !important;
 	text-align: left;
-}
-#querylist.db-dockable-disabled {
-	height: auto;
-	top: 28px;
+	font-size: 12px;
 }
 
-#debug-bar-handle {
+/* reset debug bar links */
+#querylist a {
+	border: 0;
+}
+
+.debug-bar-visible #querylist {
+	display: block;
+}
+
+.debug-bar-maximized #querylist {
+	position: fixed;
+	top: 28px;
+	height: auto;
+}
+
+body.debug-bar-maximized.debug-bar-visible {
+	overflow: hidden;
+}
+
+.debug-bar-maximized #debug-bar-actions span.minus {
+	display: block;
+}
+.debug-bar-maximized #debug-bar-actions span.plus {
+	display: none;
+}
+
+.debug-bar-partial #debug-bar-actions span.minus {
+	display: none;
+}
+.debug-bar-partial #debug-bar-actions span.plus {
+	display: block;
+}
+
+/*#querylist.db-dockable-disabled {
+	height: auto;
+	top: 28px;
+} */
+
+/* #debug-bar-handle {
 	border-color: #c6c6c6;
 	border-style: solid;
 	border-width: 1px 0;
 	height: 2px;
 	background: #fff;
 	cursor: n-resize;
-}
+} */
 
-.db-dockable-disabled #debug-bar-handle {
+/*.db-dockable-disabled #debug-bar-handle {
 	cursor: inherit;
 	height: 1px;
 	border-top: 0;
+} */
+
+#debug-bar-info {
+	height: 40px;
+	background: #f1f1f1;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: #ccc;
 }
 
 #debug-bar-menu {
+	position: absolute;
+	top: 42px;
+	left: 0;
+	width: 150px;
+	bottom: 0;
 	background: #d9d9d9; /* fallback color */
 	background:-moz-linear-gradient(bottom,  #d7d7d7,  #e4e4e4);
 	background:-webkit-gradient(linear, left bottom, left top, from(#d7d7d7), to(#e4e4e4));
 	overflow: hidden;
-	height: 24px;
 	text-shadow: 0 1px 0 #f4f4f4;
 }
-#debug-bar-menu-right {
-	float: right;
+
+#debug-menu-targets {
+	overflow: auto;
+	position: absolute;
+	top: 42px;
+	left: 150px;
+	right: 0;
+	bottom: 0;
 }
 
 #debug-status {
-	float: left;
+	float: right;
 	text-align: right;
-	padding-top: 4px;
-	padding-right: 15px;
+	padding-right: 40px;
 	color: #bbb;
 	font-size: 12px;
-	line-height: 16px;
+	line-height: 40px;
 }
 #debug-status .debug-status-title {
 	color: #999;
@@ -136,8 +193,8 @@
 }
 
 #debug-menu-links {
-	clear: left;
-	padding: 3px 15px 0;
+/*	clear: left;*/
+/*	padding: 3px 15px 0;*/
 	overflow: hidden;
 	list-style: none;
 	margin: 0;
@@ -145,31 +202,27 @@
 
 #debug-menu-links li {
 	float: left;
-	margin-right: 10px;
 	margin-bottom: 0 !important;
 }
 
 #debug-menu-links li a {
+	padding: 5px 25px 3px;
+	width: 100px;
+	line-height: 20px;
 	outline: none;
 	display: block;
-	line-height: 16px;
-	padding: 2px 9px 3px;
-	margin-right: 0;
+	margin: 0;
 	color: #777 !important;
 	text-decoration: none !important;
 	font-weight: bold !important;
 	font-size: 12px;
-	-webkit-border-top-right-radius: 4px;
-	-webkit-border-top-left-radius: 4px;
-	-moz-border-radius-topright: 4px;
-	-moz-border-radius-topleft: 4px;
 }
 
 #debug-menu-links li a:hover {
 	color: #555 !important;
-	background-color: #eee;
+/*	background-color: #eee;
 	background-image: -moz-linear-gradient(bottom, #ddd, #eee);
-	background-image: -webkit-gradient(linear, left bottom, left top, from(#ddd), to(#eee));
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#ddd), to(#eee));*/
 }
 #debug-menu-links li a.current {
 	background: #fff;
@@ -247,17 +300,8 @@
 	text-decoration: none !important;
 }
 
-#debug-menu-targets {
-	overflow: auto;
-	position: absolute;
-	top: 28px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-}
-
 #querylist .debug-menu-target {
-	margin: 10px;
+	margin: 20px;
 	display: none;
 }
 
@@ -329,10 +373,14 @@
 	margin: 15px 10px 15px 0 !important;
 }
 
+/* =========================================================================
+ *   Actions: Maximize / restore
+ * ========================================================================= */
+
 #debug-bar-actions {
-	float: left;
-	margin-top: 5px;
-	margin-right: 5px;
+	position: absolute;
+	top: 13px;
+	right: 13px;
 }
 #debug-bar-actions span {
 	-moz-border-radius: 20px;
@@ -369,9 +417,9 @@
 	text-shadow: 0 1px 0 #777;
 }
 
-/**
- * Debug Bar JS error item styling
- */
+/* =========================================================================
+ *   JS Error item styling
+ * ========================================================================= */
 
 #debug-menu-links li a#debug-menu-link-Debug_Bar_JS {
 	display: none;

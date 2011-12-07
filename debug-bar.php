@@ -33,6 +33,8 @@ class Debug_Bar {
 		add_action( 'admin_bar_menu',               array( &$this, 'admin_bar_menu' ), 1000 );
 		add_action( 'wp_after_admin_bar_render',    array( &$this, 'render' ) );
 		add_action( 'wp_head',                      array( &$this, 'ensure_ajaxurl' ), 1 );
+		add_filter( 'body_class',                   array( &$this, 'body_class' ) );
+		add_filter( 'admin_body_class',             array( &$this, 'body_class' ) );
 
 		$this->requirements();
 		$this->enqueue();
@@ -43,7 +45,7 @@ class Debug_Bar {
 	 * We can get here while logged in and break the page as the admin bar isn't shown and otherthings the js relies on aren't available.
 	 */
 	function is_wp_login() {
-		return 'wp-login.php' == basename( $_SERVER['SCRIPT_NAME']);
+		return 'wp-login.php' == basename( $_SERVER['SCRIPT_NAME'] );
 	}
 
 	function init_ajax() {
@@ -63,9 +65,9 @@ class Debug_Bar {
 	function enqueue() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 
-		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20110316a' );
-		wp_enqueue_script( 'debug-bar-ui-dockable', plugins_url( "js/ui-dockable$suffix.js", __FILE__ ), array('jquery-ui-mouse'), '20110113', true );
-		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'debug-bar-ui-dockable', 'utils'), '20110606', true );
+		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20111207' );
+
+		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'utils'), '20111207', true );
 
 		do_action('debug_bar_enqueue_scripts');
 	}
@@ -129,10 +131,34 @@ class Debug_Bar {
 
 		/* Add the main siteadmin menu item */
 		$wp_admin_bar->add_menu( array(
-			'id'    => 'debug-bar',
-			'title' => apply_filters( 'debug_bar_title', __('Debug', 'debug-bar') ),
-			'meta'  => array( 'class' => $classes )
+			'id'     => 'debug-bar',
+			'parent' => 'top-secondary',
+			'title'  => apply_filters( 'debug_bar_title', __('Debug', 'debug-bar') ),
+			'meta'   => array( 'class' => $classes ),
 		) );
+
+		// @todo: Uncomment and finish me!
+		// foreach ( $this->panels as $panel_key => $panel ) {
+		// 	if ( ! $panel->is_visible() )
+		// 		continue;
+		//
+		// 	$panel_class = get_class( $panel );
+		//
+		// 	$wp_admin_bar->add_menu( array(
+		// 		'parent' => 'debug-bar',
+		// 		'id'     => "debug-bar-$panel_class",
+		// 		'title'  => $panel->title(),
+		// 	) );
+		// }
+	}
+
+	function body_class( $classes ) {
+		$classes[] = 'debug-bar-maximized';
+
+		if ( isset( $_GET['debug-bar'] ) )
+			$classes[] = 'debug-bar-visible';
+
+		return $classes;
 	}
 
 	function render() {
@@ -150,9 +176,12 @@ class Debug_Bar {
 		?>
 	<div id='querylist'>
 
-	<div id='debug-bar-handle'></div>
-	<div id='debug-bar-menu'>
-		<div id='debug-bar-menu-right'>
+	<div id="debug-bar-actions">
+		<span class="plus">+</span>
+		<span class="minus">&ndash;</span>
+	</div>
+
+	<div id='debug-bar-info'>
 		<div id="debug-status">
 			<?php //@todo: Add a links to information about WP_DEBUG, PHP version, MySQL version, and Peak Memory.
 			$statuses = array();
@@ -180,11 +209,9 @@ class Debug_Bar {
 			echo implode( ' | ', $status_html );
 			?>
 		</div>
-		<div id="debug-bar-actions">
-			<span class="plus">+</span>
-			<span class="minus" style="display: none">&ndash;</span>
-		</div>
-		</div>
+	</div>
+
+	<div id='debug-bar-menu'>
 		<ul id="debug-menu-links">
 
 	<?php
