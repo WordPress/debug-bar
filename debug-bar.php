@@ -153,10 +153,17 @@ class Debug_Bar {
 	}
 
 	function body_class( $classes ) {
-		$classes[] = 'debug-bar-maximized';
+		if ( is_array( $classes ) )
+			$classes[] = 'debug-bar-maximized';
+		else
+			$classes .= ' debug-bar-maximized ';
 
-		if ( isset( $_GET['debug-bar'] ) )
-			$classes[] = 'debug-bar-visible';
+		if ( isset( $_GET['debug-bar'] ) ) {
+			if ( is_array( $classes ) )
+				$classes[] = 'debug-bar-visible';
+			else
+				$classes .= ' debug-bar-visible ';
+		}
 
 		return $classes;
 	}
