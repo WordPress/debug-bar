@@ -57,11 +57,11 @@
 	position: fixed;
 	height: 33%;
 	min-height: 350px;
-	font-family: Arial, Tahoma, sans-serif;
+	font-family: "Helvetica Neue", sans-serif;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: #fff;
+	background: #f1f1f1;
 	z-index: 99000;
 	color: #000;
 	line-height: 150% !important;
@@ -102,54 +102,49 @@ body.debug-bar-maximized.debug-bar-visible {
 	display: block;
 }
 
-/*#querylist.db-dockable-disabled {
-	height: auto;
-	top: 28px;
-} */
-
-/* #debug-bar-handle {
-	border-color: #c6c6c6;
-	border-style: solid;
-	border-width: 1px 0;
-	height: 2px;
-	background: #fff;
-	cursor: n-resize;
-} */
-
-/*.db-dockable-disabled #debug-bar-handle {
-	cursor: inherit;
-	height: 1px;
-	border-top: 0;
-} */
-
 #debug-bar-info {
 	height: 40px;
+	width: 100%;
+	position: absolute;
+	z-index: 200;
+
 	background: #f1f1f1;
-	border-width: 1px 0;
-	border-style: solid;
-	border-color: #ccc;
+	border-bottom: 1px solid #fff;
+	box-shadow: 0 0 6px rgba( 0, 0, 0, 0.4 );
+
+	background-color: #f1f1f1; /* Fallback */
+	background-image: -ms-linear-gradient(top, #f9f9f9, #dfdfdf); /* IE10 */
+	background-image: -moz-linear-gradient(top, #f9f9f9, #dfdfdf); /* Firefox */
+	background-image: -o-linear-gradient(top, #f9f9f9, #dfdfdf); /* Opera */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#dfdfdf)); /* old Webkit */
+	background-image: -webkit-linear-gradient(top, #f9f9f9, #dfdfdf); /* new Webkit */
+	background-image: linear-gradient(top, #f9f9f9, #dfdfdf); /* proposed W3C Markup */
 }
 
 #debug-bar-menu {
 	position: absolute;
-	top: 42px;
+	top: 41px;
 	left: 0;
-	width: 150px;
+	width: 250px;
 	bottom: 0;
-	background: #d9d9d9; /* fallback color */
-	background:-moz-linear-gradient(bottom,  #d7d7d7,  #e4e4e4);
-	background:-webkit-gradient(linear, left bottom, left top, from(#d7d7d7), to(#e4e4e4));
+	z-index: 100;
+
 	overflow: hidden;
-	text-shadow: 0 1px 0 #f4f4f4;
+	text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.9 );
+	background: #333;
+	-webkit-box-shadow: inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
+	-moz-box-shadow:    inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
+	box-shadow:         inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
 }
 
 #debug-menu-targets {
 	overflow: auto;
 	position: absolute;
-	top: 42px;
-	left: 150px;
+	top: 41px;
+	left: 250px;
 	right: 0;
 	bottom: 0;
+	z-index: 150;
 }
 
 #debug-status {
@@ -193,8 +188,6 @@ body.debug-bar-maximized.debug-bar-visible {
 }
 
 #debug-menu-links {
-/*	clear: left;*/
-/*	padding: 3px 15px 0;*/
 	overflow: hidden;
 	list-style: none;
 	margin: 0;
@@ -206,27 +199,20 @@ body.debug-bar-maximized.debug-bar-visible {
 }
 
 #debug-menu-links li a {
-	padding: 5px 25px 3px;
-	width: 100px;
-	line-height: 20px;
+	padding: 0 20px;
+	width: 210px;
+	line-height: 40px;
 	outline: none;
 	display: block;
 	margin: 0;
-	color: #777 !important;
+	color: #fff !important;
 	text-decoration: none !important;
-	font-weight: bold !important;
-	font-size: 12px;
+	font-weight: 500 !important;
+	font-size: 14px;
 }
 
-#debug-menu-links li a:hover {
-	color: #555 !important;
-/*	background-color: #eee;
-	background-image: -moz-linear-gradient(bottom, #ddd, #eee);
-	background-image: -webkit-gradient(linear, left bottom, left top, from(#ddd), to(#eee));*/
-}
 #debug-menu-links li a.current {
-	background: #fff;
-	color: #222 !important;
+	background: rgba( 0, 0, 0, 0.2 );
 }
 
 #querylist h2 {
@@ -381,6 +367,7 @@ body.debug-bar-maximized.debug-bar-visible {
 	position: absolute;
 	top: 13px;
 	right: 13px;
+	z-index: 300;
 }
 #debug-bar-actions span {
 	-moz-border-radius: 20px;
