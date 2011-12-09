@@ -88,11 +88,6 @@ class Debug_Bar {
 		}
 
 		$this->panels = apply_filters( 'debug_bar_panels', $this->panels );
-
-		foreach ( $this->panels as $panel_key => $panel ) {
-			if ( ! $panel->is_visible() )
-				unset( $this->panels[ $panel_key ] );
-		}
 	}
 
 	function ensure_ajaxurl() {
