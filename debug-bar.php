@@ -190,7 +190,8 @@ class Debug_Bar {
 			$statuses = array();
 			$statuses[] = array( 'site', php_uname( 'n' ), sprintf( __( '#%d', 'debug-bar' ), $GLOBALS['blog_id'] ) );
 			$statuses[] = array( 'php', __('PHP', 'debug-bar'), phpversion() );
-			$statuses[] = array( 'db', __('DB', 'debug-bar'), $wpdb->db_version() );
+			$db_title = empty( $wpdb->is_mysql ) ? __( 'DB', 'debug-bar' ) : 'MySQL';
+			$statuses[] = array( 'db', $db_title, $wpdb->db_version() );
 			$statuses[] = array( 'memory', __('Memory Usage', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format( $this->safe_memory_get_peak_usage() ) ) );
 
 			if ( ! WP_DEBUG )
