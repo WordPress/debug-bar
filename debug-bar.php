@@ -65,7 +65,7 @@ class Debug_Bar {
 	function enqueue() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 
-		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20111208' );
+		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20111208a' );
 
 		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'utils'), '20111207', true );
 
@@ -192,28 +192,26 @@ class Debug_Bar {
 		<div id="debug-status">
 			<?php //@todo: Add a links to information about WP_DEBUG, PHP version, MySQL version, and Peak Memory.
 			$statuses = array();
-			if ( ! WP_DEBUG )
-				$statuses[] = array( 'warning', __('WP_DEBUG OFF', 'debug-bar'), '' );
-			$statuses[] = array( 'site', sprintf( __('Site #%d on %s', 'debug-bar'), $GLOBALS['blog_id'], php_uname( 'n' ) ), '' );
+			$statuses[] = array( 'site', php_uname( 'n' ), sprintf( __( '#%d', 'debug-bar' ), $GLOBALS['blog_id'] ) );
 			$statuses[] = array( 'php', __('PHP', 'debug-bar'), phpversion() );
 			$statuses[] = array( 'db', __('DB', 'debug-bar'), $wpdb->db_version() );
-			$statuses[] = array( 'memory', __('Mem.', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format( $this->safe_memory_get_peak_usage() ) ) );
+			$statuses[] = array( 'memory', __('Memory Usage', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format( $this->safe_memory_get_peak_usage() ) ) );
+
+			if ( ! WP_DEBUG )
+				$statuses[] = array( 'warning', __('Please Enable', 'debug-bar'), __( 'WP_DEBUG', 'debug-bar' ) );
 
 			$statuses = apply_filters( 'debug_bar_statuses', $statuses );
 
-			$status_html = array();
-			foreach ( $statuses as $status ) {
+			foreach ( $statuses as $status ):
 				list( $slug, $title, $data ) = $status;
 
-				$html = "<span id='debug-status-$slug' class='debug-status'>";
-				$html .= "<span class='debug-status-title'>$title</span>";
-				if ( ! empty( $data ) )
-					$html .= " <span class='debug-status-data'>$data</span>";
-				$html .= '</span>';
-				$status_html[] = $html;
-			}
-
-			echo implode( ' | ', $status_html );
+				?><div id='debug-status-<?php echo esc_attr( $slug ); ?>' class='debug-status'>
+					<div class='debug-status-title'><?php echo $title; ?></div>
+					<?php if ( ! empty( $data ) ): ?>
+						<div class='debug-status-data'><?php echo $data; ?></div>
+					<?php endif; ?>
+				</div><?php
+			endforeach;
 			?>
 		</div>
 	</div>

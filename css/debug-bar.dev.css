@@ -103,7 +103,7 @@ body.debug-bar-maximized.debug-bar-visible {
 }
 
 #debug-bar-info {
-	height: 40px;
+	height: 60px;
 	width: 100%;
 	position: absolute;
 	z-index: 200;
@@ -123,7 +123,7 @@ body.debug-bar-maximized.debug-bar-visible {
 
 #debug-bar-menu {
 	position: absolute;
-	top: 41px;
+	top: 61px;
 	left: 0;
 	width: 250px;
 	bottom: 0;
@@ -140,7 +140,7 @@ body.debug-bar-maximized.debug-bar-visible {
 #debug-menu-targets {
 	overflow: auto;
 	position: absolute;
-	top: 41px;
+	top: 61px;
 	left: 250px;
 	right: 0;
 	bottom: 0;
@@ -148,19 +148,30 @@ body.debug-bar-maximized.debug-bar-visible {
 }
 
 #debug-status {
-	float: right;
-	text-align: right;
-	padding-right: 40px;
+	float: left;
+	padding-left: 20px;
 	color: #bbb;
-	font-size: 12px;
-	line-height: 40px;
+	font-size: 14px;
+	line-height: 60px;
 }
+
+.debug-status {
+	float: left;
+	margin-right: 40px;
+}
+
 #debug-status .debug-status-title {
-	color: #999;
+	color: #555;
+	font-weight: 500;
+	line-height: 18px;
+	font-size: 12px;
+	margin-top: 10px;
 }
 #debug-status .debug-status-data {
 	color: #999;
-	font-weight: bold;
+	font-weight: 200;
+	line-height: 20px;
+	font-size: 18px;
 }
 #debug-status #debug-status-warning {
 	font-weight: bold;
