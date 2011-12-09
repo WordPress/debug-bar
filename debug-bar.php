@@ -65,9 +65,9 @@ class Debug_Bar {
 	function enqueue() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 
-		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20111208a' );
+		wp_enqueue_style( 'debug-bar', plugins_url( "css/debug-bar$suffix.css", __FILE__ ), array(), '20111208b' );
 
-		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'utils'), '20111207', true );
+		wp_enqueue_script( 'debug-bar', plugins_url( "js/debug-bar$suffix.js", __FILE__ ), array('jquery', 'utils'), '20111208', true );
 
 		do_action('debug_bar_enqueue_scripts');
 	}
@@ -184,8 +184,9 @@ class Debug_Bar {
 	<div id='querylist'>
 
 	<div id="debug-bar-actions">
-		<span class="plus">+</span>
-		<span class="minus">&ndash;</span>
+		<span class="maximize">+</span>
+		<span class="restore">&ndash;</span>
+		<span class="close">&times;</span>
 	</div>
 
 	<div id='debug-bar-info'>

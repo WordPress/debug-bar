@@ -9,7 +9,7 @@ wpDebugBar = api = {
 	// from overlapping the bottom of the page.
 	body: undefined,
 
-	init: function(){
+	init: function() {
 		// Initialize variables.
 		debugBar = $('#querylist');
 		$win = $(window);
@@ -29,7 +29,7 @@ wpDebugBar = api = {
 				api.toggle.visibility();
 			});
 		},
-		visibility: function( show ){
+		visibility: function( show ) {
 			show = typeof show == 'undefined' ? ! api.body.hasClass( 'debug-bar-visible' ) : show;
 
 			// Show/hide the debug bar.
@@ -40,11 +40,11 @@ wpDebugBar = api = {
 		}
 	},
 
-	tabs: function(){
+	tabs: function() {
 		var debugMenuLinks = $('.debug-menu-link'),
 			debugMenuTargets = $('.debug-menu-target');
 
-		debugMenuLinks.click( function(e){
+		debugMenuLinks.click( function(e) {
 			var t = $(this);
 
 			e.preventDefault();
@@ -64,13 +64,12 @@ wpDebugBar = api = {
 	},
 
 	actions: {
-		buttons: {},
-
 		init: function() {
 			var actions = $('#debug-bar-actions');
 
-			api.actions.buttons.max = $('.plus', actions).click( api.actions.maximize );
-			api.actions.buttons.res = $('.minus', actions).click( api.actions.restore );
+			$('.maximize', actions).click( api.actions.maximize );
+			$('.restore',  actions).click( api.actions.restore );
+			$('.close',    actions).click( api.actions.close );
 		},
 		maximize: function() {
 			api.body.removeClass('debug-bar-partial');
@@ -79,6 +78,10 @@ wpDebugBar = api = {
 		restore: function() {
 			api.body.removeClass('debug-bar-maximized');
 			api.body.addClass('debug-bar-partial');
+		},
+		close: function() {
+			api.toggle.visibility( false );
+			console.log( 'boo');
 		}
 	}
 };
