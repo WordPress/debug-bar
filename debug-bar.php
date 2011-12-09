@@ -91,8 +91,6 @@ class Debug_Bar {
 	}
 
 	function ensure_ajaxurl() {
-		if ( is_admin() )
-			return;
 		$current_user = wp_get_current_user();
 		?>
 		<script type="text/javascript">
