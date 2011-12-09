@@ -78,5 +78,3 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 		echo $out;
 	}
 }
-
-?>

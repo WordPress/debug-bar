@@ -80,5 +80,3 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 
 	}
 }
-
-?>

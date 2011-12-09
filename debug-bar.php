@@ -263,5 +263,3 @@ class Debug_Bar {
 }
 
 $GLOBALS['debug_bar'] = new Debug_Bar();
-
-?>

@@ -22,5 +22,3 @@ class Debug_Bar_JS extends Debug_Bar_Panel {
 		echo '</div>';
 	}
 }
-
-?>
