@@ -186,14 +186,14 @@ class Debug_Bar {
 		<div id="debug-status">
 			<?php //@todo: Add a links to information about WP_DEBUG, PHP version, MySQL version, and Peak Memory.
 			$statuses = array();
-			$statuses[] = array( 'site', php_uname( 'n' ), sprintf( __( '#%d', 'debug-bar' ), $GLOBALS['blog_id'] ) );
+			$statuses[] = array( 'site', php_uname( 'n' ), sprintf( __( '#%d', 'debug-bar' ), get_current_blog_id() ) );
 			$statuses[] = array( 'php', __('PHP', 'debug-bar'), phpversion() );
 			$db_title = empty( $wpdb->is_mysql ) ? __( 'DB', 'debug-bar' ) : 'MySQL';
 			$statuses[] = array( 'db', $db_title, $wpdb->db_version() );
-			$statuses[] = array( 'memory', __('Memory Usage', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format( $this->safe_memory_get_peak_usage() ) ) );
+			$statuses[] = array( 'memory', __('Memory Usage', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format_i18n( $this->safe_memory_get_peak_usage() ) ) );
 
 			if ( ! WP_DEBUG )
-				$statuses[] = array( 'warning', __('Please Enable', 'debug-bar'), __( 'WP_DEBUG', 'debug-bar' ) );
+				$statuses[] = array( 'warning', __('Please Enable', 'debug-bar'), 'WP_DEBUG' );
 
 			$statuses = apply_filters( 'debug_bar_statuses', $statuses );
 
