@@ -2,7 +2,7 @@ var wpDebugBar;
 
 (function($) {
 
-var debugBar, api, $win;
+var api;
 
 wpDebugBar = api = {
 	// The element that we will pad to prevent the debug bar
@@ -10,10 +10,6 @@ wpDebugBar = api = {
 	body: undefined,
 
 	init: function() {
-		// Initialize variables.
-		debugBar = $('#querylist');
-		$win = $(window);
-
 		// If we're not in the admin, pad the body.
 		api.body = $(document.body);
 
