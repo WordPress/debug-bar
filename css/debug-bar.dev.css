@@ -12,15 +12,16 @@
 	background: -webkit-gradient(linear, left bottom, left top, from(#555), to(#3e3e3e));
 }
 
-#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary {
+#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary,
+#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary .ab-item:focus {
 	background-color: #ff8922;
 	background-image: -moz-linear-gradient(bottom, #ee6f00, #ff8922);
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#ee6f00), to(#ff8922));
 }
 
-.debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary,
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary .ab-item:hover,
-#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary .ab-item:focus {
+.debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary,
+.debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary .ab-item:focus {
 	background-color: #ee6f00;
 	background-image: -moz-linear-gradient(bottom, #ff8922, #ee6f00 );
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#ff8922), to(#ee6f00));
@@ -30,15 +31,16 @@
 	text-shadow: 0 -1px 0 #884000;
 }
 
-#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary {
+#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary,
+#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item:focus {
 	background-color: #f44;
 	background-image: -moz-linear-gradient(bottom, #d00, #f44);
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#d00), to(#f44));
 }
 
-.debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary,
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item:hover,
-#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item:focus {
+.debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary,
+.debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item:focus {
 	background-color: #d00;
 	background-image: -moz-linear-gradient(bottom, #f44, #d00 );
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#f44), to(#d00));
