@@ -2,7 +2,7 @@
 Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka
 Tags: debug
 Tested up to: 3.3
-Stable tag: 0.7
+Stable tag: 0.8
 Requires at least: 3.1
 
 Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
@@ -22,7 +22,13 @@ Add a PHP/MySQL console with the [Debug Bar Console plugin](http://wordpress.org
 == Upgrade Notice ==
 
 = 0.8 =
-JavaScript error tracking
+WordPress 3.3 compatibility
+UI refresh
+Removed jQuery UI requirement
+Full screen by default
+New debug-bar query parameter to show on page load
+Removed display cookies
+JavaScript error tracking (disabled by default)
 
 = 0.7 =
 Made compatible with PHP < 5.2.0
