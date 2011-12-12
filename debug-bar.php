@@ -75,8 +75,8 @@ class Debug_Bar {
 	function init_panels() {
 		$classes = array(
 			'Debug_Bar_PHP',
-			'Debug_Bar_WP_Query',
 			'Debug_Bar_Queries',
+			'Debug_Bar_WP_Query',
 			'Debug_Bar_Deprecated',
 			'Debug_Bar_Request',
 			'Debug_Bar_Object_Cache',
