@@ -80,6 +80,7 @@ class Debug_Bar {
 			'Debug_Bar_Deprecated',
 			'Debug_Bar_Request',
 			'Debug_Bar_Object_Cache',
+			'Debug_Bar_JS',
 		);
 
 		foreach ( $classes as $class ) {
