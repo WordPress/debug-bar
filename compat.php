@@ -5,8 +5,13 @@ if ( ! function_exists( 'wp_debug_backtrace_summary' ) ) {
 	 * Return a comma seperated string of functions that have been called to get to the current point in code.
 	 * @link http://core.trac.wordpress.org/ticket/19589
 	 * @since 3.4
+	 *
+	 * @param string $ignore_class A class to ignore all function calls within - useful when you want to just give info about the calllee
+	 * @param string $skip_frames A number of stack frames to skip - useful for unwinding back to the source of the issue
+	 * @param bool $pretty Whether or not you want a comma seperated string or raw array returned
+	 * @return string|array Either a string containing a reversed comma seperated trace or an array of individual calls.
 	 */
-	function wp_debug_backtrace_summary( $ignore_class = null, $skip_frames = 0 ) {
+	function wp_debug_backtrace_summary( $ignore_class = null, $skip_frames = 0, $pretty = true ) {
 		$trace  = debug_backtrace( false );
 		$caller = array();
 		$check_class = ! is_null( $ignore_class );
@@ -18,7 +23,7 @@ if ( ! function_exists( 'wp_debug_backtrace_summary' ) ) {
 			} elseif ( isset( $call['class'] ) ) {
 				if ( $check_class && $ignore_class == $call['class'] )
 					continue; // Filter out calls
-
+	
 				$caller[] = "{$call['class']}{$call['type']}{$call['function']}";
 			} else {
 				if ( in_array( $call['function'], array( 'do_action', 'apply_filters' ) ) ) {
@@ -30,8 +35,10 @@ if ( ! function_exists( 'wp_debug_backtrace_summary' ) ) {
 				}
 			}
 		}
-	
-		return join( ', ', array_reverse( $caller ) );
+		if ( $pretty )
+			return join( ', ', array_reverse( $caller ) );
+		else
+			return $caller;
 	}
 }
 ?>
