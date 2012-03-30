@@ -31,7 +31,8 @@ class Debug_Bar {
 			return;
 
 		add_action( 'admin_bar_menu',               array( &$this, 'admin_bar_menu' ), 1000 );
-		add_action( 'wp_after_admin_bar_render',    array( &$this, 'render' ) );
+		add_action( 'admin_footer',                 array( &$this, 'render' ), 1000 );
+		add_action( 'wp_footer',                    array( &$this, 'render' ), 1000 );
 		add_action( 'wp_head',                      array( &$this, 'ensure_ajaxurl' ), 1 );
 		add_filter( 'body_class',                   array( &$this, 'body_class' ) );
 		add_filter( 'admin_body_class',             array( &$this, 'body_class' ) );
