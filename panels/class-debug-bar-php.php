@@ -27,29 +27,27 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 	}
 
 	function error_handler( $type, $message, $file, $line ) {
-		if ( error_reporting() ) {
-			$_key = md5( $file . ':' . $line . ':' . $message );
+		$_key = md5( $file . ':' . $line . ':' . $message );
 
-			switch ( $type ) {
-				case E_WARNING :
-				case E_USER_WARNING :
-					$this->warnings[$_key] = array( $file.':'.$line, $message, wp_debug_backtrace_summary( __CLASS__ ) );
-					break;
-				case E_NOTICE :
-				case E_USER_NOTICE :
-					$this->notices[$_key] = array( $file.':'.$line, $message, wp_debug_backtrace_summary( __CLASS__ ) );
-					break;
-				case E_STRICT :
-					// TODO
-					break;
-				case E_DEPRECATED :
-				case E_USER_DEPRECATED :
-					// TODO
-					break;
-				case 0 :
-					// TODO
-					break;
-			}
+		switch ( $type ) {
+			case E_WARNING :
+			case E_USER_WARNING :
+				$this->warnings[$_key] = array( $file.':'.$line, $message, wp_debug_backtrace_summary( __CLASS__ ) );
+				break;
+			case E_NOTICE :
+			case E_USER_NOTICE :
+				$this->notices[$_key] = array( $file.':'.$line, $message, wp_debug_backtrace_summary( __CLASS__ ) );
+				break;
+			case E_STRICT :
+				// TODO
+				break;
+			case E_DEPRECATED :
+			case E_USER_DEPRECATED :
+				// TODO
+				break;
+			case 0 :
+				// TODO
+				break;
 		}
 
 		if ( null != $this->real_error_handler )
