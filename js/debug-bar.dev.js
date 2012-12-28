@@ -70,7 +70,8 @@ wpDebugBar = api = {
 			// Close the panel with the esc key if it's open
 			// 27 = esc
 			$(document).keydown( function( e ) {
-				if ( 27 != e.which || ! api.isVisible() )
+				var key = e.key || e.which || e.keyCode;
+				if ( 27 != key || ! api.isVisible() )
 					return;
 
 				e.preventDefault();
