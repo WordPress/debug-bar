@@ -18,6 +18,10 @@ wpDebugBar = api = {
 		api.actions.init();
 	},
 
+	isVisible: function() {
+		return api.body.hasClass( 'debug-bar-visible' );
+	},
+
 	toggle: {
 		init: function() {
 			$('#wp-admin-bar-debug-bar').click( function(e) {
@@ -26,7 +30,7 @@ wpDebugBar = api = {
 			});
 		},
 		visibility: function( show ) {
-			show = typeof show == 'undefined' ? ! api.body.hasClass( 'debug-bar-visible' ) : show;
+			show = typeof show == 'undefined' ? ! api.isVisible() : show;
 
 			// Show/hide the debug bar.
 			api.body.toggleClass( 'debug-bar-visible', show );
@@ -62,6 +66,15 @@ wpDebugBar = api = {
 	actions: {
 		init: function() {
 			var actions = $('#debug-bar-actions');
+
+			// Close the panel with the esc key if it's open
+			$.hotkeys.add( 'esc', function( e ) {
+				if ( ! api.isVisible() )
+					return;
+
+				e.preventDefault();
+				return api.actions.close();
+			});
 
 			$('.maximize', actions).click( api.actions.maximize );
 			$('.restore',  actions).click( api.actions.restore );
