@@ -68,8 +68,9 @@ wpDebugBar = api = {
 			var actions = $('#debug-bar-actions');
 
 			// Close the panel with the esc key if it's open
-			$.hotkeys.add( 'esc', function( e ) {
-				if ( ! api.isVisible() )
+			// 27 = esc
+			$(document).keydown( function( e ) {
+				if ( 27 != e.which || ! api.isVisible() )
 					return;
 
 				e.preventDefault();
