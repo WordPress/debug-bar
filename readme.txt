@@ -72,6 +72,18 @@ Initial Release
 
 == Changelog ==
 
+= 0.8.1 =
+Minor security fix.
+
+= 0.8 =
+WordPress 3.3 compatibility
+UI refresh
+Removed jQuery UI requirement
+Full screen by default
+New debug-bar query parameter to show on page load
+Removed display cookies
+JavaScript error tracking (disabled by default)
+
 = 0.7 =
 Made compatible with PHP < 5.2.0
 CSS Tweaks
