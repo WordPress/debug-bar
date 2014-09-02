@@ -103,6 +103,11 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 
 	function deprecated_argument_run( $function, $message, $version) {
 		$backtrace = debug_backtrace( false );
+		if ( $function === 'define()' ) {
+			$this->deprecated_functions[] = array( $message, '' );
+			return;
+		}
+
 		$bt = 4;
 		if ( ! isset( $backtrace[4]['file'] ) && 'call_user_func_array' == $backtrace[5]['function'] ) {
 			$bt = 6;
