@@ -1,7 +1,7 @@
 === Debug Bar ===
 Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka
 Tags: debug
-Tested up to: 4.1-alpha
+Tested up to: 4.5
 Stable tag: 0.8.2
 Requires at least: 3.1
 
@@ -17,9 +17,12 @@ When WP_DEBUG is enabled it also tracks PHP Warnings and Notices to make them ea
 
 When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
 
-Add a PHP/MySQL console with the [Debug Bar Console plugin](http://wordpress.org/extend/plugins/debug-bar-console/).
+Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.org/plugins/debug-bar-console/).
 
 == Upgrade Notice ==
+
+= 0.8.3 =
+Updated to avoid PHP7 Deprecated notices.
 
 = 0.8.2 =
 Updated to handle a new deprecated message in WordPress 4.0.
@@ -74,6 +77,12 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 0.8.3 =
+Updated to avoid PHP7 Deprecated notices.
+
+= 0.8.2 =
+Updated to handle a new deprecated message in WordPress 4.0.
 
 = 0.8.1 =
 Minor security fix.

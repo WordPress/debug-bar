@@ -1,11 +1,11 @@
 <?php
 /*
  Plugin Name: Debug Bar
- Plugin URI: http://wordpress.org/extend/plugins/debug-bar/
+ Plugin URI: https://wordpress.org/plugins/debug-bar/
  Description: Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
  Author: wordpressdotorg
- Version: 0.8.2
- Author URI: http://wordpress.org/
+ Version: 0.8.3
+ Author URI: https://wordpress.org/
  */
 
 /***
@@ -20,10 +20,14 @@
 class Debug_Bar {
 	var $panels = array();
 
-	function Debug_Bar() {
+	function __construct() {
 		if ( defined('DOING_AJAX') && DOING_AJAX )
 			add_action( 'admin_init', array( &$this, 'init_ajax' ) );
 		add_action( 'admin_bar_init', array( &$this, 'init' ) );
+	}
+
+	function Debug_Bar() {
+		$this->__construct();
 	}
 
 	function init() {
