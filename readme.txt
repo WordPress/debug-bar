@@ -1,8 +1,8 @@
 === Debug Bar ===
-Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka
+Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32
 Tags: debug
 Tested up to: 4.5
-Stable tag: 0.8.3
+Stable tag: 0.8.4
 Requires at least: 3.1
 
 Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
@@ -20,6 +20,9 @@ When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
 Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.org/plugins/debug-bar-console/).
 
 == Upgrade Notice ==
+
+= 0.8.4 =
+Updated to avoid incompatibilities with some extensions.
 
 = 0.8.3 =
 Updated to avoid PHP7 Deprecated notices.
@@ -77,6 +80,9 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 0.8.4 =
+Updated to avoid incompatibilities with some extensions.
 
 = 0.8.3 =
 Updated to avoid PHP7 Deprecated notices.

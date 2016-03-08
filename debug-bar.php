@@ -4,7 +4,7 @@
  Plugin URI: https://wordpress.org/plugins/debug-bar/
  Description: Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
  Author: wordpressdotorg
- Version: 0.8.3
+ Version: 0.8.4
  Author URI: https://wordpress.org/
  */
 
@@ -27,7 +27,7 @@ class Debug_Bar {
 	}
 
 	function Debug_Bar() {
-		$this->__construct();
+		Debug_Bar::__construct();
 	}
 
 	function init() {

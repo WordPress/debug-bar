@@ -16,7 +16,7 @@ class Debug_Bar_Panel {
 	}
 
 	function Debug_Bar_Panel( $title = '' ) {
-		$this->__construct( $title );
+		Debug_Bar_Panel::__construct( $title );
 	}
 
 	/**
