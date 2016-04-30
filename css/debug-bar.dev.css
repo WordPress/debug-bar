@@ -121,7 +121,7 @@ body.debug-bar-maximized.debug-bar-visible {
 	bottom: 0;
 	z-index: 100;
 
-	overflow: hidden;
+	overflow: auto;
 	text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.9 );
 	background: #333;
 	-webkit-box-shadow: inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
@@ -203,9 +203,10 @@ body.debug-bar-maximized.debug-bar-visible {
 }
 
 #debug-menu-links li a {
+	box-sizing: content-box;
 	padding: 0 20px;
 	width: 210px;
-	line-height: 40px;
+	line-height: 32px;
 	outline: none;
 	display: block;
 	margin: 0;
