@@ -85,22 +85,22 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 
 		if ( ! is_null( $queried_object ) ) {
 			echo '<h3>Queried Object:</h3>';
-			echo '<ol class="debug-bar-wp-query-list">';
+			echo '<table class="debug-bar-wp-query-list"><tbody>';
 			$this->_recursive_print_kv($queried_object);
-			echo '</ol>';
+			echo '</tbody></table>';
 		}
 		echo '</div>';
 	}
-        
-        protected function _recursive_print_kv( $kv_array ) {
-            foreach ( $kv_array as $key => $value ) {
-                    if( is_object( $value ) || is_array( $value ) ) {
-                            printf( '<li>%s => <ol>', $key );
-                            $this->_recursive_print_kv( $value );
-                            echo '</ol></li>';
-                    } else {
-                            echo "<li>{$key} => {$value}</li>";
-                    }
-            }
-        }
+
+	protected function _recursive_print_kv( $kv_array ) {
+		foreach ( $kv_array as $key => $value ) {
+			if( is_object( $value ) || is_array( $value ) ) {
+				echo '<tr><th>', $key, '</th> <td>&rArr;</td> <td>';
+				$this->_recursive_print_kv( $value );
+				echo '</td></tr>';
+			} else {
+				echo '<tr><th>', $key, '</th> <td>&rArr;</td> <td>', $value, '</td></tr>';
+			}
+		}
+	}
 }
