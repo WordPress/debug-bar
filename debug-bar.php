@@ -32,8 +32,9 @@ class Debug_Bar {
 	}
 
 	function init() {
-		if ( ! is_super_admin() || ! is_admin_bar_showing() || $this->is_wp_login() )
+		if ( ! $this->enable_debug_bar() ) {
 			return;
+		}
 
 		add_action( 'admin_bar_menu',               array( $this, 'admin_bar_menu' ), 1000 );
 		add_action( 'admin_footer',                 array( $this, 'render' ), 1000 );
@@ -54,9 +55,34 @@ class Debug_Bar {
 		return 'wp-login.php' == basename( $_SERVER['SCRIPT_NAME'] );
 	}
 
+	/**
+	 * Should the debug bar functionality be enabled ?
+	 *
+	 * @param bool $ajax Whether this is an ajax call or not. Defaults to false.
+	 * @return bool
+	 */
+	function enable_debug_bar( $ajax = false ) {
+		$enable = false;
+		if ( $ajax && is_super_admin() ) {
+			$enable = true;
+		} elseif ( ! $ajax && ( is_super_admin() && is_admin_bar_showing() && ! $this->is_wp_login() ) ) {
+			$enable = true;
+		}
+
+		/**
+		 * Allows for overruling of whether the debug bar functionality will be enabled.
+		 *
+		 * @since 0.8.5
+		 *
+		 * @param bool $enable Whether the debug bar will be enabled or not.
+		 */
+		return apply_filters( 'debug_bar_enable', $enable );
+	}
+
 	function init_ajax() {
-		if ( ! is_super_admin() )
+		if ( ! $this->enable_debug_bar( true ) ) {
 			return;
+		}
 
 		$this->requirements();
 		$this->init_panels();
