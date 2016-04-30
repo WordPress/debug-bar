@@ -226,6 +226,7 @@ body.debug-bar-maximized.debug-bar-visible {
 	padding: 5px 10px 15px;
 	clear: none;
 	text-align: center;
+	color: #000;
 	font-family: georgia, times, serif;
 	font-size: 28px;
 	margin: 15px 10px 15px 0 !important;
