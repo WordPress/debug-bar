@@ -92,7 +92,6 @@ wpDebugBar = api = {
 		},
 		close: function() {
 			api.toggle.visibility( false );
-			console.log( 'boo');
 		}
 	}
 };
