@@ -13,11 +13,19 @@ Adds a debug menu to the admin bar that shows query, cache, and other helpful de
 
 A must for developers!
 
-When WP_DEBUG is enabled it also tracks PHP Warnings and Notices to make them easier to find.
+When `WP_DEBUG` is enabled it also tracks PHP Warnings and Notices to make them easier to find.
 
-When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
+When `SAVEQUERIES` is enabled the mysql queries are tracked and displayed.
+
+To enable these options, add the following code to your `wp-config.php` file:
+`
+define( 'WP_DEBUG', true );
+define( 'SAVEQUERIES', true );
+`
 
 Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.org/plugins/debug-bar-console/).
+
+There are numerous other add-ons available to get more insight into, for instance, the registered Post Types, Shortcodes, WP Cron, Language file loading, Actions and Filters and so on. Just [search the plugin directory for 'Debug Bar'](https://wordpress.org/plugins/search.php?q=debug+bar).
 
 == Upgrade Notice ==
 
