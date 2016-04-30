@@ -243,6 +243,15 @@ body.debug-bar-maximized.debug-bar-visible {
 	margin-bottom: 5px;
 }
 
+#querylist h2 span#debug-bar-js-error-count {
+	font-size: inherit;
+	color: inherit;
+	text-transform: inherit;
+	white-space: inherit;
+	display: inherit;
+	margin-bottom: inherit;
+}
+
 #object-cache-stats h2 {
 	border: none;
 	float: none;
