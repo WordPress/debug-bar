@@ -28,7 +28,7 @@ class Debug_Bar {
 	}
 
 	function Debug_Bar() {
-		_deprecated_constructor( __METHOD__, '0.8.5', __CLASS__ );
+		_deprecated_constructor( __METHOD__, '0.8.3', __CLASS__ );
 		self::__construct();
 	}
 
@@ -73,7 +73,7 @@ class Debug_Bar {
 		/**
 		 * Allows for overruling of whether the debug bar functionality will be enabled.
 		 *
-		 * @since 0.8.5
+		 * @since 0.9
 		 *
 		 * @param bool $enable Whether the debug bar will be enabled or not.
 		 */
