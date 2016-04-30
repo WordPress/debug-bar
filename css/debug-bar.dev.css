@@ -59,6 +59,7 @@
  */
 
 #querylist {
+	direction: ltr;
 	display: none;
 	position: fixed;
 	height: 33%;
