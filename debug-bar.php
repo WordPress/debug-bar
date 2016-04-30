@@ -21,9 +21,10 @@ class Debug_Bar {
 	var $panels = array();
 
 	function __construct() {
-		if ( defined('DOING_AJAX') && DOING_AJAX )
-			add_action( 'admin_init', array( &$this, 'init_ajax' ) );
-		add_action( 'admin_bar_init', array( &$this, 'init' ) );
+		if ( defined('DOING_AJAX') && DOING_AJAX ) {
+			add_action( 'admin_init', array( $this, 'init_ajax' ) );
+		}
+		add_action( 'admin_bar_init', array( $this, 'init' ) );
 	}
 
 	function Debug_Bar() {
@@ -34,12 +35,12 @@ class Debug_Bar {
 		if ( ! is_super_admin() || ! is_admin_bar_showing() || $this->is_wp_login() )
 			return;
 
-		add_action( 'admin_bar_menu',               array( &$this, 'admin_bar_menu' ), 1000 );
-		add_action( 'admin_footer',                 array( &$this, 'render' ), 1000 );
-		add_action( 'wp_footer',                    array( &$this, 'render' ), 1000 );
-		add_action( 'wp_head',                      array( &$this, 'ensure_ajaxurl' ), 1 );
-		add_filter( 'body_class',                   array( &$this, 'body_class' ) );
-		add_filter( 'admin_body_class',             array( &$this, 'body_class' ) );
+		add_action( 'admin_bar_menu',               array( $this, 'admin_bar_menu' ), 1000 );
+		add_action( 'admin_footer',                 array( $this, 'render' ), 1000 );
+		add_action( 'wp_footer',                    array( $this, 'render' ), 1000 );
+		add_action( 'wp_head',                      array( $this, 'ensure_ajaxurl' ), 1 );
+		add_filter( 'body_class',                   array( $this, 'body_class' ) );
+		add_filter( 'admin_body_class',             array( $this, 'body_class' ) );
 
 		$this->requirements();
 		$this->enqueue();

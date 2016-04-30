@@ -9,9 +9,9 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 	function init() {
 		$this->title( __('Deprecated', 'debug-bar') );
 
-		add_action( 'deprecated_function_run', array( &$this, 'deprecated_function_run' ), 10, 3 );
-		add_action( 'deprecated_file_included', array( &$this, 'deprecated_file_included' ), 10, 4 );
-		add_action( 'deprecated_argument_run',  array( &$this, 'deprecated_argument_run' ),  10, 3 );
+		add_action( 'deprecated_function_run', array( $this, 'deprecated_function_run' ), 10, 3 );
+		add_action( 'deprecated_file_included', array( $this, 'deprecated_file_included' ), 10, 4 );
+		add_action( 'deprecated_argument_run',  array( $this, 'deprecated_argument_run' ),  10, 3 );
 
 		// Silence E_NOTICE for deprecated usage.
 		foreach ( array( 'function', 'file', 'argument' ) as $item )
