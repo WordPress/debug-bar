@@ -24,8 +24,10 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 		if ( !empty($wpdb->queries) ) {
 			$show_many = isset($_GET['debug_queries']);
 
-			if ( $wpdb->num_queries > 500 && !$show_many )
+			if ( $wpdb->num_queries > 500 && ! $show_many ) {
+				/* translators: %s = a url. */
 				$out .= "<p>" . sprintf( __('There are too many queries to show easily! <a href="%s">Show them anyway</a>', 'debug-bar'), esc_url( add_query_arg( 'debug_queries', 'true' ) ) ) . "</p>";
+			}
 
 			$out .= '<ol class="wpd-queries">';
 			$counter = 0;
@@ -44,7 +46,8 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 				$debug = str_replace( array( 'do_action, call_user_func_array' ), array( 'do_action' ), $debug );
 				$query = nl2br(esc_html($query));
 
-				$out .= "<li>$query<br/><div class='qdebug'>$debug <span>#{$counter} (" . number_format(sprintf('%0.1f', $elapsed * 1000), 1, '.', ',') . "ms)</span></div></li>\n";
+				/* translators: %d = duration time in microseconds. */
+				$out .= "<li>$query<br/><div class='qdebug'>$debug <span>#{$counter} (" . sprintf( __( '%0.1fms', 'debug-bar' ), number_format_i18n( ( $elapsed * 1000 ), 1 ) ) . ")</span></div></li>\n";
 			}
 			$out .= '</ol>';
 		} else {
@@ -66,12 +69,17 @@ class Debug_Bar_Queries extends Debug_Bar_Panel {
 		}
 
 		$heading = '';
-		if ( $wpdb->num_queries )
-			$heading .= '<h2><span>Total Queries:</span>' . number_format( $wpdb->num_queries ) . "</h2>\n";
-		if ( $total_time )
-			$heading .= '<h2><span>Total query time:</span>' . number_format(sprintf('%0.1f', $total_time * 1000), 1) . " ms</h2>\n";
-		if ( ! empty($EZSQL_ERROR) )
-			$heading .= '<h2><span>Total DB Errors:</span>' . number_format( count($EZSQL_ERROR) ) . "</h2>\n";
+		if ( $wpdb->num_queries ) {
+			$heading .= '<h2><span>' . __( 'Total Queries:', 'debug-bar' ) . '</span>' . number_format_i18n( $wpdb->num_queries ) . "</h2>\n";
+		}
+		if ( $total_time ) {
+			$heading .= '<h2><span>' . __( 'Total query time:', 'debug-bar' ) . '</span>';
+			/* translators: %d = duration time in microseconds. */
+			$heading .= sprintf( __( '%0.1f ms', 'debug-bar' ), number_format_i18n( ( $total_time * 1000 ), 1 ) ) . "</h2>\n";
+		}
+		if ( ! empty($EZSQL_ERROR) ) {
+			$heading .= '<h2><span>' . __( 'Total DB Errors:', 'debug-bar' ) . '</span>' . number_format_i18n( count( $EZSQL_ERROR ) ) . "</h2>\n";
+		}
 
 		$out = $heading . $out;
 

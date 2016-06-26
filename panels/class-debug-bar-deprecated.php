@@ -28,9 +28,9 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 
 	function render() {
 		echo "<div id='debug-bar-deprecated'>";
-		echo '<h2><span>Total Functions:</span>' . number_format( count( $this->deprecated_functions ) ) . "</h2>\n";
-		echo '<h2><span>Total Arguments:</span>' . number_format( count( $this->deprecated_arguments ) ) . "</h2>\n";
-		echo '<h2><span>Total Files:</span>' . number_format( count( $this->deprecated_files ) ) . "</h2>\n";
+		echo '<h2><span>', __( 'Total Functions:', 'debug-bar' ), '</span>', number_format_i18n( count( $this->deprecated_functions ) ), "</h2>\n";
+		echo '<h2><span>', __( 'Total Arguments:', 'debug-bar' ), '</span>', number_format_i18n( count( $this->deprecated_arguments ) ), "</h2>\n";
+		echo '<h2><span>', __( 'Total Files:', 'debug-bar' ), '</span>', number_format_i18n( count( $this->deprecated_files ) ), "</h2>\n";
 		if ( count( $this->deprecated_functions ) ) {
 			echo '<ol class="debug-bar-deprecated-list">';
 			foreach ( $this->deprecated_functions as $location => $message_stack) {
@@ -79,10 +79,13 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 		}
 		$file = $backtrace[ $bt ]['file'];
 		$line = $backtrace[ $bt ]['line'];
-		if ( ! is_null($replacement) )
+		if ( ! is_null($replacement) ) {
+			/* translators: %1$s is a function or file name, %2$s a version number, %3$s an alternative function or file to use. */
 			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.', 'debug-bar'), $function, $version, $replacement );
-		else
+		} else {
+			/* translators: %1$s is a function or file name, %2$s a version number. */
 			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.', 'debug-bar'), $function, $version );
+		}
 
 		$this->deprecated_functions[$file.':'.$line] = array( $message, wp_debug_backtrace_summary( null, $bt ) );
 	}
@@ -93,10 +96,13 @@ class Debug_Bar_Deprecated extends Debug_Bar_Panel {
 		$file_abs = str_replace(ABSPATH, '', $file);
 		$line = $backtrace[4]['line'];
 		$message = empty( $message ) ? '' : ' ' . $message;
-		if ( ! is_null( $replacement ) )
+		if ( ! is_null( $replacement ) ) {
+			/* translators: %1$s is a function or file name, %2$s a version number, %3$s an alternative function or file to use. */
 			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.', 'debug-bar'), $file_abs, $version, $replacement ) . $message;
-		else
+		} else {
+			/* translators: %1$s is a function or file name, %2$s a version number. */
 			$message = sprintf( __('%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.', 'debug-bar'), $file_abs, $version ) . $message;
+		}
 
 		$this->deprecated_files[$file.':'.$line] = array( $message, wp_debug_backtrace_summary( null, 4 ) );
 	}

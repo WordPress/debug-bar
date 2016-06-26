@@ -6,6 +6,7 @@
  Author: wordpressdotorg
  Version: 0.9-alpha
  Author URI: https://wordpress.org/
+ Text Domain: debug-bar
  */
 
 /***
@@ -37,6 +38,8 @@ class Debug_Bar {
 			return;
 		}
 
+		load_plugin_textdomain( 'debug-bar' );
+
 		add_action( 'admin_bar_menu',               array( $this, 'admin_bar_menu' ), 1000 );
 		add_action( 'admin_footer',                 array( $this, 'render' ), 1000 );
 		add_action( 'wp_footer',                    array( $this, 'render' ), 1000 );
@@ -49,7 +52,8 @@ class Debug_Bar {
 		$this->init_panels();
 	}
 
-	/* Are we on the wp-login.php page?
+	/**
+	 * Are we on the wp-login.php page?
 	 * We can get here while logged in and break the page as the admin bar isn't shown and otherthings the js relies on aren't available.
 	 */
 	function is_wp_login() {
@@ -214,14 +218,37 @@ class Debug_Bar {
 		<div id="debug-status">
 			<?php //@todo: Add a links to information about WP_DEBUG, PHP version, MySQL version, and Peak Memory.
 			$statuses = array();
-			$statuses[] = array( 'site', php_uname( 'n' ), sprintf( __( '#%d', 'debug-bar' ), get_current_blog_id() ) );
-			$statuses[] = array( 'php', __('PHP', 'debug-bar'), phpversion() );
-			$db_title = empty( $wpdb->is_mysql ) ? __( 'DB', 'debug-bar' ) : 'MySQL';
-			$statuses[] = array( 'db', $db_title, $wpdb->db_version() );
-			$statuses[] = array( 'memory', __('Memory Usage', 'debug-bar'), sprintf( __('%s bytes', 'debug-bar'), number_format_i18n( $this->safe_memory_get_peak_usage() ) ) );
+			$statuses[] = array(
+				'site',
+				php_uname( 'n' ),
+				/* translators: %d is the site id number in a multi-site setting. */
+				sprintf( __( '#%d', 'debug-bar' ), get_current_blog_id() ),
+			);
+			$statuses[] = array(
+				'php',
+				__( 'PHP', 'debug-bar' ),
+				phpversion(),
+			);
+			$db_title = empty( $wpdb->is_mysql ) ? __( 'DB', 'debug-bar' ) : __( 'MySQL', 'debug-bar' );
+			$statuses[] = array(
+				'db',
+				$db_title,
+				$wpdb->db_version(),
+			);
+			$statuses[] = array(
+				'memory',
+				__( 'Memory Usage', 'debug-bar' ),
+				/* translators: %s is a formatted number representing the memory usage. */
+				sprintf( __( '%s bytes', 'debug-bar' ), number_format_i18n( $this->safe_memory_get_peak_usage() ) ),
+			);
 
-			if ( ! WP_DEBUG )
-				$statuses[] = array( 'warning', __('Please Enable', 'debug-bar'), 'WP_DEBUG' );
+			if ( ! WP_DEBUG ) {
+				$statuses[] = array(
+					'warning',
+					__( 'Please Enable', 'debug-bar' ),
+					'WP_DEBUG',
+				);
+			}
 
 			$statuses = apply_filters( 'debug_bar_statuses', $statuses );
 

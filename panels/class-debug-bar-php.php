@@ -65,13 +65,13 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 
 	function render() {
 		echo "<div id='debug-bar-php'>";
-		echo '<h2><span>Total Warnings:</span>' . number_format( count( $this->warnings ) ) . "</h2>\n";
-		echo '<h2><span>Total Notices:</span>' . number_format( count( $this->notices ) ) . "</h2>\n";
+		echo '<h2><span>', __( 'Total Warnings:', 'debug-bar' ), '</span>', number_format_i18n( count( $this->warnings ) ), "</h2>\n";
+		echo '<h2><span>', __( 'Total Notices:', 'debug-bar' ), '</span>', number_format_i18n( count( $this->notices ) ), "</h2>\n";
 		if ( count( $this->warnings ) ) {
 			echo '<ol class="debug-bar-php-list">';
 			foreach ( $this->warnings as $location_message_stack ) {
 				list( $location, $message, $stack) = $location_message_stack;
-				echo '<li class="debug-bar-php-warning">WARNING: ';
+				echo '<li class="debug-bar-php-warning">', __( 'WARNING:', 'debug-bar' ), ' ';
 				echo str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message);
 				echo '<br/>';
 				echo $stack;
@@ -83,7 +83,7 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 			echo '<ol class="debug-bar-php-list">';
 			foreach ( $this->notices as $location_message_stack) {
 				list( $location, $message, $stack) = $location_message_stack;
-				echo '<li class="debug-bar-php-notice">NOTICE: ';
+				echo '<li class="debug-bar-php-notice">', __( 'NOTICE:', 'debug-bar' ), ' ';
 				echo str_replace(ABSPATH, '', $location) . ' - ' . strip_tags($message);
 				echo '<br/>';
 				echo $stack;
