@@ -95,7 +95,6 @@ class Debug_Bar {
 
 	function requirements() {
 		$path = plugin_dir_path( __FILE__ );
-		require_once( $path . '/compat.php' );
 		$recs = array( 'panel', 'php', 'queries', 'request', 'wp-query', 'object-cache', 'deprecated', 'js' );
 		foreach ( $recs as $rec )
 			require_once "$path/panels/class-debug-bar-$rec.php";
