@@ -459,7 +459,8 @@ body.debug-bar-maximized.debug-bar-visible {
  *   JS Error item styling
  * ========================================================================= */
 
-#debug-menu-links li a#debug-menu-link-Debug_Bar_JS {
+#debug-menu-links li a#debug-menu-link-Debug_Bar_JS,
+#wp-admin-bar-debug-bar-Debug_Bar_JS {
 	display: none;
 }
 

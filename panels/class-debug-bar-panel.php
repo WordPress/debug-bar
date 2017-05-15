@@ -1,14 +1,15 @@
 <?php
 
 class Debug_Bar_Panel {
-	var $_title = '';
-	var $_visible = true;
+	public $_title = '';
+	public $_visible = true;
 
 	function __construct( $title = '' ) {
 		$this->title( $title );
 
 		if ( $this->init() === false ) {
 			$this->set_visible( false );
+
 			return;
 		}
 
@@ -40,9 +41,17 @@ class Debug_Bar_Panel {
 		$this->_visible = $visible;
 	}
 
-	function title( $title=NULL ) {
-		if ( ! isset( $title ) )
+	/**
+	 * Get/set title.
+	 *
+	 * @param null $title
+	 * @return string|void
+	 */
+	function title( $title = null ) {
+		if ( ! isset( $title ) ) {
 			return $this->_title;
+		}
+
 		$this->_title = $title;
 	}
 
