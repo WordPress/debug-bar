@@ -2,18 +2,20 @@
 
 class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 	function init() {
-		$this->title( __('WP Query', 'debug-bar') );
+		$this->title( __( 'WP Query', 'debug-bar' ) );
 	}
 
 	function prerender() {
-		$this->set_visible( defined('SAVEQUERIES') && SAVEQUERIES );
+		$this->set_visible( defined( 'SAVEQUERIES' ) && SAVEQUERIES );
 	}
 
 	function render() {
 		global $template, $wp_query;
+
 		$queried_object = get_queried_object();
-		if ( $queried_object && isset( $queried_object->post_type ) )
+		if ( $queried_object && isset( $queried_object->post_type ) ) {
 			$post_type_object = get_post_type_object( $queried_object->post_type );
+		}
 
 		echo "<div id='debug-bar-wp-query'>";
 		echo '<h2><span>', __( 'Queried Object ID:', 'debug-bar' ), '</span>', get_queried_object_id(), "</h2>\n";
@@ -58,8 +60,8 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 			echo '<h2><span>', __( 'Query Template:', 'debug-bar' ), '</span>', basename( $template ), "</h2>\n";
 		}
 
-		$show_on_front = get_option( 'show_on_front' );
-		$page_on_front = get_option( 'page_on_front' );
+		$show_on_front  = get_option( 'show_on_front' );
+		$page_on_front  = get_option( 'page_on_front' );
 		$page_for_posts = get_option( 'page_for_posts' );
 
 		echo '<h2><span>', __( 'Show on Front:', 'debug-bar' ), '</span>', $show_on_front, "</h2>\n";
@@ -74,7 +76,7 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 
 		echo '<div class="clear"></div>';
 
-		if ( empty($wp_query->query) ) {
+		if ( empty( $wp_query->query ) ) {
 			$query = __( 'None', 'debug-bar' );
 		} else {
 			$query = http_build_query( $wp_query->query );
@@ -83,7 +85,7 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 		echo '<h3>', __( 'Query Arguments:', 'debug-bar' ), '</h3>';
 		echo '<p>' . esc_html( $query ) . '</p>';
 
-		if ( ! empty($wp_query->request) ) {
+		if ( ! empty( $wp_query->request ) ) {
 			echo '<h3>', __( 'Query SQL:', 'debug-bar' ), '</h3>';
 			echo '<p>' . esc_html( $wp_query->request ) . '</p>';
 		}
@@ -91,7 +93,7 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 		if ( ! is_null( $queried_object ) ) {
 			echo '<h3>', __( 'Queried Object:', 'debug-bar' ), '</h3>';
 			echo '<table class="debug-bar-wp-query-list"><tbody>';
-			$this->_recursive_print_kv($queried_object);
+			$this->_recursive_print_kv( $queried_object );
 			echo '</tbody></table>';
 		}
 		echo '</div>';
@@ -99,7 +101,7 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 
 	protected function _recursive_print_kv( $kv_array ) {
 		foreach ( $kv_array as $key => $value ) {
-			if( is_object( $value ) || is_array( $value ) ) {
+			if ( is_object( $value ) || is_array( $value ) ) {
 				echo '<tr><th>', $key, '</th> <td>&rArr;</td> <td>';
 				$this->_recursive_print_kv( $value );
 				echo '</td></tr>';
