@@ -1,7 +1,7 @@
 === Debug Bar ===
 Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland
 Tags: debug
-Tested up to: 4.8
+Tested up to: 4.9.8
 Stable tag: 0.9
 Requires at least: 3.4
 
