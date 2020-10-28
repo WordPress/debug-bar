@@ -106,6 +106,12 @@ Initial Release
 
 == Changelog ==
 
+= 1.1 =
+Add a new panel for HTTP requests using the native WP methods.
+AMP dev mode compatibility.
+Change cache busters to use `filemtime` instead of hardcoded values.
+Minor CSS updates, so theems don't override the <pre> styles.
+
 = 1.0.1 =
 Update object cache panel CSS to be ready for new object-cache.php release with better stats()
 
