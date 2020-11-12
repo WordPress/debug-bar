@@ -105,12 +105,12 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 		}
 
 		$elapsed_class = '';
-		if ( $this->num_errors > 0 ) {
+		if ( $this->total_time > $this->time_limit ) {
 			$elapsed_class = 'debug_bar_http_error';
 		}
 
 		$errors_class = '';
-		if ( $this->total_time > $this->time_limit ) {
+		if ( $this->num_errors > 0 ) {
 			$errors_class = 'debug_bar_http_error';
 		}
 
