@@ -1,7 +1,7 @@
 === Debug Bar ===
-Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu
+Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott
 Tags: debug
-Tested up to: 5.5.1
+Tested up to: 5.5.3
 Stable tag: 1.1
 Requires at least: 3.4
 
@@ -28,6 +28,12 @@ Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.or
 There are numerous other add-ons available to get more insight into, for instance, the registered Post Types, Shortcodes, WP Cron, Language file loading, Actions and Filters and so on. Just [search the plugin directory for 'Debug Bar'](https://wordpress.org/plugins/search/debug+bar/).
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Refactor the HTTP Requests panel:
+- Remove jQuery usage
+- Properly display response codes
+- Better CSS to emphasize errors and long requests (>2.5 seconds)
 
 = 1.1 =
 Add a new panel for HTTP requests using the native WP methods.
@@ -105,6 +111,12 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 1.1.1 =
+Refactor the HTTP Requests panel:
+- Remove jQuery usage
+- Properly display response codes
+- Better CSS to emphasize errors and long requests (>2.5 seconds)
 
 = 1.1 =
 Add a new panel for HTTP requests using the native WP methods.
