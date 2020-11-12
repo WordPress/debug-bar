@@ -33,7 +33,7 @@ There are numerous other add-ons available to get more insight into, for instanc
 Refactor the HTTP Requests panel:
 - Remove jQuery usage
 - Properly display response codes
-- Better CSS to emphasize errors and long requests (>2.5 seconds)
+- Better CSS to emphasize errors and long requests ( > 250ms )
 
 = 1.1 =
 Add a new panel for HTTP requests using the native WP methods.
@@ -116,7 +116,7 @@ Initial Release
 Refactor the HTTP Requests panel:
 - Remove jQuery usage
 - Properly display response codes
-- Better CSS to emphasize errors and long requests (>2.5 seconds)
+- Better CSS to emphasize errors and long requests ( > 250ms )
 
 = 1.1 =
 Add a new panel for HTTP requests using the native WP methods.

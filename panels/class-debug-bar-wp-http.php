@@ -3,7 +3,7 @@
 class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 	public $requests = [];
 
-	public $time_limit = 2500;
+	public $time_limit = 250; // milliseconds
 	public $total_time = 0;
 	public $num_errors = 0;
 
