@@ -115,6 +115,9 @@ Initial Release
 
 == Changelog ==
 
+= 1.1.2 =
+Fix error checking in HTTP Requests panel.
+
 = 1.1.1 =
 Refactor the HTTP Requests panel:
 - Remove jQuery usage
