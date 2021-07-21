@@ -115,6 +115,9 @@ Initial Release
 
 == Changelog ==
 
+= 1.1.3 =
+Decode the SQL in the WP_Query panel.
+
 = 1.1.2 =
 Fix error checking in HTTP Requests panel.
 
