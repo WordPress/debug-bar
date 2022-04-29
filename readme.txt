@@ -1,8 +1,8 @@
 === Debug Bar ===
 Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott
 Tags: debug
-Tested up to: 5.5.3
-Stable tag: 1.1.2
+Tested up to: 5.9.3
+Stable tag: 1.1.3
 Requires at least: 3.4
 
 Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
@@ -28,6 +28,10 @@ Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.or
 There are numerous other add-ons available to get more insight into, for instance, the registered Post Types, Shortcodes, WP Cron, Language file loading, Actions and Filters and so on. Just [search the plugin directory for 'Debug Bar'](https://wordpress.org/plugins/search/debug+bar/).
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+- Fix notices in HTTP Requests panel when a request is stopped/doesn't finish.
+- Decode the SQL in the WP_Query panel.
 
 = 1.1.2 =
 Fix error checking in HTTP Requests panel.
@@ -116,7 +120,8 @@ Initial Release
 == Changelog ==
 
 = 1.1.3 =
-Decode the SQL in the WP_Query panel.
+- Fix notices in HTTP Requests panel when a request is stopped/doesn't finish.
+- Decode the SQL in the WP_Query panel.
 
 = 1.1.2 =
 Fix error checking in HTTP Requests panel.
