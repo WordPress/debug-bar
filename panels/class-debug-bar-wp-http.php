@@ -87,9 +87,9 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 	}
 
 	function render() {
-		$num_requests = number_format( count( $this->requests ) );
-		$elapsed = number_format( $this->total_time, 1 );
-		$num_errors = number_format( $this->num_errors );
+		$num_requests = number_format_i18n( count( $this->requests ) );
+		$elapsed      = number_format_i18n( $this->total_time, 1 );
+		$num_errors   = number_format_i18n( $this->num_errors );
 
 		if ( isset( $_GET['fullbody'] ) ) {
 			$fullbody = '<p style="clear:left">Request and response bodies are included. <a href="' . esc_attr( remove_query_arg( 'fullbody' ) ) . '">Reload with those omitted.</a>';
@@ -165,8 +165,7 @@ HTML;
 			}
 
 			$start = $r['args']['time_start'] - $_SERVER['REQUEST_TIME_FLOAT'];
-			$start *= 1000;
-			$start = number_format( $start, 1 );
+			$start = number_format_i18n( $start * 1000, 1 );
 
 			$duration = 'error getting request duration';
 			if ( ! empty( $r['args']['duration'] ) ) {
