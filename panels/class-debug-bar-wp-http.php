@@ -171,19 +171,19 @@ function debug_bar_http_toggle( id ) {
 			if ( ! empty( $r['args']['duration'] ) ) {
 				$duration = sprintf(
 					/* translators: %s = duration in milliseconds. */
-					esc_html__( '%s ms', 'debug-bar' ),
+					__( '%s ms', 'debug-bar' ),
 					number_format_i18n( $r['args']['duration'], 1 )
 				);
 			}
-			$method = esc_html( $r['args']['method'] );
-			$url = esc_html( $r['url'] );
+			$method = $r['args']['method'];
+			$url = $r['url'];
 
 			if ( ! empty( $r['r'] ) && is_wp_error( $r['r'] ) ) {
 				$code = esc_html( $r['r']->get_error_code() );
 			} else {
 				$code = 'error getting response code, most likely a stopped request';
 				if ( ! empty( $r['r']['response']['code'] ) ) {
-					$code = esc_html( $r['r']['response']['code'] );
+					$code = $r['r']['response']['code'];
 				}
 			}
 
@@ -195,10 +195,10 @@ function debug_bar_http_toggle( id ) {
 		<tr class="<?php echo esc_attr( $class ); ?>">
 			<td><a onclick="debug_bar_http_toggle( '<?php echo esc_attr( $record_id ); ?>' )"><?php esc_html_e( 'Toggle', 'debug-bar' ); ?></a></td>
 			<td><?php /* translators: %s = duration in milliseconds. */ printf( esc_html__( '%s ms', 'debug-bar' ), $start ); ?></td>
-			<td><?php echo esc_attr( $duration ); ?></td>
-			<td><?php echo esc_attr( $method ); ?></td>
-			<td><?php echo esc_attr( $url ); ?></td>
-			<td><?php echo esc_attr( $code ); ?></td>
+			<td><?php echo esc_html( $duration ); ?></td>
+			<td><?php echo esc_html( $method ); ?></td>
+			<td><?php echo esc_url( $url ); ?></td>
+			<td><?php echo esc_html( $code ); ?></td>
 		</tr>
 
 		<tr id="<?php echo esc_attr( $record_id ); ?>" style="display: none">
