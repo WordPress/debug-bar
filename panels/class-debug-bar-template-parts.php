@@ -60,6 +60,8 @@ class Debug_Bar_Template_Parts extends Debug_Bar_Panel {
 	function action_template_part( $_template_file, $load_once, $args ) {
 		if ( defined( 'SAVE_TEMPLATE_PARTS' ) && SAVE_TEMPLATE_PARTS ) {
 
+			$abs_path = substr( ABSPATH, 0, -1 );
+
 			$template = '/' . str_replace( ABSPATH, '', $_template_file );
 
 			if ( ! isset( $GLOBALS['template_parts'] ) ) {
@@ -75,7 +77,8 @@ class Debug_Bar_Template_Parts extends Debug_Bar_Panel {
 			$trace_func = '';
 			foreach ( $trace as $key => $line ) {
 				if ( in_array( $line['function'], array( 'include', 'require', 'require_once' ) ) ) {
-					$trace_func = '/' . str_replace( ABSPATH, '', $line['args'][0] );
+					$trace_func = str_replace( $abs_path, '', $line['args'][0] );
+					$trace_func = str_replace( '\\', '/', $trace_func );
 					break;
 				}
 			}

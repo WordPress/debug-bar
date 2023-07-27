@@ -32,6 +32,9 @@ There are numerous other add-ons available to get more insight into, for instanc
 
 == Upgrade Notice ==
 
+= 1.2.1 =
+- Added support for template tree output in Windows.
+
 = 1.2.0 =
 Added a new panel for templates uploaded to the page.
 
