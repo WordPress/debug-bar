@@ -527,3 +527,27 @@ body.debug-bar-maximized.debug-bar-visible {
 #debug-bar-js .debug-bar-js-error:hover span {
 	color: #000;
 }
+
+/* =========================================================================
+ *   Template Parts styling
+ * ========================================================================= */
+
+.debug-bar-template-parts h3 {
+    float: none;
+    clear: both;
+    font-family: georgia,times,serif;
+    font-size: 22px;
+    margin: 15px 10px 15px 0;
+}
+
+.debug-bar-template-parts__row {
+    padding: 5px;
+}
+
+.debug-bar-template-parts__group {
+    position: relative;
+    background: #e8e8e8;
+    margin: 10px 0;
+    margin-left: 25px;
+    padding: 5px;
+}
