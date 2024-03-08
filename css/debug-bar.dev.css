@@ -305,6 +305,7 @@ body.debug-bar-maximized.debug-bar-visible {
 #querylist a {
 	text-decoration: underline !important;
 	color: blue !important;
+	cursor: pointer;
 }
 
 #querylist a:hover {
