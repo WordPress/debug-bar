@@ -97,14 +97,6 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 			$fullbody = '<p style="clear:left">' . esc_html__( 'Request and response bodies are omitted.', 'debug-bar' ) . ' <a href="' . esc_attr( add_query_arg( 'fullbody', 'please' ) ) . '">' . esc_html__( 'Reload with those included.', 'debug-bar' ) . '</a></p>';
 		}
 
-		$css_errors = '';
-		if (
-			$this->num_errors > 0
-			|| $this->total_time > $this->time_limit
-		) {
-			$css_errors = "#wp-admin-bar-debug-bar-Debug_Bar_WP_Http, #debug-menu-link-Debug_Bar_WP_Http { background-color: #d00 !important; background-image: -moz-linear-gradient(bottom,#f44,#d00) !important; background-image: -webkit-gradient(linear,left bottom,left top,from(#f44),to(#d00)) important; }\n";
-		}
-
 		$elapsed_class = '';
 		if ( $this->total_time > $this->time_limit ) {
 			$elapsed_class = 'debug_bar_http_error';
@@ -118,10 +110,9 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 		?>
 <style>
 	#debug_bar_http { clear: left; }
-	#debug_bar_http .err, .debug_bar_http_error { background-color: #ffebe8; border: 1px solid #c00 !important; }
+	#debug_bar_http .err, .debug_bar_http_error { background-color: #ffebe8; border: 1px solid #d00 !important; }
 	#debug_bar_http th, #debug_bar_http td { padding: 8px; }
 	#debug_bar_http pre { font-family: monospace; }
-	<?php echo $css_errors; ?>
 </style>
 
 <script>
