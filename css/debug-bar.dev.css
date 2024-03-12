@@ -429,8 +429,8 @@ body.debug-bar-maximized.debug-bar-visible {
 	border-radius: 20px;
 	display: block;
 	float: left;
-	height: 19px;
-	width: 19px;
+	height: 18px;
+	width: 18px;
 	margin-left: 5px;
 	font-size: 18px;
 	text-align: center;
@@ -443,10 +443,6 @@ body.debug-bar-maximized.debug-bar-visible {
 }
 #debug-bar-actions span:hover {
 	background: #888;
-}
-
-#debug-bar-actions span.restore {
-	line-height: 15px;
 }
 
 .debug-bar-maximized #debug-bar-actions span.restore {
