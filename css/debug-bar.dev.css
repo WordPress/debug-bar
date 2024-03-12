@@ -440,9 +440,24 @@ body.debug-bar-maximized.debug-bar-visible {
 	background: #aaa;
 	cursor: pointer;
 }
+#debug-bar-actions span.maximize,
+#debug-bar-actions span.restore {
+	background-color: #9d9;
+}
+#debug-bar-actions span.close {
+	background-color: #d99;
+}
 #debug-bar-actions span:hover {
 	background: #888;
 }
+#debug-bar-actions span.maximize:hover,
+#debug-bar-actions span.restore:hover {
+	background: #40bf40;
+}
+#debug-bar-actions span.close:hover {
+	background: #bf4040;
+}
+
 
 .debug-bar-maximized #debug-bar-actions span.restore {
 	display: block;
