@@ -127,7 +127,7 @@ class Debug_Bar {
 	function enqueue() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '';
 
-		$style_dependencies = array();
+		$style_dependencies = array( 'dashicons' );
 		$script_dependencies = array( 'jquery' );
 		if ( $this->is_amp() ) {
 			// Add admin-bar dependencies so AMP dev mode will stop removing debug-bar assets
