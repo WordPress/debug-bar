@@ -429,27 +429,35 @@ body.debug-bar-maximized.debug-bar-visible {
 	border-radius: 20px;
 	display: block;
 	float: left;
-	height: 19px;
-	width: 19px;
+	height: 20px;
+	width: 20px;
+	line-height: 20px;
 	margin-left: 5px;
-
 	font-size: 18px;
-	line-height: 14px;
 	text-align: center;
 	font-weight: bold;
-
 	color: #eee;
 	background: #aaa;
-
 	cursor: pointer;
+}
+#debug-bar-actions span.maximize,
+#debug-bar-actions span.restore {
+	background-color: #9d9;
+}
+#debug-bar-actions span.close {
+	background-color: #d99;
 }
 #debug-bar-actions span:hover {
 	background: #888;
 }
-
-#debug-bar-actions span.restore {
-	line-height: 15px;
+#debug-bar-actions span.maximize:hover,
+#debug-bar-actions span.restore:hover {
+	background: #40bf40;
 }
+#debug-bar-actions span.close:hover {
+	background: #bf4040;
+}
+
 
 .debug-bar-maximized #debug-bar-actions span.restore {
 	display: block;

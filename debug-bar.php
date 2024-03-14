@@ -279,9 +279,9 @@ class Debug_Bar {
 		<div id='querylist'>
 
 			<div id="debug-bar-actions">
-				<span class="maximize">+</span>
-				<span class="restore">&ndash;</span>
-				<span class="close">&times;</span>
+				<span class="maximize dashicons dashicons-plus-alt2"></span>
+				<span class="restore dashicons dashicons-minus"></span>
+				<span class="close dashicons dashicons-no-alt"></span>
 			</div>
 
 			<div id='debug-bar-info'>
