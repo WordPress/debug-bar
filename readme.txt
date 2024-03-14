@@ -31,6 +31,7 @@ There are numerous other add-ons available to get more insight into, for instanc
 
 = 1.1.5 =
 - Update CSS to remove gradient and shadow styles
+- Use dashicons as action buttons instead of misaligned text.
 
 = 1.1.4 =
 - Fix PHP8+ critical error if `php_uname` is disabled
@@ -124,6 +125,10 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 1.1.5 =
+- Update CSS to remove gradient and shadow styles
+- Use dashicons as action buttons instead of misaligned text.
 
 = 1.1.4 =
 - Fix PHP8+ critical error if `php_uname` is disabled

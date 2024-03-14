@@ -8,46 +8,31 @@
 
 #wpadminbar #wp-admin-bar-debug-bar.active {
 	background: #555;
-	background: -moz-linear-gradient(bottom,  #555,  #3e3e3e);
-	background: -webkit-gradient(linear, left bottom, left top, from(#555), to(#3e3e3e));
 }
 
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary,
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary .ab-item:focus {
 	background-color: #ff8922;
-	background-image: -moz-linear-gradient(bottom, #ee6f00, #ff8922);
-	background-image: -webkit-gradient(linear, left bottom, left top, from(#ee6f00), to(#ff8922));
 }
 
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary .ab-item:hover,
 .debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary,
 .debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary .ab-item:focus {
 	background-color: #ee6f00;
-	background-image: -moz-linear-gradient(bottom, #ff8922, #ee6f00 );
-	background-image: -webkit-gradient(linear, left bottom, left top, from(#ff8922), to(#ee6f00));
 }
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-notice-summary .ab-item {
-	color: #fff;
-	text-shadow: 0 -1px 0 #884000;
+	color: #f0f0f1;
 }
 
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary,
-#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item:focus {
-	background-color: #f44;
-	background-image: -moz-linear-gradient(bottom, #d00, #f44);
-	background-image: -webkit-gradient(linear, left bottom, left top, from(#d00), to(#f44));
-}
-
+#wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item:focus,
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item:hover,
 .debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary,
 .debug-bar-visible #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item:focus {
 	background-color: #d00;
-	background-image: -moz-linear-gradient(bottom, #f44, #d00 );
-	background-image: -webkit-gradient(linear, left bottom, left top, from(#f44), to(#d00));
 }
 #wpadminbar #wp-admin-bar-debug-bar.debug-bar-php-warning-summary .ab-item {
-	color: #fff;
-	text-shadow: 0 -1px 0 #700;
+	color: #f0f0f1;
 }
 
 #wpadminbar #wp-admin-bar-debug-bar ul {
@@ -103,15 +88,6 @@ body.debug-bar-maximized.debug-bar-visible {
 
 	background: #f1f1f1;
 	border-bottom: 1px solid #fff;
-	box-shadow: 0 0 6px rgba( 0, 0, 0, 0.4 );
-
-	background-color: #f1f1f1; /* Fallback */
-	background-image: -ms-linear-gradient(top, #f9f9f9, #dfdfdf); /* IE10 */
-	background-image: -moz-linear-gradient(top, #f9f9f9, #dfdfdf); /* Firefox */
-	background-image: -o-linear-gradient(top, #f9f9f9, #dfdfdf); /* Opera */
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#dfdfdf)); /* old Webkit */
-	background-image: -webkit-linear-gradient(top, #f9f9f9, #dfdfdf); /* new Webkit */
-	background-image: linear-gradient(top, #f9f9f9, #dfdfdf); /* proposed W3C Markup */
 }
 
 #debug-bar-menu {
@@ -123,11 +99,7 @@ body.debug-bar-maximized.debug-bar-visible {
 	z-index: 100;
 
 	overflow: auto;
-	text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.9 );
 	background: #333;
-	-webkit-box-shadow: inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
-	-moz-box-shadow:    inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
-	box-shadow:         inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
 }
 
 #debug-menu-targets {
@@ -168,7 +140,7 @@ body.debug-bar-maximized.debug-bar-visible {
 }
 #debug-status #debug-status-warning {
 	font-weight: bold;
-	color: red;
+	color: #d00;
 }
 #debug-status #debug-status-site {
 	font-weight: bold;
@@ -267,34 +239,34 @@ body.debug-bar-maximized.debug-bar-visible {
 
 #object-cache-stats ul.debug-menu-links,
 #object-cache-stats-menu-targets {
-       clear: both;
+	clear: both;
 }
 
 .object-cache-stats-menu-target pre {
-       white-space: pre-wrap;
-       margin: 1rem 0;
+	white-space: pre-wrap;
+	margin: 1rem 0;
 }
 
 #object-cache-stats ul.debug-menu-links li {
-       float: left;
-       margin: 0 10px 10px 0;
-       background: none;
-       border: 1px solid #eee;
-       color: #4b5259;
-       list-style: none;
+	float: left;
+	margin: 0 10px 10px 0;
+	background: none;
+	border: 1px solid #eee;
+	color: #4b5259;
+	list-style: none;
 }
 
 #object-cache-stats ul.debug-menu-links li:hover {
-       border-color: #ddd;
+	border-color: #ddd;
 }
 
 #object-cache-stats ul.debug-menu-links li a {
-       background: none;
-       color: #4b5259;
-       overflow: hidden;
-       display: block;
-       padding: 5px 9px;
-       text-decoration: none;
+	background: none;
+	color: #4b5259;
+	overflow: hidden;
+	display: block;
+	padding: 5px 9px;
+	text-decoration: none;
 }
 
 #querylist h3 {
@@ -333,6 +305,7 @@ body.debug-bar-maximized.debug-bar-visible {
 #querylist a {
 	text-decoration: underline !important;
 	color: blue !important;
+	cursor: pointer;
 }
 
 #querylist a:hover {
@@ -378,7 +351,7 @@ body.debug-bar-maximized.debug-bar-visible {
 
 #debug-bar-php .debug-bar-php-warning {
 	background-color: #ffebe8;
-	border: 1px solid #c00;
+	border: 1px solid #d00;
 }
 
 #debug-bar-php .debug-bar-php-notice {
@@ -456,27 +429,35 @@ body.debug-bar-maximized.debug-bar-visible {
 	border-radius: 20px;
 	display: block;
 	float: left;
-	height: 19px;
-	width: 19px;
+	height: 20px;
+	width: 20px;
+	line-height: 20px;
 	margin-left: 5px;
-
 	font-size: 18px;
-	line-height: 14px;
 	text-align: center;
 	font-weight: bold;
-
 	color: #eee;
 	background: #aaa;
-
 	cursor: pointer;
+}
+#debug-bar-actions span.maximize,
+#debug-bar-actions span.restore {
+	background-color: #9d9;
+}
+#debug-bar-actions span.close {
+	background-color: #d99;
 }
 #debug-bar-actions span:hover {
 	background: #888;
 }
-
-#debug-bar-actions span.restore {
-	line-height: 15px;
+#debug-bar-actions span.maximize:hover,
+#debug-bar-actions span.restore:hover {
+	background: #40bf40;
 }
+#debug-bar-actions span.close:hover {
+	background: #bf4040;
+}
+
 
 .debug-bar-maximized #debug-bar-actions span.restore {
 	display: block;
@@ -515,7 +496,7 @@ body.debug-bar-maximized.debug-bar-visible {
 
 #debug-bar-js .debug-bar-js-error {
 	background-color: #ffebe8;
-	border: 1px solid #c00;
+	border: 1px solid #d00;
 }
 
 #debug-bar-js .debug-bar-js-error span {

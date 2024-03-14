@@ -87,22 +87,14 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 	}
 
 	function render() {
-		$num_requests = number_format( count( $this->requests ) );
-		$elapsed = number_format( $this->total_time, 1 );
-		$num_errors = number_format( $this->num_errors );
+		$num_requests = number_format_i18n( count( $this->requests ) );
+		$elapsed      = number_format_i18n( $this->total_time, 1 );
+		$num_errors   = number_format_i18n( $this->num_errors );
 
 		if ( isset( $_GET['fullbody'] ) ) {
-			$fullbody = '<p style="clear:left">Request and response bodies are included. <a href="' . esc_attr( remove_query_arg( 'fullbody' ) ) . '">Reload with those omitted.</a>';
+			$fullbody = '<p style="clear:left">' . esc_html__( 'Request and response bodies are included.', 'debug-bar' ) . ' <a href="' . esc_attr( remove_query_arg( 'fullbody' ) ) . '">' . esc_html__( 'Reload with those omitted.', 'debug-bar' ) . '</a></p>';
 		} else {
-			$fullbody = '<p style="clear:left">Request and response bodies are omitted. <a href="' . esc_attr( add_query_arg( 'fullbody', 'please' ) ) . '">Reload with those included.</a>';
-		}
-
-		$css_errors = '';
-		if (
-			$this->num_errors > 0
-			|| $this->total_time > $this->time_limit
-		) {
-			$css_errors = "#wp-admin-bar-debug-bar-Debug_Bar_WP_Http, #debug-menu-link-Debug_Bar_WP_Http { background-color: #d00 !important; background-image: -moz-linear-gradient(bottom,#f44,#d00) !important; background-image: -webkit-gradient(linear,left bottom,left top,from(#f44),to(#d00)) important; }\n";
+			$fullbody = '<p style="clear:left">' . esc_html__( 'Request and response bodies are omitted.', 'debug-bar' ) . ' <a href="' . esc_attr( add_query_arg( 'fullbody', 'please' ) ) . '">' . esc_html__( 'Reload with those included.', 'debug-bar' ) . '</a></p>';
 		}
 
 		$elapsed_class = '';
@@ -115,13 +107,12 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 			$errors_class = 'debug_bar_http_error';
 		}
 
-		$out =<<<HTML
+		?>
 <style>
 	#debug_bar_http { clear: left; }
-	#debug_bar_http .err, .debug_bar_http_error { background-color: #ffebe8; border: 1px solid #c00 !important; }
+	#debug_bar_http .err, .debug_bar_http_error { background-color: #ffebe8; border: 1px solid #d00 !important; }
 	#debug_bar_http th, #debug_bar_http td { padding: 8px; }
 	#debug_bar_http pre { font-family: monospace; }
-	{$css_errors}
 </style>
 
 <script>
@@ -135,25 +126,25 @@ function debug_bar_http_toggle( id ) {
 }
 </script>
 
-<h2><span>HTTP Requests:</span> {$num_requests}</h2>
-<h2 class="{$elapsed_class}"><span>Total Elapsed:</span> {$elapsed} ms</h2>
-<h2 class="{$errors_class}"><span>Errors:</span> {$num_errors}</h2>
+<h2><span><?php esc_html_e( 'HTTP Requests:', 'debug-bar' ); ?></span> <?php echo esc_html( $num_requests ); ?></h2>
+<h2 class="<?php echo esc_attr( $elapsed_class ); ?>"><span><?php esc_html_e( 'Total Elapsed:', 'debug-bar' ); ?></span> <?php /* translators: %s = duration in milliseconds. */ printf( esc_html__( '%s ms', 'debug-bar' ), $elapsed ); ?></h2>
+<h2 class="<?php echo esc_attr( $errors_class ); ?>"><span><?php esc_html_e( 'Errors:', 'debug-bar' ); ?></span> <?php echo esc_html( $num_errors ); ?></h2>
 
-{$fullbody}
+<?php echo $fullbody; ?>
 
 <table id="debug_bar_http">
 	<thead>
 		<tr>
-			<th>More</th>
-			<th>Start</th>
-			<th>Duration</th>
-			<th>Method</th>
-			<th>URL</th>
-			<th>Code</th>
+			<th><?php esc_html_e( 'More', 'debug-bar' ); ?></th>
+			<th><?php esc_html_e( 'Start', 'debug-bar' ); ?></th>
+			<th><?php esc_html_e( 'Duration', 'debug-bar' ); ?></th>
+			<th><?php esc_html_e( 'Method', 'debug-bar' ); ?></th>
+			<th><?php esc_html_e( 'URL', 'debug-bar' ); ?></th>
+			<th><?php esc_html_e( 'Code', 'debug-bar' ); ?></th>
 		</tr>
 	</thead>
 	<tbody>
-HTML;
+		<?php
 
 		foreach( $this->requests as $i => $r ) {
 			$class = '';
@@ -165,49 +156,53 @@ HTML;
 			}
 
 			$start = $r['args']['time_start'] - $_SERVER['REQUEST_TIME_FLOAT'];
-			$start *= 1000;
-			$start = number_format( $start, 1 );
+			$start = number_format_i18n( $start * 1000, 1 );
 
 			$duration = 'error getting request duration';
 			if ( ! empty( $r['args']['duration'] ) ) {
-				$duration = number_format( $r['args']['duration'], 1 ) . ' ms';
+				$duration = sprintf(
+					/* translators: %s = duration in milliseconds. */
+					__( '%s ms', 'debug-bar' ),
+					number_format_i18n( $r['args']['duration'], 1 )
+				);
 			}
-			$method = esc_html( $r['args']['method'] );
-			$url = esc_html( $r['url'] );
+			$method = $r['args']['method'];
+			$url = $r['url'];
 
 			if ( ! empty( $r['r'] ) && is_wp_error( $r['r'] ) ) {
 				$code = esc_html( $r['r']->get_error_code() );
 			} else {
 				$code = 'error getting response code, most likely a stopped request';
 				if ( ! empty( $r['r']['response']['code'] ) ) {
-					$code = esc_html( $r['r']['response']['code'] );
+					$code = $r['r']['response']['code'];
 				}
 			}
 
 			$details = esc_html( print_r( $r, true ) );
 
 			$record_id = 'debug_bar_http_record_' . md5( $i );
-			$out .=<<<HTML
-		<tr class="{$class}">
-			<td><a onclick="debug_bar_http_toggle( '{$record_id}' );">Toggle</a></td>
-			<td>{$start} ms</td>
-			<td>{$duration}</td>
-			<td>{$method}</td>
-			<td>{$url}</td>
-			<td>{$code}</td>
+			
+			?>
+		<tr class="<?php echo esc_attr( $class ); ?>">
+			<td><a onclick="debug_bar_http_toggle( '<?php echo esc_attr( $record_id ); ?>' )"><?php esc_html_e( 'Toggle', 'debug-bar' ); ?></a></td>
+			<td><?php /* translators: %s = duration in milliseconds. */ printf( esc_html__( '%s ms', 'debug-bar' ), $start ); ?></td>
+			<td><?php echo esc_html( $duration ); ?></td>
+			<td><?php echo esc_html( $method ); ?></td>
+			<td><?php echo esc_url( $url ); ?></td>
+			<td><?php echo esc_html( $code ); ?></td>
 		</tr>
 
-		<tr id="{$record_id}" style="display: none">
-			<td colspan="5"><pre>{$details}</pre></td>
+		<tr id="<?php echo esc_attr( $record_id ); ?>" style="display: none">
+			<td colspan="5"><pre><?php echo esc_html( $details ); ?></pre></td>
 		</tr>
-HTML;
+		<?php
+
 		}
 
-		$out .=<<<HTML
+		?>
 	</tbody>
 </table>
-HTML;
+	<?php
 
-		echo $out;
 	}
 }
