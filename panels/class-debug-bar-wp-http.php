@@ -69,7 +69,7 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 	}
 
 	function init() {
-		$this->title( __( 'WP_Http', 'debug-bar' ) );
+		$this->title( 'WP_Http' );
 	}
 
 	function prerender() {
