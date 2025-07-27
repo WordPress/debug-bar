@@ -4,6 +4,8 @@ Tags: debug
 Tested up to: 6.9
 Stable tag: 1.1.7
 Requires at least: 3.4
+License: GPLv2 or later  
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
 
