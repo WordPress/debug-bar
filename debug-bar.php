@@ -177,7 +177,7 @@ class Debug_Bar {
 	function ensure_ajaxurl() { ?>
 		<script type="text/javascript">
 			//<![CDATA[
-			var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
+			var ajaxurl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
 			//]]>
 		</script>
 		<?php
