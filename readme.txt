@@ -1,9 +1,11 @@
 === Debug Bar ===
-Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, teaeagle
+Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, eoigal, teaeagle
 Tags: debug
-Tested up to: 6.1
-Stable tag: 1.1.4
+Tested up to: 6.9
+Stable tag: 1.1.7
 Requires at least: 3.4
+License: GPLv2 or later  
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
 
@@ -32,11 +34,21 @@ There are numerous other add-ons available to get more insight into, for instanc
 
 == Upgrade Notice ==
 
+= 1.3.0 =
+Added a new panel for templates uploaded to the page.
+
 = 1.2.1 =
 - Added support for template tree output in Windows.
 
-= 1.2.0 =
-Added a new panel for templates uploaded to the page.
+= 1.1.7 =
+- Resolves a PHP Warning in WP 6.7+.
+
+= 1.1.6 =
+- 1.1.5 didn't have the minified CSS rebuilt.
+
+= 1.1.5 =
+- Update CSS to remove gradient and shadow styles
+- Use dashicons as action buttons instead of misaligned text.
 
 = 1.1.4 =
 - Fix PHP8+ critical error if `php_uname` is disabled
@@ -130,6 +142,16 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 1.1.7 =
+- Resolves a PHP Warning in WP 6.7+.
+
+= 1.1.6 =
+- 1.1.5 didn't have the minified CSS rebuilt.
+
+= 1.1.5 =
+- Update CSS to remove gradient and shadow styles
+- Use dashicons as action buttons instead of misaligned text.
 
 = 1.1.4 =
 - Fix PHP8+ critical error if `php_uname` is disabled

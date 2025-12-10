@@ -23,7 +23,7 @@ var wpDebugBar;
 
 		toggle: {
 			init: function init() {
-				$( '#wp-admin-bar-debug-bar' ).click( function onClickAdminBarMenu( event ) {
+				$( '#wp-admin-bar-debug-bar' ).on( 'click', function onClickAdminBarMenu( event ) {
 					event.preventDefault();
 
 					// Click on submenu item.
@@ -66,7 +66,7 @@ var wpDebugBar;
 			var debugMenuLinks = $( '.debug-menu-link' ),
 				debugMenuTargets = $( '.debug-menu-target' );
 
-			debugMenuLinks.click( function onClickLink( event ) {
+			debugMenuLinks.on( 'click', function onClickLink( event ) {
 				var $this = $( this );
 
 				event.preventDefault();
@@ -91,18 +91,18 @@ var wpDebugBar;
 				var actions = $( '#debug-bar-actions' );
 
 				// Close the panel with the esc key if it's open.
-				$( document ).keydown( function maybeClosePanel( event ) {
+				$( document ).on( 'keydown', function maybeClosePanel( event ) {
 					var key = event.key || event.which || event.keyCode;
 
-					if ( 27 /* esc */ === key && api.isVisible() ) {
+					if ( (27 === key || 'Escape' === key) && api.isVisible() ) {
 						event.preventDefault();
 						api.actions.close();
 					}
 				} );
 
-				$( '.maximize', actions ).click( api.actions.maximize );
-				$( '.restore',  actions ).click( api.actions.restore  );
-				$( '.close',    actions ).click( api.actions.close    );
+				$( '.maximize', actions ).on( 'click', api.actions.maximize );
+				$( '.restore',  actions ).on( 'click', api.actions.restore  );
+				$( '.close',    actions ).on( 'click', api.actions.close    );
 			},
 			maximize: function maximize() {
 				api.body.removeClass( 'debug-bar-partial' );
