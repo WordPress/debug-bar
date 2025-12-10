@@ -1,5 +1,5 @@
 === Debug Bar ===
-Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, eoigal
+Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, eoigal, teaeagle
 Tags: debug
 Tested up to: 6.9
 Stable tag: 1.1.7
@@ -19,10 +19,13 @@ When `WP_DEBUG` is enabled it also tracks PHP Warnings and Notices to make them 
 
 When `SAVEQUERIES` is enabled the mysql queries are tracked and displayed.
 
+When `SAVE_TEMPLATE_PARTS` is enabled, it saves the templates used.
+
 To enable these options, add the following code to your `wp-config.php` file:
 `
 define( 'WP_DEBUG', true );
 define( 'SAVEQUERIES', true );
+define( 'SAVE_TEMPLATE_PARTS', true );
 `
 
 Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.org/plugins/debug-bar-console/).
@@ -30,6 +33,12 @@ Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.or
 There are numerous other add-ons available to get more insight into, for instance, the registered Post Types, Shortcodes, WP Cron, Language file loading, Actions and Filters and so on. Just [search the plugin directory for 'Debug Bar'](https://wordpress.org/plugins/search/debug+bar/).
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+Added a new panel for templates uploaded to the page.
+
+= 1.2.1 =
+- Added support for template tree output in Windows.
 
 = 1.1.7 =
 - Resolves a PHP Warning in WP 6.7+.
