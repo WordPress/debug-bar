@@ -7,6 +7,7 @@
  Version: 1.1.7
  Author URI: https://wordpress.org/
  Text Domain: debug-bar
+ License: GPLv2 or later
  */
 
 /***
