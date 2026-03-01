@@ -1,11 +1,11 @@
 === Debug Bar ===
-Contributors: wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, eoigal
-Tags: debug
-Tested up to: 6.9
-Stable tag: 1.1.7
+Contributors:      wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, eoigal, johnjamesjacoby
+Tags:              debug
+Tested up to:      7.0
+Stable tag:        1.1.8
 Requires at least: 3.4
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License:           GPLv2 or later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
 Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
 
@@ -30,6 +30,9 @@ Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.or
 There are numerous other add-ons available to get more insight into, for instance, the registered Post Types, Shortcodes, WP Cron, Language file loading, Actions and Filters and so on. Just [search the plugin directory for 'Debug Bar'](https://wordpress.org/plugins/search/debug+bar/).
 
 == Upgrade Notice ==
+
+= 1.1.8 =
+- Add late output escaping where missing in the `WP_Query` panel.
 
 = 1.1.7 =
 - Resolves a PHP Warning in WP 6.7+.
@@ -133,6 +136,9 @@ Added deprecated function usage tracking
 Initial Release
 
 == Changelog ==
+
+= 1.1.8 =
+- Add late output escaping where missing in the `WP_Query` panel.
 
 = 1.1.7 =
 - Resolves a PHP Warning in WP 6.7+.
