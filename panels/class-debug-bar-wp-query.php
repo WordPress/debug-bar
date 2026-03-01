@@ -18,7 +18,7 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 		}
 
 		echo "<div id='debug-bar-wp-query'>";
-		echo '<h2><span>', __( 'Queried Object ID:', 'debug-bar' ), '</span>', get_queried_object_id(), "</h2>\n";
+		echo '<h2><span>', __( 'Queried Object ID:', 'debug-bar' ), '</span>', esc_html( get_queried_object_id() ), "</h2>\n";
 
 		// Determine the query type. Follows the template loader order.
 		$type = '';
@@ -53,7 +53,7 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 		}
 
 		if ( ! empty( $type ) ) {
-			echo '<h2><span>', __( 'Query Type:', 'debug-bar' ), '</span>', $type, "</h2>\n";
+			echo '<h2><span>', __( 'Query Type:', 'debug-bar' ), '</span>', esc_html( $type ), "</h2>\n";
 		}
 
 		if ( ! empty( $template ) ) {
@@ -64,14 +64,14 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 		$page_on_front  = get_option( 'page_on_front' );
 		$page_for_posts = get_option( 'page_for_posts' );
 
-		echo '<h2><span>', __( 'Show on Front:', 'debug-bar' ), '</span>', $show_on_front, "</h2>\n";
+		echo '<h2><span>', __( 'Show on Front:', 'debug-bar' ), '</span>', esc_html( $show_on_front ), "</h2>\n";
 		if ( 'page' == $show_on_front ) {
-			echo '<h2><span>', __( 'Page for Posts:', 'debug-bar' ), '</span>', $page_for_posts, "</h2>\n";
-			echo '<h2><span>', __( 'Page on Front:', 'debug-bar' ), '</span>', $page_on_front, "</h2>\n";
+			echo '<h2><span>', __( 'Page for Posts:', 'debug-bar' ), '</span>', esc_html( $page_for_posts ), "</h2>\n";
+			echo '<h2><span>', __( 'Page on Front:', 'debug-bar' ), '</span>', esc_html( $page_on_front ), "</h2>\n";
 		}
 
 		if ( isset( $post_type_object ) ) {
-			echo '<h2><span>', __( 'Post Type:', 'debug-bar' ), '</span>', $post_type_object->labels->singular_name, "</h2>\n";
+			echo '<h2><span>', __( 'Post Type:', 'debug-bar' ), '</span>', esc_html( $post_type_object->labels->singular_name ), "</h2>\n";
 		}
 
 		echo '<div class="clear"></div>';
@@ -106,11 +106,11 @@ class Debug_Bar_WP_Query extends Debug_Bar_Panel {
 	protected function _recursive_print_kv( $kv_array ) {
 		foreach ( $kv_array as $key => $value ) {
 			if ( is_object( $value ) || is_array( $value ) ) {
-				echo '<tr><th>', $key, '</th> <td>&rArr;</td> <td>';
+				echo '<tr><th>', esc_html( $key ), '</th> <td>&rArr;</td> <td>';
 				$this->_recursive_print_kv( $value );
 				echo '</td></tr>';
 			} else {
-				echo '<tr><th>', $key, '</th> <td>&rArr;</td> <td>', $value, '</td></tr>';
+				echo '<tr><th>', esc_html( $key ), '</th> <td>&rArr;</td> <td>', esc_html( $value ), '</td></tr>';
 			}
 		}
 	}
