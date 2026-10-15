@@ -1,5 +1,5 @@
 === Debug Bar ===
-Contributors:      wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, eoigal, johnjamesjacoby
+Contributors:      wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, eoigal, johnjamesjacoby, teaeagle
 Tags:              debug
 Tested up to:      7.0
 Stable tag:        1.1.8
@@ -19,10 +19,13 @@ When `WP_DEBUG` is enabled it also tracks PHP Warnings and Notices to make them 
 
 When `SAVEQUERIES` is enabled the mysql queries are tracked and displayed.
 
+On WordPress 6.1 and later, when `SAVE_TEMPLATE_PARTS` is enabled the PHP templates loaded for the page are displayed as a tree.
+
 To enable these options, add the following code to your `wp-config.php` file:
 `
 define( 'WP_DEBUG', true );
 define( 'SAVEQUERIES', true );
+define( 'SAVE_TEMPLATE_PARTS', true );
 `
 
 Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.org/plugins/debug-bar-console/).
