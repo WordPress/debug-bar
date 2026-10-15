@@ -1,13 +1,16 @@
 <?php
 /*
- Plugin Name: Debug Bar
- Plugin URI:  https://wordpress.org/plugins/debug-bar/
- Description: Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
- Author:      wordpressdotorg
- Version:     1.1.8
- Author URI:  https://wordpress.org/
- Text Domain: debug-bar
- License:     GPLv2 or later
+ Plugin Name:       Debug Bar
+ Plugin URI:        https://wordpress.org/plugins/debug-bar/
+ Description:       Adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
+ Author:            wordpressdotorg
+ Version:           1.1.8
+ Requires at least: 3.4
+ Requires PHP:      5.2.4
+ Author URI:        https://wordpress.org/
+ Text Domain:       debug-bar
+ License:           GPLv2 or later
+ License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 /***
