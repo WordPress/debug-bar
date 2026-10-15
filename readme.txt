@@ -2,9 +2,9 @@
 Contributors:      wordpressdotorg, ryan, westi, koopersmith, duck_, mitchoyoshitaka, dd32, jrf, obenland, nacin, evansolomon, Otto42, aidvu, josephscott, eoigal, johnjamesjacoby
 Tags:              debug
 Tested up to:      7.0
-Stable tag:        1.1.8
+Stable tag:        1.2.0
 Requires at least: 3.4
-Requires PHP:      5.2.4
+Requires PHP:      5.4.0
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,10 @@ Add a PHP/MySQL console with the [Debug Bar Console plugin](https://wordpress.or
 There are numerous other add-ons available to get more insight into, for instance, the registered Post Types, Shortcodes, WP Cron, Language file loading, Actions and Filters and so on. Just [search the plugin directory for 'Debug Bar'](https://wordpress.org/plugins/search/debug+bar/).
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+- Add a filter for controlling HTTP response body capture.
+- Add plugin requirement and license metadata.
 
 = 1.1.8 =
 - Add late output escaping where missing in the `WP_Query` panel.
@@ -137,6 +141,10 @@ Fix error checking in HTTP Requests panel.
 - Initial Release
 
 == Changelog ==
+
+= 1.2.0 =
+- Add a filter for controlling HTTP response body capture.
+- Add plugin requirement and license metadata.
 
 = 1.1.8 =
 - Add late output escaping where missing in the `WP_Query` panel.

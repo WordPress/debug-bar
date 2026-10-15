@@ -41,7 +41,7 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 			/**
 			 * Filters whether to include the response body in the HTTP request details.
 			 *
-			 * @since 1.1.9
+			 * @since 1.2.0
 			 *
 			 * @param bool   $include_response_body Whether to include the response body.
 			 * @param array  $response              HTTP response.
