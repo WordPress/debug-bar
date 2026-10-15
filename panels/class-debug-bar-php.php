@@ -56,9 +56,6 @@ class Debug_Bar_PHP extends Debug_Bar_Panel {
 					wp_debug_backtrace_summary( __CLASS__ ),
 				);
 				break;
-			case E_STRICT:
-				// TODO
-				break;
 			case E_DEPRECATED:
 			case E_USER_DEPRECATED:
 				// TODO
