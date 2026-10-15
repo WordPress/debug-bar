@@ -38,7 +38,25 @@ class Debug_Bar_WP_Http extends Debug_Bar_Panel {
 		if ( $this->is_request_error( $response ) ) {
 			$this->num_errors++;
 		} else {
-			if ( ! isset( $_GET['fullbody'] ) ) {
+			/**
+			 * Filters whether to include the response body in the HTTP request details.
+			 *
+			 * @since 1.1.9
+			 *
+			 * @param bool   $include_response_body Whether to include the response body.
+			 * @param array  $response              HTTP response.
+			 * @param array  $args                  HTTP request arguments.
+			 * @param string $url                   The request URL.
+			 */
+			$include_response_body = apply_filters(
+				'debug_bar_http_include_response_body',
+				isset( $_GET['fullbody'] ),
+				$response,
+				$args,
+				$url
+			);
+
+			if ( ! $include_response_body ) {
 				$response['body'] = '[omitted]';
 				unset( $response['http_response'] );
 			}
